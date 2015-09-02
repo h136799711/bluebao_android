@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">蓝堡健身</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="actionbar_acti_login">登录</string>
+    <string name="acti_login_et_username">请输入你的账号</string>
+    <string name="acti_login_et_password">请输入你的密码</string>
+    <string name="acti_login_cb_rememberpwd">记住密码</string>
+    <string name="acti_login_btn_login">立即登录</string>
+    <string name="acti_login_btn_register">快速注册</string>
+    <string name="actionbar_frag_tab_home">蓝堡踏步机</string>
+    <string name="frag_tab_home_tv_deviceboundstate">无连接设备</string>
+    <string name="frag_tab_home_tv_mileage">路程</string>
+    <string name="frag_tab_home_tv_calorie">运动消耗</string>
+    <string name="frag_tab_home_tv_heartrate">心率</string>
+    <string name="frag_tab_home_tv_speed">速度</string>
+    <string name="frag_tab_home_tv_time">时间</string>
+    <string name="frag_tab_home_tv_weight">体重</string>
+    <string name="frag_tab_home_tv_bmi">BMI</string>
+    <string name="frag_tab_home_tv_percent">%</string>
+    <string name="frag_tab_home_tv_tizhifanglv">体脂肪率</string>
+    <string name="frag_tab_home_tv_tishuifenlv">体水分率</string>
+    <string name="frag_tab_home_tv_tinianling">体年龄</string>
+    <string name="frag_tab_home_tv_jichudaixie">基础代谢</string>
+    <string name="frag_tab_home_tv_jirouhanliang">肌肉含量</string>
+    <string name="frag_tab_home_tv_neizanghanliang">内脏含量</string>
+    <string name="frag_tab_home_tv_gugehanliang">骨骼含量</string>
+    <string name="frag_tab_home_tv_pixiazhifang">皮下脂肪</string>
+
+    <!-- bluetooth -->
+    <string name="ble_not_supported">BLE is not supported</string>
+    <string name="label_data">Data:</string>
+    <string name="label_device_address">Device address:</string>
+    <string name="label_state">State:</string>
+    <string name="no_data">No data</string>
+    <string name="connected">Connected</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="title_devices">BLE Device Scan</string>
+    <string name="error_bluetooth_not_supported">Bluetooth not supported.</string>
+    <string name="unknown_device">Unknown device</string>
+    <string name="unknown_characteristic">Unknown characteristic</string>
+    <string name="unknown_service">Unknown service</string>
+
+    <!-- Menu items -->
+    <string name="menu_connect">Connect</string>
+    <string name="menu_disconnect">Disconnect</string>
+    <string name="menu_scan">Scan</string>
+    <string name="menu_stop">Stop</string>
+
+    <!-- acti_alldata -->
+    <string name="actionbar_acti_alldata">运动数据</string>
+
+</resources>

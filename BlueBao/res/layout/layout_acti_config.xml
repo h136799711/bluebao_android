@@ -1,0 +1,135 @@
+<!-- dialog_config布局文件 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+    
+    <!-- 开始：自己的actionbar -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/heightActiBar"
+        android:background="@color/colorActionBar"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/heightActiBarWord"
+            android:gravity="center"
+            android:text="设置"
+            android:textColor="@color/colorActionBarWord"
+            android:textSize="@dimen/textsizeActiBarWord" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="#DCDCDC" >
+        </View>
+    </LinearLayout>
+
+    <!-- 结束：自己的actionbar -->
+    
+
+    <!-- 震动 -->
+
+    <RelativeLayout
+        android:id="@+id/acti_config_rl_vibrate"
+        android:layout_width="match_parent"
+        android:layout_height="50dip" 
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/acti_config_tv_vibrate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dip"
+            android:layout_alignParentStart="true"
+            android:gravity="center"
+            android:text="震动"
+            android:textColor="@color/colorActionBarWord"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/acti_config_iv_vibrate_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dip"
+            android:layout_alignParentEnd="true"
+            android:background="@null"
+            android:src="@drawable/right" 
+            android:visibility="invisible"/>
+    </RelativeLayout>
+    
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="#DCDCDC"
+        />
+
+    <!-- 声音 -->
+
+    <RelativeLayout
+         android:id="@+id/acti_config_rl_sound"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/acti_config_tv_sound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dip"
+            android:layout_alignParentStart="true"
+            android:gravity="center"
+            android:text="声音"
+            android:textColor="@color/colorActionBarWord"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/acti_config_iv_sound_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dip"
+             android:layout_alignParentEnd="true"
+             android:background="@null"
+            android:src="@drawable/right" 
+            android:visibility="invisible"/>
+    </RelativeLayout>
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="#DCDCDC"
+        />
+    <!-- 检查新版本 -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dip" 
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/acti_config_tv_newVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="检查新版本"
+            android:textColor="@color/colorActionBarWord"
+            android:textSize="20sp" 
+            android:layout_marginStart="20dip"
+            android:layout_alignParentStart="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+             android:layout_alignParentEnd="true"
+             android:layout_marginEnd="20dip"
+             android:gravity="center_vertical"
+            android:text="V1.0"
+            android:textSize="18sp" />
+    </RelativeLayout>
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="#DCDCDC"
+        />
+</LinearLayout>

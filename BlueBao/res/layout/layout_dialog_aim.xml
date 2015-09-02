@@ -1,0 +1,71 @@
+<!-- dialog_aim布局文件 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="100dip"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+    
+ <!-- 选择 时间 duration -->
+
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
+
+        <TextView
+            android:id="@+id/dialog_aim_tv_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="提醒时间"
+            android:textSize="18sp" 
+            android:gravity="center"/>
+
+        <NumberPicker
+            android:id="@+id/dialog_aim_np_time_hour"
+            android:layout_width="50dip"
+            android:layout_height="100dip"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/dialog_aim_tv_time"
+            android:focusable="true"
+            android:focusableInTouchMode="true" 
+            android:gravity="center"
+            android:layout_marginStart="15dip"/>
+
+        <NumberPicker
+            android:id="@+id/dialog_aim_np_time_minute"
+            android:layout_width="50dip"
+            android:layout_height="100dip"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/dialog_aim_tv_time"
+            android:focusable="true"
+            android:focusableInTouchMode="true" 
+            android:layout_toEndOf="@id/dialog_aim_np_time_hour"/>
+    </RelativeLayout>
+
+    <!-- 选择 目标卡路里 goal -->
+
+    <RelativeLayout
+        android:layout_width="0dip"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
+
+        <TextView
+            android:id="@+id/dialog_aim_tv_calorie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="卡路里"
+            android:textSize="18sp" 
+            android:gravity="center"/>
+
+        <NumberPicker
+            android:id="@+id/dialog_aim_np_goal"
+            android:layout_width="match_parent"
+            android:layout_height="100dip"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/dialog_aim_tv_calorie"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
+
+      
+    </RelativeLayout>
+
+</LinearLayout>

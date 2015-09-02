@@ -1,0 +1,51 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ricewhitegb"
+    android:orientation="vertical" >
+
+    <!-- 开始：自己的actionbar -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/heightActiBar"
+        android:background="@color/colorActionBar"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/heightActiBarWord"
+            android:gravity="center"
+            android:text="关于蓝堡"
+            android:textColor="@color/colorActionBarWord"
+            android:textSize="@dimen/textsizeActiBarWord" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="#DCDCDC" >
+        </View>
+    </LinearLayout>
+
+    <!-- 结束：自己的actionbar -->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"
+        android:text="    蓝堡是全球十大家用健身器材品牌之一,集研发生产销售售后服务于一体.荣获2012年度伯明翰GLEE展博会最受欢迎品牌.是国内成长最快,顾客反响最好的网购品牌之一."
+        android:textColor="@color/colorActionBarWord"
+        android:textSize="18sp" />
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dip"
+        android:text="    蓝堡品牌自成立以来始终坚持以提供前瞻性的运动理念,独具时尚感的外形设计和至为精湛的制作工艺,将深厚的专业健身器材造诣溶于每一个产品的血液中.蓝堡健身器材质量,售后等方面都尽善尽美,而远销海内外.收到外国企业和消费者的一致好评.蓝堡也被消费者一致评为网上十大健身品牌之一."
+        android:textColor="@color/colorActionBarWord"
+        android:textSize="18sp" />
+    
+    
+    
+
+</LinearLayout>

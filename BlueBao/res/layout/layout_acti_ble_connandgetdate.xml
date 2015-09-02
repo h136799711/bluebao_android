@@ -1,0 +1,135 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    
+    android:orientation="vertical"
+     >
+
+    <!-- 开始：自己的actionbar -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/heightActiBar"
+        android:background="@color/colorActionBar"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/heightActiBarWord"
+            android:gravity="center"
+            android:text="设备提供的服务"
+            android:textColor="@color/colorActionBarWord"
+            android:textSize="@dimen/textsizeActiBarWord" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="#DCDCDC" >
+        </View>
+    </LinearLayout>
+
+    <!-- 结束：自己的actionbar -->
+    
+    <!-- 显示设备名称 -->
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView 
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="设备名称  "
+            android:textSize="22sp"
+            />
+        <TextView 
+            android:id="@+id/acti_ble_connandgetdata_tv_devicename"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="设备名称  "
+            android:textSize="22sp"
+            />
+    </LinearLayout>
+    
+    <!-- 显示设备地址 -->
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView 
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="设备地址  "
+            android:textSize="22sp"
+            />
+        <TextView 
+            android:id="@+id/acti_ble_connandgetdata_tv_deviceaddress"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="设备地址  "
+            android:textSize="22sp"
+            />
+    </LinearLayout>
+    
+    <!-- 显示设备连接状态 -->
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView 
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="连接状态  "
+            android:textSize="22sp"
+            />
+        <TextView 
+            android:id="@+id/acti_ble_connandgetdata_tv_devicestate"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="连接状态  "
+            android:textSize="20sp"
+            />
+    </LinearLayout>
+    
+        <!-- 测试读取心率数据 -->
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView 
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="目前心率  "
+            android:textSize="22sp"
+            />
+        <TextView 
+            android:id="@+id/acti_ble_connandgetdata_tv_heartrate"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="心率值  "
+            android:textSize="20sp"
+            />
+    </LinearLayout>
+    
+
+
+    <ExpandableListView
+        android:id="@+id/acti_ble_connandgetdata_exlv_services"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+
+
+</LinearLayout>

@@ -1,0 +1,18 @@
+<!-- dialog_userheight布局文件 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/widthLayoutDialogForPI"
+    android:layout_height="@dimen/heightLayoutDialogForPI"
+    android:orientation="horizontal" >
+    
+ <!-- 设置身高-->
+
+        <NumberPicker
+            android:id="@+id/dialog_userheight"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:gravity="center"
+            android:focusableInTouchMode="true" 
+            />
+
+</LinearLayout>

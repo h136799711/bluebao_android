@@ -1,0 +1,289 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ricewhitegb"
+    android:orientation="vertical" >
+
+    <!-- 开始：自己的actionbar -->
+
+    <RelativeLayout
+        android:id="@+id/acti_share_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/heightActiBar" >
+
+        <TextView
+            android:id="@+id/acti_share_tv_share_no"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="15dip"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/colorActiShare_actionbarword" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/heightActiBar"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/heightActiBarWord"
+                android:gravity="center"
+                android:text="蓝堡动感单车"
+                android:textColor="@color/colorActionBarWord"
+                android:textSize="@dimen/textsizeActiBarWord" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="#DCDCDC" >
+            </View>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/acti_share_tv_share_yes"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="15dip"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="@color/colorActiShare_actionbarword" />
+    </RelativeLayout>
+
+    <!-- 结束：自己的actionbar -->
+
+
+    <!-- top img 区域 -->
+
+    <ImageView
+        android:id="@+id/acti_share_iv_topimg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/acti_share_actionbar"
+        android:layout_marginBottom="10dip"
+        android:layout_marginEnd="10dip"
+        android:layout_marginStart="10dip"
+        android:layout_marginTop="20dip"
+        android:src="@drawable/acti_share_topimg" />
+
+    <!-- 数据 区域 -->
+    <!-- miles -->
+
+    <RelativeLayout
+        android:id="@+id/acti_share_data_miles"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/heightActiShareDataRL"
+        android:layout_below="@id/acti_share_iv_topimg"
+        android:layout_marginEnd="@dimen/widthActiShareDataRL_marEnd"
+        android:layout_marginStart="@dimen/widthActiShareDataRL_marStart"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/acti_share_data_left_img1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fragment_tab_home_leftimg_mileage" />
+
+        <TextView
+            android:id="@+id/acti_share_data_left_word1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/widthActiShareDataRL_word1_marEnd"
+            android:layout_marginStart="@dimen/widthActiShareDataRL_word1_marStart"
+            android:layout_toEndOf="@id/acti_share_data_left_img1"
+            android:gravity="center"
+            android:text="骑行了"
+            android:textColor="@color/colorLightGray"
+            android:textSize="@dimen/textsizeActiShareDataWord" />
+
+        <TextView
+            android:id="@+id/acti_share_miles"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@id/acti_share_data_left_word1"
+            android:gravity="center"
+            android:hint="00"
+            android:textColor="@color/colorLightGray"
+            android:textSize="@dimen/textsizeActiShareDataWord" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/widthActiShareDataRL_word2_marEnd"
+            android:layout_marginStart="@dimen/widthActiShareDataRL_word2_marStart"
+            android:gravity="center"
+            android:text="公里"
+            android:textColor="@color/colorLightGray"
+            android:textSize="@dimen/textsizeActiShareDataWord" />
+    </RelativeLayout>
+
+    <!-- minutes -->
+
+    <RelativeLayout
+        android:id="@+id/acti_share_data_minutes"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/heightActiShareDataRL"
+        android:layout_below="@id/acti_share_data_miles"
+        android:layout_marginEnd="@dimen/widthActiShareDataRL_marEnd"
+        android:layout_marginStart="@dimen/widthActiShareDataRL_marStart"
+        android:layout_marginTop="3dip"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/acti_share_data_left_img2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fragment_tab_home_leftimg_time" />
+
+        <TextView
+            android:id="@+id/acti_share_data_left_word2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/widthActiShareDataRL_word1_marEnd"
+            android:layout_marginStart="@dimen/widthActiShareDataRL_word1_marStart"
+            android:layout_toEndOf="@id/acti_share_data_left_img2"
+            android:gravity="center"
+            android:text="耗时    "
+            android:textColor="@color/colorLightGray"
+            android:textSize="@dimen/textsizeActiShareDataWord" />
+
+        <TextView
+            android:id="@+id/acti_share_time"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@id/acti_share_data_left_word2"
+            android:gravity="center"
+            android:hint="00"
+            android:textColor="@color/colorLightGray"
+            android:textSize="@dimen/textsizeActiShareDataWord" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/widthActiShareDataRL_word2_marEnd"
+            android:layout_marginStart="@dimen/widthActiShareDataRL_word2_marStart"
+            android:gravity="center"
+            android:text="分钟"
+            android:textColor="@color/colorLightGray"
+            android:textSize="@dimen/textsizeActiShareDataWord" />
+    </RelativeLayout>
+
+    <!-- cals -->
+
+    <RelativeLayout
+        android:id="@+id/acti_share_data_cals"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/heightActiShareDataRL"
+        android:layout_below="@id/acti_share_data_minutes"
+        android:layout_marginEnd="@dimen/widthActiShareDataRL_marEnd"
+        android:layout_marginStart="@dimen/widthActiShareDataRL_marStart"
+        android:layout_marginTop="3dip"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/acti_share_data_left_img3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fragment_tab_home_leftimg_calorie" />
+
+        <TextView
+            android:id="@+id/acti_share_data_left_word3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/widthActiShareDataRL_word1_marEnd"
+            android:layout_marginStart="@dimen/widthActiShareDataRL_word1_marStart"
+            android:layout_toEndOf="@id/acti_share_data_left_img3"
+            android:gravity="center"
+            android:text="消耗    "
+            android:textColor="@color/colorLightGray"
+            android:textSize="@dimen/textsizeActiShareDataWord" />
+
+        <TextView
+            android:id="@+id/acti_share_cals"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@id/acti_share_data_left_word3"
+            android:gravity="center"
+            android:hint="00"
+            android:textColor="@color/colorLightGray"
+            android:textSize="@dimen/textsizeActiShareDataWord" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/widthActiShareDataRL_word2_marEnd"
+            android:layout_marginStart="@dimen/widthActiShareDataRL_word2_marStart"
+            android:gravity="center"
+            android:text="大卡"
+            android:textColor="@color/colorLightGray"
+            android:textSize="@dimen/textsizeActiShareDataWord" />
+    </RelativeLayout>
+
+    <!-- 下边的蓝堡广告 -->
+
+    <LinearLayout
+        android:id="@+id/acti_share_ad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/acti_share_data_cals"
+        android:layout_marginTop="50dip"
+        android:layout_marginBottom="30dip"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="今天是运动的第  "
+                android:textColor="@color/colorTabShareWord"
+                android:textSize="@dimen/textsizeTab_share_AD" />
+
+            <TextView
+                android:id="@+id/acti_share_days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="6"
+                android:textColor="@color/colorTabShareWord"
+                android:textSize="@dimen/textsizeTab_share_AD" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="  天"
+                android:textColor="@color/colorTabShareWord"
+                android:textSize="@dimen/textsizeTab_share_AD" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="全力以赴，不负自己，加油！坚持！"
+            android:textColor="@color/colorTabShareWord"
+            android:textSize="@dimen/textsizeTab_share_AD" />
+
+    </LinearLayout>
+    
+         <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/acti_share_ad"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="10dip"
+            android:layout_marginStart="10dip"
+            android:src="@drawable/acti_share_bottomimg2" />
+
+</RelativeLayout>

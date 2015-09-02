@@ -1,0 +1,145 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ricewhitegb"
+    android:orientation="vertical" >
+
+    <!-- 开始：自己的actionbar -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dip"
+        android:background="@color/white"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="54dip"
+            android:gravity="center"
+            android:text="注册"
+            android:textColor="@color/black"
+            android:textSize="22sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="#DCDCDC" >
+        </View>
+    </LinearLayout>
+
+    <!-- 结束：自己的actionbar -->
+
+
+    <!-- 开始：邮箱、密码、密码确认、同意用户须知、快速注册按钮 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dip"
+        android:orientation="vertical" >
+
+        <!-- 邮箱 -->
+
+        <EditText
+            android:id="@+id/acti_register_et_emailaddress"
+            android:layout_width="match_parent"
+            android:layout_height="50.0dip"
+            android:layout_marginLeft="12.0dip"
+            android:layout_marginRight="12.0dip"
+            android:layout_marginTop="15.0dip"
+            android:background="@drawable/edittext_bg"
+            android:drawablePadding="15.0dip"
+            android:drawableStart="@drawable/exwidget_clearedittext_left_email"
+            android:ems="22"
+            android:hint="请输入你的邮箱地址"
+            android:inputType="textEmailAddress"
+            android:paddingBottom="2.0dip"
+            android:paddingEnd="10.0dip"
+            android:paddingStart="15.0dip"
+            android:paddingTop="2.0dip"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="#ff999999"
+            android:textCursorDrawable="@null"
+            android:textSize="17sp" />
+
+        <!-- 密码 -->
+
+        <EditText
+            android:id="@+id/acti_register_et_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="50.0dip"
+            android:layout_marginLeft="12.0dip"
+            android:layout_marginRight="12.0dip"
+            android:layout_marginTop="15.0dip"
+            android:background="@drawable/edittext_bg"
+            android:drawablePadding="15.0dip"
+            android:drawableStart="@drawable/exwidget_clearedittext_left_pwd"
+            android:ems="22"
+            android:hint="请输入你的密码"
+            android:inputType="textPassword"
+            android:paddingBottom="2.0dip"
+            android:paddingEnd="10.0dip"
+            android:paddingStart="15.0dip"
+            android:paddingTop="2.0dip"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="#ff999999"
+            android:textCursorDrawable="@null"
+            android:textSize="17sp" />
+
+        <!-- 确认密码 -->
+
+        <EditText
+            android:id="@+id/acti_register_et_confirmpwd"
+            android:layout_width="match_parent"
+            android:layout_height="50.0dip"
+            android:layout_marginLeft="12.0dip"
+            android:layout_marginRight="12.0dip"
+            android:layout_marginTop="15.0dip"
+            android:background="@drawable/edittext_bg"
+            android:drawablePadding="15.0dip"
+            android:drawableStart="@drawable/exwidget_clearedittext_left_pwd"
+            android:ems="22"
+            android:hint="请确认你的密码"
+            android:inputType="textPassword"
+            android:paddingBottom="2.0dip"
+            android:paddingEnd="10.0dip"
+            android:paddingStart="15.0dip"
+            android:paddingTop="2.0dip"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="#ff999999"
+            android:textCursorDrawable="@null"
+            android:textSize="17sp" />
+
+        <!-- 同意协议 -->
+
+        <CheckBox
+            android:id="@+id/acti_register_cb_agreewiththepolicy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dip"
+            android:layout_marginStart="20dip"
+            android:layout_marginTop="20dip"
+            android:checked="true"
+            android:text="同意并签订《用户须知》"
+            android:textColor="@color/black"
+            android:textSize="16.0sp" />
+
+        <!-- 快速注册 按钮 -->
+
+        <Button
+            android:id="@+id/acti_register_btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dip"
+            android:layout_marginStart="20dip"
+            android:layout_marginTop="10dip"
+            android:background="#5EB85E"
+            android:text="快速注册"
+            android:textColor="@color/black"
+            android:textSize="18.0sp" />
+    </LinearLayout>
+
+</LinearLayout>

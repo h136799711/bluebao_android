@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="config_grant_type">client_credentials</string>
+     
+    <string name="config_client_id">by55bec42a8e5431</string> <!-- by559a8de1c325c1 -->
+    
+    <string name="config_client_secret">f63515ffc8c1a200dedeffce9bd63492</string><!-- aedd16f80c192661016eebe3ac35a6e7 -->
+    
+    <string name="config_url_gettoken">http://lanbao.itboye.com/api.php/Token/index</string>
+    
+    <string name="config_url_login">http://lanbao.itboye.com/api.php/Token/index</string>
+    
+    <string name="config_url_register">http://lanbao.itboye.com/api.php/Token/index</string>
+    
+</resources>

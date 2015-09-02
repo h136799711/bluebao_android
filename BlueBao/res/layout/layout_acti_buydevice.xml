@@ -1,0 +1,66 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ricewhitegb"
+    android:orientation="vertical" >
+
+    <!-- 开始：自己的actionbar -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/heightActiBar"
+        android:background="@color/colorActionBar"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/heightActiBarWord"
+            android:gravity="center"
+            android:text="购买器材"
+            android:textColor="@color/colorActionBarWord"
+            android:textSize="@dimen/textsizeActiBarWord" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="#DCDCDC" >
+        </View>
+    </LinearLayout>
+
+    <!-- 结束：自己的actionbar -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dip"
+        android:layout_marginTop="20dip"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/acti_bdevice_ibtn_tmall"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:src="@drawable/actibdevice_tmall"
+            android:background="@null"
+            />
+        
+        <ImageButton
+            android:id="@+id/acti_bdevice_ibtn_jd"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:src="@drawable/actibdevice_jd"
+            android:background="@null"
+            />
+        
+        <ImageButton
+            android:id="@+id/acti_bdevice_ibtn_1hao"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:src="@drawable/actibdevice_1hao"
+            android:background="@null"
+            />
+        
+    </LinearLayout>
+</LinearLayout>

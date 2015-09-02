@@ -1,0 +1,794 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fadingEdge="vertical"
+    android:scrollbars="vertical" >
+
+    <!-- tab_home中所有页面组件都放置在此LinearLayout中 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <!-- =====divider=================================== -->
+
+
+        <!-- 日期 -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <ImageButton
+                android:id="@+id/frag_tab_home_ibtn_previous"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dip"
+                android:layout_marginTop="5dip"
+                android:background="@drawable/frag_tab_home_imgbtn_previous_bg" />
+
+            <TextView
+                android:id="@+id/frag_tab_home_tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="35dip"
+                android:gravity="center_vertical"
+                android:text="2015-8-7 星期五"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+
+            <ImageButton
+                android:id="@+id/frag_tab_home_ibtn_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dip"
+                android:layout_marginTop="5dip"
+                android:background="@drawable/frag_tab_home_imgbtn_next_bg" />
+        </LinearLayout>
+
+        <!-- =====divider=================================== -->
+
+
+        <!-- 连接设备 -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/frag_tab_home_tv_device"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="没有连接设备"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+
+            <ImageButton
+                android:id="@+id/frag_tab_home_ibtn_connectdevice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dip"
+                android:layout_toEndOf="@id/frag_tab_home_tv_device"
+                android:background="@null"
+                android:src="@drawable/fragment_tab_home_connectdevice" />
+        </RelativeLayout>
+
+        <!-- =====divider=================================== -->
+
+
+        <!-- 目标及完成比例 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dip"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
+            
+			<!-- 测试============================================================== -->
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/frag_tab_home_test_ibtn_aimandpercent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" 
+                android:layout_gravity="center_vertical"
+                />
+            
+            
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:background="#DCDCDC" >
+        </View>
+
+        <!-- =====divider=================================== -->
+
+
+        <!-- 里程 -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dip"
+            android:layout_marginStart="20dip"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:drawableStart="@drawable/fragment_tab_home_leftimg_mileage"
+                android:gravity="center_vertical"
+                android:text="里程"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/frag_tab_home_tv_mileage"
+                android:layout_width="wrap_content"
+                android:layout_height="50dip"
+                android:layout_alignParentEnd="true"
+                android:gravity="center_vertical"
+                android:text="100"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:background="#DCDCDC" >
+        </View>
+
+        <!-- =====divider=================================== -->
+
+
+        <!-- 卡路里 -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dip"
+            android:layout_marginStart="20dip"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:drawableStart="@drawable/fragment_tab_home_leftimg_calorie"
+                android:gravity="center_vertical"
+                android:text="卡路里"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/frag_tab_home_tv_calorie"
+                android:layout_width="wrap_content"
+                android:layout_height="50dip"
+                android:layout_alignParentEnd="true"
+                android:gravity="center_vertical"
+                android:text="100"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:background="#DCDCDC" >
+        </View>
+
+        <!-- =====divider=================================== -->
+
+
+        <!-- 心率 -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dip"
+            android:layout_marginStart="20dip"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:drawableStart="@drawable/fragment_tab_home_leftimg_heartrate"
+                android:gravity="center_vertical"
+                android:text="心率"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/frag_tab_home_tv_heartrate"
+                android:layout_width="wrap_content"
+                android:layout_height="50dip"
+                android:layout_alignParentEnd="true"
+                android:gravity="center_vertical"
+                android:text="100"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:background="#DCDCDC" >
+        </View>
+
+        <!-- =====divider=================================== -->
+
+
+        <!-- 速度 -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dip"
+            android:layout_marginStart="20dip"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:drawableStart="@drawable/fragment_tab_home_leftimg_speed"
+                android:gravity="center_vertical"
+                android:text="速度"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/frag_tab_home_tv_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="50dip"
+                android:layout_alignParentEnd="true"
+                android:gravity="center_vertical"
+                android:text="100"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:background="#DCDCDC" >
+        </View>
+
+        <!-- =====divider=================================== -->
+
+
+        <!-- 时间 -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dip"
+            android:layout_marginStart="20dip"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:drawableStart="@drawable/fragment_tab_home_leftimg_time"
+                android:gravity="center_vertical"
+                android:text="时间"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/frag_tab_home_tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="50dip"
+                android:layout_alignParentEnd="true"
+                android:gravity="center_vertical"
+                android:text="100"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dip"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:background="#DCDCDC" >
+        </View>
+
+        <!-- =====divider=================================== -->
+
+
+        <!-- 体重 and BMI -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dip"
+            android:layout_marginEnd="10dip"
+            android:layout_marginStart="20dip"
+            android:orientation="horizontal" >
+
+            <!-- 体重 -->
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="体重"
+                    android:textColor="@color/black"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/frag_tab_home_tv_weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dip"
+                    android:layout_marginStart="5dip"
+                    android:gravity="center_vertical"
+                    android:text="100"
+                    android:textColor="@color/brown"
+                    android:textSize="38sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dip"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dip"
+                android:layout_marginTop="5dip"
+                android:background="#DCDCDC" >
+            </View>
+
+            <!-- BMI -->
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="BMI"
+                    android:textColor="@color/black"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/frag_tab_home_tv_bmi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dip"
+                    android:layout_marginStart="5dip"
+                    android:gravity="center_vertical"
+                    android:text="100"
+                    android:textColor="@color/brown"
+                    android:textSize="32sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dip"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:background="#DCDCDC" >
+        </View>
+
+        <!-- =====divider=================================== -->
+
+
+        <!-- 上层：各项参数 -->
+        <LinearLayout 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            
+            <!--  体脂肪率 -->
+            <RelativeLayout
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <TextView
+                    android:id="@+id/frag_tab_home_tv_tizhifanglv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="20" 
+                    android:textSize="32sp"
+                    android:textColor="@color/brown"
+                    android:layout_marginStart="20dip">
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="%"
+                    android:textSize="22sp"
+                    android:textColor="@color/blue"
+                    android:layout_toEndOf="@id/frag_tab_home_tv_tizhifanglv"
+                    android:layout_alignBottom="@id/frag_tab_home_tv_tizhifanglv"
+                    android:layout_marginStart="3dip" >
+                </TextView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="体脂肪率"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:layout_below="@id/frag_tab_home_tv_tizhifanglv" >
+                </TextView>
+            </RelativeLayout>
+            
+                   <View
+                android:layout_width="1dip"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dip"
+                android:layout_marginTop="5dip"
+                android:background="#DCDCDC" >
+            </View>
+            
+            <!--  体水分率 -->
+            <RelativeLayout
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <TextView
+                    android:id="@+id/frag_tab_home_tv_tishuifenlv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="20" 
+                    android:textSize="32sp"
+                    android:textColor="@color/brown"
+                    android:layout_marginStart="20dip">
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="%"
+                    android:textSize="22sp"
+                    android:textColor="@color/blue"
+                    android:layout_toEndOf="@id/frag_tab_home_tv_tishuifenlv"
+                    android:layout_alignBottom="@id/frag_tab_home_tv_tishuifenlv"
+                    android:layout_marginStart="3dip" >
+                </TextView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="体水分率"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:layout_below="@id/frag_tab_home_tv_tishuifenlv" >
+                </TextView>
+            </RelativeLayout>
+            
+                   <View
+                android:layout_width="1dip"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dip"
+                android:layout_marginTop="5dip"
+                android:background="#DCDCDC" >
+            </View>
+            
+            <!--  体年龄 -->
+            <RelativeLayout
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <TextView
+                    android:id="@+id/frag_tab_home_tv_tinianling"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="20" 
+                    android:textSize="32sp"
+                    android:textColor="@color/brown"
+                    android:layout_marginStart="20dip">
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="%"
+                    android:textSize="22sp"
+                    android:textColor="@color/blue"
+                    android:layout_toEndOf="@id/frag_tab_home_tv_tinianling"
+                    android:layout_alignBottom="@id/frag_tab_home_tv_tinianling"
+                    android:layout_marginStart="3dip" >
+                </TextView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="体年龄"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:layout_below="@id/frag_tab_home_tv_tinianling" >
+                </TextView>
+            </RelativeLayout>
+            
+                   <View
+                android:layout_width="1dip"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dip"
+                android:layout_marginTop="5dip"
+                android:background="#DCDCDC" >
+            </View>
+            
+            <!--  基础代谢 -->
+            <RelativeLayout
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1" 
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/frag_tab_home_tv_jichudaixie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20" 
+                    android:textSize="32sp"
+                    android:textColor="@color/brown"
+                    android:layout_marginStart="20dip">
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="%"
+                    android:textSize="22sp"
+                    android:textColor="@color/blue"
+                    android:layout_toEndOf="@id/frag_tab_home_tv_jichudaixie"
+                    android:layout_alignBottom="@id/frag_tab_home_tv_jichudaixie"
+                    android:layout_marginStart="3dip" >
+                </TextView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="基础代谢"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:layout_below="@id/frag_tab_home_tv_jichudaixie" >
+                </TextView>
+            </RelativeLayout>
+            
+        </LinearLayout>
+        
+               <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="#DCDCDC" >
+            </View>
+        
+        <!-- 下层：各项参数 -->
+        <LinearLayout 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            
+            <!--  肌肉含量 -->
+            <RelativeLayout
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <TextView
+                    android:id="@+id/frag_tab_home_tv_jirouhanliang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="20" 
+                    android:textSize="32sp"
+                    android:textColor="@color/brown"
+                    android:layout_marginStart="20dip">
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="%"
+                    android:textSize="22sp"
+                    android:textColor="@color/blue"
+                    android:layout_toEndOf="@id/frag_tab_home_tv_jirouhanliang"
+                    android:layout_alignBottom="@id/frag_tab_home_tv_jirouhanliang"
+                    android:layout_marginStart="3dip" >
+                </TextView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="肌肉含量"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:layout_below="@id/frag_tab_home_tv_jirouhanliang" >
+                </TextView>
+            </RelativeLayout>
+            
+                   <View
+                android:layout_width="1dip"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dip"
+                android:layout_marginTop="5dip"
+                android:background="#DCDCDC" >
+            </View>
+            
+            <!--  内脏含量 -->
+            <RelativeLayout
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <TextView
+                    android:id="@+id/frag_tab_home_tv_neizanghanliang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="20" 
+                    android:textSize="32sp"
+                    android:textColor="@color/brown"
+                    android:layout_marginStart="20dip">
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="%"
+                    android:textSize="22sp"
+                    android:textColor="@color/blue"
+                    android:layout_toEndOf="@id/frag_tab_home_tv_neizanghanliang"
+                    android:layout_alignBottom="@id/frag_tab_home_tv_neizanghanliang"
+                    android:layout_marginStart="3dip" >
+                </TextView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="内脏含量"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:layout_below="@id/frag_tab_home_tv_neizanghanliang" >
+                </TextView>
+            </RelativeLayout>
+            
+                   <View
+                android:layout_width="1dip"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dip"
+                android:layout_marginTop="5dip"
+                android:background="#DCDCDC" >
+            </View>
+            
+            <!--  骨骼含量 -->
+            <RelativeLayout
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <TextView
+                    android:id="@+id/frag_tab_home_tv_gugehanliang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="20" 
+                    android:textSize="32sp"
+                    android:textColor="@color/brown"
+                    android:layout_marginStart="20dip">
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="%"
+                    android:textSize="22sp"
+                    android:textColor="@color/blue"
+                    android:layout_toEndOf="@id/frag_tab_home_tv_gugehanliang"
+                    android:layout_alignBottom="@id/frag_tab_home_tv_gugehanliang"
+                    android:layout_marginStart="3dip" >
+                </TextView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="骨骼含量"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:layout_below="@id/frag_tab_home_tv_gugehanliang" >
+                </TextView>
+            </RelativeLayout>
+            
+                   <View
+                android:layout_width="1dip"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dip"
+                android:layout_marginTop="5dip"
+                android:background="#DCDCDC" >
+            </View>
+            
+            <!--  皮下脂肪 -->
+            <RelativeLayout
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="1" 
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/frag_tab_home_tv_pixiazhifang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20" 
+                    android:textSize="32sp"
+                    android:textColor="@color/brown"
+                    android:layout_marginStart="20dip">
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="%"
+                    android:textSize="22sp"
+                    android:textColor="@color/blue"
+                    android:layout_toEndOf="@id/frag_tab_home_tv_pixiazhifang"
+                    android:layout_alignBottom="@id/frag_tab_home_tv_pixiazhifang"
+                    android:layout_marginStart="3dip" >
+                </TextView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="皮下脂肪"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:layout_below="@id/frag_tab_home_tv_pixiazhifang" >
+                </TextView>
+            </RelativeLayout>
+            
+        </LinearLayout>
+        
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ricewhitegb"
+    android:orientation="vertical" >
+
+    <!-- 上边的 用户头像、用户名、个性签名 -->
+
+    <RelativeLayout
+        android:id="@+id/fragment_menu_left_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dip"
+        android:layout_marginTop="30dip" >
+
+        <ImageView
+            android:id="@+id/fragment_menu_left_top_userimg"
+            android:layout_width="@dimen/widthUserImg"
+            android:layout_height="@dimen/heightUserImg"
+            android:src="@drawable/fragment_menu_left_userimg_default" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="120dip"
+            android:layout_marginStart="5dip"
+            android:layout_toEndOf="@id/fragment_menu_left_top_userimg"
+            android:gravity="center"
+            android:text="爱运动,享自由"
+            android:textColor="@color/colorFragMenuWord"
+            android:textSize="@dimen/textsizeFragMenu" />
+    </RelativeLayout>
+
+    <!-- 下边的 List -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_marginTop="3dip"
+        android:layout_weight="1" >
+
+        <ListView
+            android:id="@+id/fragment_meun_left_lv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:choiceMode="singleChoice"
+            android:divider="#000"
+            android:dividerHeight="1dip"
+            android:listSelector="@color/white" />
+    </LinearLayout>
+
+</LinearLayout>

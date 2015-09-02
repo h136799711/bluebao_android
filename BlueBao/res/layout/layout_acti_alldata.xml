@@ -1,0 +1,80 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="@color/ricewhitegb"
+    >
+    <!-- 开始：自己的actionbar -->
+    <LinearLayout
+        android:id="@+id/acti_alldata_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/heightActiBar"
+        android:orientation="vertical" 
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/heightActiBarWord"
+            android:gravity="center"
+            android:text="@string/actionbar_acti_alldata"
+            android:textSize="@dimen/textsizeActiBarWord" 
+            android:textColor="@color/colorActionBarWord"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="#DCDCDC" >
+        </View>
+    </LinearLayout>
+
+	<!-- 结束：自己的actionbar -->
+	
+	 <!-- =====divider=================================== -->
+
+
+            <!-- 日期 -->
+
+            <LinearLayout
+                android:id="@+id/acti_alldata_ll_date"
+                android:layout_below="@id/acti_alldata_actionbar"
+                android:layout_width="match_parent"
+                android:layout_height="30dip"
+                android:layout_marginTop="10dip"
+                android:gravity="center"
+                android:orientation="horizontal" 
+                >
+
+                <ImageButton
+                    android:id="@+id/acti_alldata_ibtn_previous"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="50dip"
+                    android:background="@drawable/frag_tab_home_imgbtn_previous_bg" />
+
+                <TextView
+                    android:id="@+id/acti_alldata_tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@color/colorLightGray"
+                    android:textSize="20sp" />
+
+                <ImageButton
+                    android:id="@+id/acti_alldata_ibtn_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dip"
+                    android:background="@drawable/frag_tab_home_imgbtn_next_bg" />
+            </LinearLayout>
+
+            <!-- =====divider=================================== -->
+
+	<com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/acti_adddata_lc_alldata"
+        android:layout_width="match_parent"
+        android:layout_height="300dip" 
+        android:layout_below="@id/acti_alldata_ll_date"
+        android:layout_marginTop="10dip"/>
+
+   
+
+</RelativeLayout>

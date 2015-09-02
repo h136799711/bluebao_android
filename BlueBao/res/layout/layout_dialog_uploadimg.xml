@@ -1,0 +1,43 @@
+<!-- dialog_aim布局文件 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/widthPopupWindow"
+    android:layout_height="@dimen/heightPopupWindow"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/dialog_uploadimg_tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:text="头像设置"
+        android:textSize="22sp" 
+        android:gravity="start|center"
+        android:layout_marginStart="5dip"/>
+
+    <TextView
+        android:id="@+id/dialog_uploadimg_tv_choselocalimg"
+        android:layout_width="match_parent"
+        android:layout_height="55dip"
+        android:background="#FFFFFF"
+        android:text="选择本地图片"
+        android:textColor="#000000"
+        android:textSize="20sp" 
+        android:gravity="start|center"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="#DCDCDC" />
+
+    <TextView
+        android:id="@+id/dialog_uploadimg_tv_takeimg"
+        android:layout_width="match_parent"
+        android:layout_height="55dip"
+        android:background="#FFFFFF"
+        android:text="拍照"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:gravity="start|center"
+        />
+
+</LinearLayout>

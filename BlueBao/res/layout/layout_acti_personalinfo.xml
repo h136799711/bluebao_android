@@ -1,0 +1,361 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ricewhitegb"
+    android:orientation="vertical" >
+
+    <!-- 开始：自己的actionbar -->
+
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/heightActiBar"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/heightActiBarWord" >
+            
+            <!-- <ImageButton 
+                android:id="@+id/acti_personalinfo_ibtn_save"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:background="@null"
+                android:layout_alignParentLeft="true"
+                android:layout_marginStart="10dip"
+                android:src="@drawable/fragment_tab_home_showmenu"
+                /> -->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/heightActiBarWord"
+                android:gravity="center"
+                android:text="个人资料"
+                android:textColor="@color/colorActionBarWord"
+                android:textSize="@dimen/textsizeActiBarWord" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="#DCDCDC" >
+        </View>
+    </LinearLayout>
+
+    <!-- 结束：自己的actionbar -->
+    <!-- =====divider=================================== -->
+
+
+    <!-- 图片、用户名、个性签名 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/acti_personalinfo_rl_top"
+            android:layout_width="match_parent"
+            android:layout_height="140dip" >
+
+            <ImageView
+                android:id="@+id/acti_personalinfo_iv_userimg"
+                android:layout_width="@dimen/widthUserImg"
+                android:layout_height="@dimen/heightUserImg"
+                android:layout_marginBottom="10dip"
+                android:layout_marginEnd="10dip"
+                android:layout_marginStart="10dip"
+                android:layout_marginTop="10dip"
+                android:src="@drawable/fragment_menu_left_userimg_default" />
+
+            <EditText
+                android:id="@+id/acti_personalinfo_et_username"
+                android:layout_width="match_parent"
+                android:layout_height="40dip"
+                android:layout_alignTop="@id/acti_personalinfo_iv_userimg"
+                android:layout_marginTop="20dip"
+                android:layout_toEndOf="@id/acti_personalinfo_iv_userimg"
+                android:gravity="left"
+                android:singleLine="true"
+                android:cursorVisible="false"
+                android:maxLength="20"
+                android:textColor="@color/colorTabPcenterWord"
+                android:textSize="@dimen/textsizeTab_pcenter_username" />
+            <!-- maxLength 最多输入字符数 -->
+            <!-- cursorVisible 光标不可见 -->
+
+            <EditText
+                android:id="@+id/acti_personalinfo_et_userSentence"
+                android:layout_width="match_parent"
+                android:layout_height="40dip"
+                android:layout_below="@id/acti_personalinfo_et_username"
+                android:layout_toEndOf="@id/acti_personalinfo_iv_userimg"
+                android:gravity="left"
+                android:textColor="@color/colorTabPcenterWord"
+                android:textSize="@dimen/textsizeTab_pcenter_usersentence" />
+        </RelativeLayout>
+    </LinearLayout>
+    <!-- =====divider=================================== -->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginTop="2dip"
+        android:background="#DCDCDC" />
+    <!-- =====divider=================================== -->
+
+
+    <!-- 性别、年龄、身高、当前体重、目标体重、BMI -->
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:orientation="vertical" >
+
+            <!-- 性别 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/heightActiPersonalInfoArgus"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/widthActiPersonalInfoArgus_marStart"
+                    android:layout_weight="1"
+                    android:gravity="left|center_vertical"
+                    android:text="性别"
+                    android:textColor="@color/colorActiPersonalInfoArgusWord"
+                    android:textSize="@dimen/textsizeActiPersonalInfoArgusWord" />
+
+                <RadioGroup
+                    android:id="@+id/acti_personalinfo_rg_userGender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/acti_personalinfo_rbtn_userGender_male"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:text="男"
+                        android:textColor="@color/colorActiPersonalInfoArgusWord"
+                        android:textSize="@dimen/textsizeActiPersonalInfoArgusWord" />
+
+                    <RadioButton
+                        android:id="@+id/acti_personalinfo_rbtn_userGender_female"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/widthActiPersonalInfoArgus_marEnd"
+                        android:text="女"
+                        android:textColor="@color/colorActiPersonalInfoArgusWord"
+                        android:textSize="@dimen/textsizeActiPersonalInfoArgusWord" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="2dip"
+                android:background="#DCDCDC" />
+
+            <!-- 年龄 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/heightActiPersonalInfoArgus"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/widthActiPersonalInfoArgus_marStart"
+                    android:layout_weight="1"
+                    android:gravity="left|center_vertical"
+                    android:text="年龄"
+                    android:textColor="@color/colorActiPersonalInfoArgusWord"
+                    android:textSize="@dimen/textsizeActiPersonalInfoArgusWord" />
+
+                <TextView
+                    android:id="@+id/acti_personalinfo_tv_userAge"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right|center_vertical"
+                    android:layout_marginEnd="@dimen/widthActiPersonalInfoArgus_marEnd"
+                    android:text="21岁"
+                    android:textColor="@color/colorActiPersonalInfoArgusNumber"
+                    android:textSize="@dimen/textsizeActiPersonalInfoArgusNumber" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="2dip"
+                android:background="#DCDCDC" />
+
+            <!-- 身高 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/heightActiPersonalInfoArgus"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/widthActiPersonalInfoArgus_marStart"
+                    android:layout_weight="1"
+                    android:gravity="left|center_vertical"
+                    android:text="身高"
+                    android:textColor="@color/colorActiPersonalInfoArgusWord"
+                    android:textSize="@dimen/textsizeActiPersonalInfoArgusWord" />
+
+                <TextView
+                    android:id="@+id/acti_personalinfo_tv_userHeight"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right|center_vertical"
+                    android:layout_marginEnd="@dimen/widthActiPersonalInfoArgus_marEnd"
+                    android:text="165cm"
+                    android:textColor="@color/colorActiPersonalInfoArgusNumber"
+                    android:textSize="@dimen/textsizeActiPersonalInfoArgusNumber" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="2dip"
+                android:background="#DCDCDC" />
+
+            <!-- 当前体重 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/heightActiPersonalInfoArgus"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/widthActiPersonalInfoArgus_marStart"
+                    android:layout_weight="1"
+                    android:gravity="left|center_vertical"
+                    android:text="当前体重"
+                    android:textColor="@color/colorActiPersonalInfoArgusWord"
+                    android:textSize="@dimen/textsizeActiPersonalInfoArgusWord" />
+
+                <TextView
+                    android:id="@+id/acti_personalinfo_tv_userWeightNow"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right|center_vertical"
+                    android:layout_marginEnd="@dimen/widthActiPersonalInfoArgus_marEnd"
+                    android:text="65kg"
+                    android:textColor="@color/colorActiPersonalInfoArgusNumber"
+                    android:textSize="@dimen/textsizeActiPersonalInfoArgusNumber" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="2dip"
+                android:background="#DCDCDC" />
+
+            <!-- 目标体重 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/heightActiPersonalInfoArgus"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/widthActiPersonalInfoArgus_marStart"
+                    android:layout_weight="1"
+                    android:gravity="left|center_vertical"
+                    android:text="目标体重"
+                    android:textColor="@color/colorActiPersonalInfoArgusWord"
+                    android:textSize="@dimen/textsizeActiPersonalInfoArgusWord" />
+
+                <TextView
+                    android:id="@+id/acti_personalinfo_tv_userWeightTarget"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right|center_vertical"
+                    android:layout_marginEnd="@dimen/widthActiPersonalInfoArgus_marEnd"
+                    android:text="65kg"
+                    android:textColor="@color/colorActiPersonalInfoArgusNumber"
+                    android:textSize="@dimen/textsizeActiPersonalInfoArgusNumber" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="2dip"
+                android:background="#DCDCDC" />
+
+            <!-- BMI -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/heightActiPersonalInfoArgus"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/widthActiPersonalInfoArgus_marStart"
+                    android:layout_weight="1"
+                    android:gravity="left|center_vertical"
+                    android:text="BMI"
+                    android:textColor="@color/colorActiPersonalInfoArgusWord"
+                    android:textSize="@dimen/textsizeActiPersonalInfoArgusWord" />
+
+                <TextView
+                    android:id="@+id/acti_personalinfo_tv_userBMI"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right|center_vertical"
+                    android:layout_marginEnd="@dimen/widthActiPersonalInfoArgus_marEnd"
+                    android:hint="BMI值"
+                    android:textColor="@color/colorActiPersonalInfoArgusNumber"
+                    android:textSize="@dimen/textsizeActiPersonalInfoArgusNumber" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginTop="2dip"
+        android:background="#DCDCDC" />
+   
+    <!-- =====divider=================================== -->
+
+    <Button
+        android:id="@+id/acti_personalinfo_btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dip"
+        android:layout_marginEnd="5dip"
+        android:layout_marginTop="5dip"
+        android:gravity="center"
+        android:background="@color/colorActiPersonalInfoBtn"
+        android:text="保存"
+        android:textSize="@dimen/textsizeActiPersonalInfoSave" />
+
+</LinearLayout>
