@@ -308,9 +308,8 @@ public class FragTabHomeTest2 extends Fragment {
 	// 根据“日期”tv显示的数据去服务器获取数据并展示
 
 	private void showDataAccordingToTheDateFromServer(String data) {
-		// String uid = Util.uId+"";
-		// TODO ----------------------------------------------
-		String uid = "39";
+		String uid = Util.uId+"";
+		//String uid = "39";
 		String uuid = SampleGattAttributes.SERVICE_I_NEED;
 		Log.i(TAG, "data is: " + data);
 
@@ -337,7 +336,7 @@ public class FragTabHomeTest2 extends Fragment {
 		}
 		if (!token.isEmpty()) {
 			RequestParams params = new RequestParams();
-			params.addBodyParameter("uid", "39");
+			params.addBodyParameter("uid", uid);
 			params.addBodyParameter("uuid", uuid);
 			params.addBodyParameter("time", timeSeconds);
 
@@ -358,10 +357,10 @@ public class FragTabHomeTest2 extends Fragment {
 						DataFromServerDayBean bean = gson.fromJson(arg0.result, DataFromServerDayBean.class);
 						if (bean != null) {
 							tv_heartrate.setText(bean.getData().getHeart_rate());
-							tv_speed.setText(bean.getData().getSpeed());
+							tv_speed.setText(bean.getData().getSpeed()+" km/h");
 							tv_time.setText(bean.getData().getCost_time());
-							tv_calorie.setText(bean.getData().getCalorie());
-							tv_mileage.setText(bean.getData().getDistance());
+							tv_calorie.setText(bean.getData().getCalorie()+" 大卡");
+							tv_mileage.setText(bean.getData().getDistance()+" km");
 							if (bean.getData().getTarget_calorie() != "0") {
 
 								float a = Float.parseFloat(bean.getData().getCalorie());
@@ -455,12 +454,17 @@ public class FragTabHomeTest2 extends Fragment {
 				tv_heartrate.setText(dataToShowBean.getXinlv());
 				tv_speed.setText(dataToShowBean.getSpeed());
 				tv_time.setText(dataToShowBean.getTime());
+				//Util中保存一份，供分享时用
+				Util.miles = dataToShowBean.getMiles();
+				Util.time = dataToShowBean.getTime();
+				Util.cals = dataToShowBean.getCars();
+				
 			} else {
 				Toast.makeText(getActivity(), "读取到的数据为空", Toast.LENGTH_SHORT).show();
 			}
 
 			// 提交数据到服务器
-			if (timeNow - timeLastTime > 10) { // 两分钟提交一次
+			if (timeNow - timeLastTime > 10) { // 10秒提交一次
 
 				Log.i(TAG, "这次提交时间-----：" + timeNow);
 				timeLastTime = timeNow;

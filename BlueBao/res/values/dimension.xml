@@ -81,4 +81,6 @@
     <dimen name="widthActiShareDataRL_word2_marEnd">30dip</dimen>
     <dimen name="textsizeActiShareDataWord">20sp</dimen>
     
+    <dimen name="widthFrag_tab_home_drawablePadding">5dip</dimen>
+    
 </resources>

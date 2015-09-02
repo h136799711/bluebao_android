@@ -171,6 +171,7 @@
                     android:layout_alignParentStart="true"
                     android:drawableStart="@drawable/fragment_tab_home_leftimg_heartrate"
                     android:gravity="center_vertical"
+                    android:drawablePadding="@dimen/widthFrag_tab_home_drawablePadding"
                     android:text="@string/frag_tab_home_tv_heartrate"
                     android:textColor="@color/colorTabHomeOtherWord"
                     android:textSize="@dimen/textsizeTab_home_arguments" />
@@ -210,6 +211,7 @@
                     android:layout_alignParentStart="true"
                     android:drawableStart="@drawable/fragment_tab_home_leftimg_speed"
                     android:gravity="center_vertical"
+                    android:drawablePadding="@dimen/widthFrag_tab_home_drawablePadding"
                     android:text="@string/frag_tab_home_tv_speed"
                     android:textColor="@color/colorTabHomeOtherWord"
                     android:textSize="@dimen/textsizeTab_home_arguments" />
@@ -251,6 +253,7 @@
                     android:layout_alignParentStart="true"
                     android:drawableStart="@drawable/fragment_tab_home_leftimg_time"
                     android:gravity="center_vertical"
+                    android:drawablePadding="@dimen/widthFrag_tab_home_drawablePadding"
                     android:text="@string/frag_tab_home_tv_time"
                     android:textColor="@color/colorTabHomeOtherWord"
                     android:textSize="@dimen/textsizeTab_home_arguments" />
@@ -290,6 +293,7 @@
                     android:layout_alignParentStart="true"
                     android:drawableStart="@drawable/fragment_tab_home_leftimg_calorie"
                     android:gravity="center_vertical"
+                    android:drawablePadding="@dimen/widthFrag_tab_home_drawablePadding"
                     android:text="@string/frag_tab_home_tv_calorie"
                     android:textColor="@color/colorTabHomeOtherWord"
                     android:textSize="@dimen/textsizeTab_home_arguments" />
@@ -331,6 +335,7 @@
                     android:layout_alignParentStart="true"
                     android:drawableStart="@drawable/fragment_tab_home_leftimg_mileage"
                     android:gravity="center_vertical"
+                    android:drawablePadding="@dimen/widthFrag_tab_home_drawablePadding"
                     android:text="@string/frag_tab_home_tv_mileage"
                     android:textColor="@color/colorTabHomeOtherWord"
                     android:textSize="@dimen/textsizeTab_home_arguments" />

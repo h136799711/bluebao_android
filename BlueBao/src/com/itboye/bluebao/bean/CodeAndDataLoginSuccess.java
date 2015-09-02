@@ -45,8 +45,9 @@ public class CodeAndDataLoginSuccess {
 		public void setUid(int uid) {
 			this.uid = uid;
 		}
-		
-		
+		public int getContinuous_day() {
+			return continuous_day;
+		}
 	}
 	
 }

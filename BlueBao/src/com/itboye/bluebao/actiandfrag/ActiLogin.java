@@ -64,23 +64,24 @@ public class ActiLogin extends Activity implements View.OnClickListener {
 
 		btn_login.setOnClickListener(this);
 		btn_toRegister.setOnClickListener(this);
-
+		
+		//Log.i(TAG, ActiLogin.this.getIntent().getStringExtra("newUsername") );
+		
 	}
 
 	@Override
 	protected void onResume() {
 
-	
 		if (!Util.isInternetAvailable(ActiLogin.this)) {// 手机没有接入网络
 			Toast.makeText(ActiLogin.this, "请先将手机接入网络", Toast.LENGTH_LONG).show();
 			btn_login.setEnabled(false);// 不可用
 			btn_toRegister.setEnabled(false);
 		}
-		/*if (!Util.isBleAvailable(ActiLogin.this)) {
+		if (!Util.isBleAvailable(ActiLogin.this)) {
 			Toast.makeText(ActiLogin.this, "手机系统版本太低，请更新", Toast.LENGTH_LONG).show();
 			btn_login.setEnabled(false);
 			btn_toRegister.setEnabled(false);
-		}*///avd测试时去掉
+		}
 
 		if (pdialog != null) {
 			pdialog.cancel();
@@ -113,7 +114,6 @@ public class ActiLogin extends Activity implements View.OnClickListener {
 			});
 			pdialog.setMessage("登录中......");
 			pdialog.show();
-			
 
 			// 执行获取token和登录操作，执行完之后调用pdialog.cancel()即可
 			// 取消dialog，并执行dialog的onCancel()方法
@@ -161,7 +161,9 @@ public class ActiLogin extends Activity implements View.OnClickListener {
 								if (length > 100) {
 									CodeAndDataLoginSuccess infoSuccess = gson.fromJson(arg0.result, CodeAndDataLoginSuccess.class);
 									Log.i(TAG, "uid  is :" + infoSuccess.getData().getUid());
+									Log.i(TAG, "continuous_day  is :" + infoSuccess.getData().getContinuous_day());
 									Util.uId = infoSuccess.getData().getUid();
+									Util.continuous_day = infoSuccess.getData().getContinuous_day();
 
 									if (cb_rememberPwd.isChecked()) {
 										sp = ActiLogin.this.getSharedPreferences(Util.SP_FN_USERNAMEPWD, Context.MODE_PRIVATE);

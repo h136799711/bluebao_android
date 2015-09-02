@@ -54,12 +54,14 @@ public class Util {
 	
 	public static final String SP_FN_PINFO = "PINFO";//用户信息
 	public static final String SP_KEY_PINFO = "PINFO";
-	public static int uId=39;//用户id
+	public static int uId;//用户id
+	public static int continuous_day = 0;//已锻炼天数，分享时用
+	public static String time = "00:00:00";//运动了多久，分享时用
+	public static String cals = "0";//消耗了多少卡路里，分享时用
+	public static String miles ="0";//运动里程数，分享时用
 	
 	public static final String SP_FN_USERIMG = "userimg";//用户头像
 	public static final String SP_KEY_USERIMG_PATH = "userimg_path"; 
-	//public static final String SP_KEY_USERIMG_CHOSENAME = "userimg_chosename";//删除时用
-	//public static final String SP_KEY_USERIMG_TAKENAME = "userimg_takename"; //删除时用
 	public static final String SP_KEY_USERIMG_USE = "userimg_usename"; //显示时用
 	
 	public static final String SP_FN_USERNAMEPWD = "username_pwd";//用户账号密码

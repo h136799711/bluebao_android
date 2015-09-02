@@ -9,7 +9,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="55dip"
-        android:background="@color/white"
         android:orientation="vertical" >
 
         <TextView
@@ -17,7 +16,7 @@
             android:layout_height="54dip"
             android:gravity="center"
             android:text="注册"
-            android:textColor="@color/black"
+            android:textColor="@color/colorActionBarWord"
             android:textSize="22sp" />
 
         <View
@@ -49,9 +48,9 @@
             android:layout_marginTop="15.0dip"
             android:background="@drawable/edittext_bg"
             android:drawablePadding="15.0dip"
-            android:drawableStart="@drawable/exwidget_clearedittext_left_email"
+            android:drawableStart="@drawable/exwidget_clearedittext_left_username"
             android:ems="22"
-            android:hint="请输入你的邮箱地址"
+            android:hint="请输入你的账号"
             android:inputType="textEmailAddress"
             android:paddingBottom="2.0dip"
             android:paddingEnd="10.0dip"
@@ -138,7 +137,7 @@
             android:layout_marginTop="10dip"
             android:background="#5EB85E"
             android:text="快速注册"
-            android:textColor="@color/black"
+            android:textColor="@color/colorWordsOnButton"
             android:textSize="18.0sp" />
     </LinearLayout>
 

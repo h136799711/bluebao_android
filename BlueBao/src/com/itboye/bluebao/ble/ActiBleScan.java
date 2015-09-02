@@ -32,12 +32,12 @@ import com.itboye.bluebao.actiandfrag.ActiMainTest3;
 public class ActiBleScan extends Activity implements OnClickListener {
 
 	private final static String TAG = "-----ActiBleNew";
-	private final  Context CONTEXT = ActiBleScan.this ;
-	
-	//start 8.26 added
+	private final Context CONTEXT = ActiBleScan.this;
+
+	// start 8.26 added
 	private BluetoothLeService mBluetoothLeService;
-	private String deviceAddress; //要连接的ble的mac address
-	//end 8.26 added
+	private String deviceAddress; // 要连接的ble的mac address
+	// end 8.26 added
 
 	private LeDeviceListAdapter mLeDeviceListAdapter;
 	private BluetoothManager bluetoothManager;
@@ -59,10 +59,11 @@ public class ActiBleScan extends Activity implements OnClickListener {
 		setContentView(R.layout.layout_acti_ble_scan);
 		mHandler = new Handler();
 
-		/*if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
-			Toast.makeText(this, "您的手机不支持BLE", Toast.LENGTH_SHORT).show();
-			finish();
-		}*/
+		/*
+		 * if (!getPackageManager().hasSystemFeature(PackageManager.
+		 * FEATURE_BLUETOOTH_LE)) { Toast.makeText(this, "您的手机不支持BLE",
+		 * Toast.LENGTH_SHORT).show(); finish(); }
+		 */
 
 		bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
 		mBluetoothAdapter = bluetoothManager.getAdapter();
@@ -76,76 +77,82 @@ public class ActiBleScan extends Activity implements OnClickListener {
 		lv_bledevices = (ListView) findViewById(R.id.acti_ble_scan_lv_foundeddevices);
 		mLeDeviceListAdapter = new LeDeviceListAdapter();
 		lv_bledevices.setAdapter(mLeDeviceListAdapter);
-		lv_bledevices.setOnItemClickListener(new MyOnItemClickListener() );
+		lv_bledevices.setOnItemClickListener(new MyOnItemClickListener());
 		btn_scan.setOnClickListener(this);
 
 	}
-	
-	//监听lv_bledevices的item点击事件
+
+	// 监听lv_bledevices的item点击事件
 	private class MyOnItemClickListener implements OnItemClickListener {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			BluetoothDevice ble = mLeDeviceListAdapter.getDevice(position);
-			if ( ble==null ) {
-				Toast.makeText(CONTEXT, "设备已经关闭" , Toast.LENGTH_SHORT).show();
+			if (ble == null) {
+				Toast.makeText(CONTEXT, "设备已经关闭", Toast.LENGTH_SHORT).show();
 				return;
 			}
 			deviceAddress = ble.getAddress();// 赋给常量deviceAddress
-			
-			//start 8.26 added
-			
+
+			// start 8.26 added
+
 			// 绑定服务。mServiceConnection处理连接成功与否。成功：直接根据deviceAddress连接；
 			// 失败：mBluetoothLeService
 			Intent gattServiceIntent = new Intent(ActiBleScan.this, BluetoothLeService.class);
 			bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
-			
+
 			Intent intent = new Intent(CONTEXT, ActiMainTest3.class);
-			//intent.putExtra(ActiBleConnAndGetdata.EXTRAS_DEVICE_NAME, ble.getName());
-			//intent.putExtra(ActiBleConnAndGetdata.EXTRAS_DEVICE_ADDRESS, ble.getAddress());
-			if ( mScanning ){//若正在搜索则停止搜索
+			// intent.putExtra(ActiBleConnAndGetdata.EXTRAS_DEVICE_NAME,
+			// ble.getName());
+			// intent.putExtra(ActiBleConnAndGetdata.EXTRAS_DEVICE_ADDRESS,
+			// ble.getAddress());
+			if (mScanning) {// 若正在搜索则停止搜索
 				mBluetoothAdapter.stopLeScan(mLeScanCallback);
 			}
 			startActivity(intent);
-			
-			
-/*			Intent intent = new Intent(CONTEXT, ActiBleConnAndGetdata.class);
-			intent.putExtra(ActiBleConnAndGetdata.EXTRAS_DEVICE_NAME, ble.getName());
-			intent.putExtra(ActiBleConnAndGetdata.EXTRAS_DEVICE_ADDRESS, ble.getAddress());
-			if ( mScanning ){//若正在搜索则停止搜索
-				mBluetoothAdapter.stopLeScan(mLeScanCallback);
-			}
-			startActivity(intent);*/
+
+			/*
+			 * Intent intent = new Intent(CONTEXT, ActiBleConnAndGetdata.class);
+			 * intent.putExtra(ActiBleConnAndGetdata.EXTRAS_DEVICE_NAME,
+			 * ble.getName());
+			 * intent.putExtra(ActiBleConnAndGetdata.EXTRAS_DEVICE_ADDRESS,
+			 * ble.getAddress()); if ( mScanning ){//若正在搜索则停止搜索
+			 * mBluetoothAdapter.stopLeScan(mLeScanCallback); }
+			 * startActivity(intent);
+			 */
 		}
-	} 
-	
+	}
+
 	@Override
 	protected void onResume() {
 		super.onResume();
 		// Ensures Bluetooth is enabled on the device. If Bluetooth is not
-		// currently enabled, fire an intent to display a dialog asking the user to grant permission to enable it.
-/*		if (!mBluetoothAdapter.isEnabled()) {
-			if (!mBluetoothAdapter.isEnabled()) {
+		// currently enabled, fire an intent to display a dialog asking the user
+		// to grant permission to enable it.
+		/*
+		 * if (!mBluetoothAdapter.isEnabled()) { if
+		 * (!mBluetoothAdapter.isEnabled()) { Intent enableBtIntent = new
+		 * Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+		 * startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT); } }
+		 */
+		if (mBluetoothAdapter != null) {
+			if (!mBluetoothAdapter.enable()) {
 				Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-				startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+				startActivity(enableBtIntent);
 			}
-		}*/
-		if(  !mBluetoothAdapter.enable() ) {
-			Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-			startActivity(enableBtIntent);
 		}
 
 		// Initializes list view adapter.
 		mLeDeviceListAdapter = new LeDeviceListAdapter();
 		lv_bledevices.setAdapter(mLeDeviceListAdapter);
 		scanLeDevice(true);
-		
-		//start 8.26 added
+
+		// start 8.26 added
 		if (mBluetoothLeService != null) {
 			final boolean result = mBluetoothLeService.connect(deviceAddress);
 			Log.d(TAG, "Connect device result is : " + result);
 		}
-		//end 8.26 added
+		// end 8.26 added
 	}
 
 	@Override
@@ -154,21 +161,21 @@ public class ActiBleScan extends Activity implements OnClickListener {
 		scanLeDevice(false);
 		mLeDeviceListAdapter.clear();
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		mBluetoothLeService = null;
-		
+
 		super.onDestroy();
 	}
-	
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.acti_ble_scan_btn_scan: // 搜索ble设备
-			if ( mScanning == true ) {
+			if (mScanning == true) {
 				Toast.makeText(CONTEXT, "scanning......", Toast.LENGTH_SHORT).show();
-			}else{
+			} else {
 				scanLeDevice(true);
 			}
 			break;
@@ -243,7 +250,6 @@ public class ActiBleScan extends Activity implements OnClickListener {
 		public long getItemId(int i) {
 			return i;
 		}
-		
 
 		@Override
 		public View getView(int i, View view, ViewGroup viewGroup) {
@@ -261,9 +267,9 @@ public class ActiBleScan extends Activity implements OnClickListener {
 
 			BluetoothDevice device = mLeDevices.get(i);
 			final String deviceName = device.getName();
-			if (deviceName != null && deviceName.length() > 0){
+			if (deviceName != null && deviceName.length() > 0) {
 				viewHolder.deviceName.setText(deviceName);
-			}else{
+			} else {
 				viewHolder.deviceName.setText(R.string.unknown_device);
 			}
 			viewHolder.deviceAddress.setText(device.getAddress());
@@ -291,32 +297,32 @@ public class ActiBleScan extends Activity implements OnClickListener {
 		TextView deviceAddress;
 	}
 
-	//8.26 added below
+	// 8.26 added below
 	// bindService的时候成功或不成功的处理函数 // Code to manage Service lifecycle.
-		private final ServiceConnection mServiceConnection = new ServiceConnection() {
+	private final ServiceConnection mServiceConnection = new ServiceConnection() {
 
-			@Override
-			public void onServiceConnected(ComponentName componentName, IBinder service) {
-				
-				mBluetoothLeService = ((BluetoothLeService.LocalBinder) service).getService();
-				if (!mBluetoothLeService.initialize()) {
-					Toast.makeText(ActiBleScan.this, "服务未成功初始化", Toast.LENGTH_SHORT).show();
-					finish();
-				}
-				Toast.makeText(ActiBleScan.this, "服务已连接", Toast.LENGTH_SHORT).show();
-				Toast.makeText(ActiBleScan.this, "开始连接设备，设备地址为： " + deviceAddress, Toast.LENGTH_SHORT).show();
+		@Override
+		public void onServiceConnected(ComponentName componentName, IBinder service) {
 
-				// Automatically connects to the device upon successful start-up initialization.
-			  mBluetoothLeService.connect(deviceAddress);
-	
+			mBluetoothLeService = ((BluetoothLeService.LocalBinder) service).getService();
+			if (!mBluetoothLeService.initialize()) {
+				Toast.makeText(ActiBleScan.this, "服务未成功初始化", Toast.LENGTH_SHORT).show();
+				finish();
 			}
+			Toast.makeText(ActiBleScan.this, "服务已连接", Toast.LENGTH_SHORT).show();
+			Toast.makeText(ActiBleScan.this, "开始连接设备，设备地址为： " + deviceAddress, Toast.LENGTH_SHORT).show();
 
-			@Override
-			public void onServiceDisconnected(ComponentName componentName) {
-				mBluetoothLeService = null;
-				Toast.makeText(ActiBleScan.this, "服务未成功连接", Toast.LENGTH_SHORT).show();
-			}
-		};
+			// Automatically connects to the device upon successful start-up
+			// initialization.
+			mBluetoothLeService.connect(deviceAddress);
 
-		
+		}
+
+		@Override
+		public void onServiceDisconnected(ComponentName componentName) {
+			mBluetoothLeService = null;
+			Toast.makeText(ActiBleScan.this, "服务未成功连接", Toast.LENGTH_SHORT).show();
+		}
+	};
+
 }
