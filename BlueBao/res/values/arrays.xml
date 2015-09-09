@@ -4,14 +4,14 @@
     <!-- 左侧菜单中的ListView -->
     <string-array name="menu_left">
         <item >个人资料</item>
-        <item >运动数据</item>
         <item >设备管理</item>
+        <item >运动数据</item>
         <item >目标管理</item>
-        <item >闹铃提醒</item>
         <item >关于蓝堡</item>
         <item >购买器材</item>
+        <item >闹铃开关</item>
         <item >设置</item>
-        <item >退出</item>
+        <item >注销</item>
     </string-array>
     
 </resources>

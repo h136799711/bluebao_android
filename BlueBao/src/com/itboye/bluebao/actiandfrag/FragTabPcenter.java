@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +18,7 @@ import com.itboye.bluebao.R;
 import com.itboye.bluebao.bean.BestScoreBean;
 import com.itboye.bluebao.bean.PInfo;
 import com.itboye.bluebao.bean.TotalScoreBean;
+import com.itboye.bluebao.exwidget.CircleImageView;
 import com.itboye.bluebao.util.Util;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -29,20 +29,16 @@ import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 
 /**
  * fragment home for tab pcenter
- * 
- * @author Administrator 方法：用户名-个性签名-身高-体重-BMI的 展示和修改（直接点击即可修改） +总里程。。。最多消耗热量的
- *         展示（SP中获取）
- *
- *         TODO 还应该加一个广播接收器，当总里程。。。最多消耗热量数据改变时，修改页面展示的数据
+ * @author Administrator   
  */
 public class FragTabPcenter extends Fragment {
 
 	protected static final String TAG = "-----FragTabPcenter";
 	private SharedPreferences sp;
 	private Gson gson = new Gson();
-	private String tokenForTwo = "";
 
-	private ImageView iv_userimg;
+	//private ImageView iv_userimg;
+	private CircleImageView iv_userimg;
 	private TextView tv_usernickname;
 	private TextView tv_userSentence;
 	private TextView tv_userHeight;
@@ -54,17 +50,11 @@ public class FragTabPcenter extends Fragment {
 	private TextView tv_bestMiles;
 	private TextView tv_bestTime;
 	private TextView tv_bestCars;
-	private String totalMiles;
-	private String totalTime;
-	private String totalCars;
-	private String bestMiles;
-	private String bestTime;
-	private String bestCars;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View layout_fragment_pcenter = inflater.inflate(R.layout.layout_fragment_tab_pcenter, container, false);
 
-		iv_userimg = (ImageView) layout_fragment_pcenter.findViewById(R.id.frag_tab_pcenter_iv_userimg);
+		iv_userimg = (CircleImageView) layout_fragment_pcenter.findViewById(R.id.frag_tab_pcenter_iv_userimg);
 		tv_usernickname = (TextView) layout_fragment_pcenter.findViewById(R.id.frag_tab_pcenter_et_username);
 		tv_userSentence = (TextView) layout_fragment_pcenter.findViewById(R.id.frag_tab_pcenter_et_userSentence);
 		tv_userHeight = (TextView) layout_fragment_pcenter.findViewById(R.id.frag_tab_pcenter_et_userHeight);
@@ -113,36 +103,31 @@ public class FragTabPcenter extends Fragment {
 			tv_userSentence.setText(pInfo.getSignature());
 			tv_userHeight.setText(pInfo.getHeight() + "");
 			tv_userWeight.setText(pInfo.getWeight() + "");
-			tv_userBMI.setText(pInfo.getBMI() + "");
+			//tv_userBMI.setText(pInfo.getBMI() + "");
+			tv_userBMI.setText("正常");
 		}else{
 			tv_usernickname.setText("爱运动 享自由");
 			tv_userSentence.setText("个性签名");
-			tv_userHeight.setText("165cm");
-			tv_userWeight.setText( "65kg");
-			tv_userBMI.setText("23.88");
+			tv_userHeight.setText("165");
+			tv_userWeight.setText( "65");
+			tv_userBMI.setText("正常");
 		}
-
-		// start 8.28 added
 
 		int uId = Util.uId;
-		Log.i(TAG, "uId is:" + uId);
 		if (uId != 0) {
-			getDataAndShow(uId);// 暂时写死
+			getDataAndShow(uId);
 		} else {
-			tv_totalCars.setText("0大卡");
-			tv_totalTime.setText("0小时");
-			tv_totalMiles.setText("0km");
+			tv_totalCars.setText("0卡");
+			tv_totalTime.setText("0时");
+			tv_totalMiles.setText("0公里");
 
-			tv_bestCars.setText("0大卡");
-			tv_bestTime.setText("0小时");
-			tv_bestMiles.setText("0km");
+			tv_bestCars.setText("0卡");
+			tv_bestTime.setText("0时");
+			tv_bestMiles.setText("0公里");
 		}
-		// end 8.28 added
-
 		super.onResume();
 	}
 
-	// start 8.28 added
 	private void getDataAndShow(final int uId) {
 		getTotalDataAndShow(uId);
 		getBestDataAndShow(uId);
@@ -150,18 +135,15 @@ public class FragTabPcenter extends Fragment {
 
 	private void getTotalDataAndShow(final int uId) {
 
-		// 1 获取token
 		String token = Util.getAccessToken(getActivity());
 		if (token.isEmpty()) {
 			try {
 				Thread.sleep(2000);
 				token = Util.getAccessToken(getActivity());
-				Log.i(TAG, " 2秒之后token值为：" + token);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-		// 2 获取数据
 		if (!token.isEmpty()) {
 
 			HttpUtils httpUtils = new HttpUtils();
@@ -171,49 +153,49 @@ public class FragTabPcenter extends Fragment {
 			params.addBodyParameter("uid", uId + "");
 
 			String urlGetTotalData = Util.urlGetTotalData + token;
-			Log.i(TAG, urlGetTotalData);
+			//Log.i(TAG, urlGetTotalData);
 
 			httpUtils.send(HttpMethod.POST, urlGetTotalData, params, new RequestCallBack<String>() {
 				@Override
 				public void onFailure(HttpException arg0, String arg1) {
-					Log.i(TAG, "获取总成绩失败：" + arg1);
-					tv_totalMiles.setText("0km");
-					tv_totalTime.setText("0小时");
-					tv_totalCars.setText("0大卡");
-					Toast.makeText(getActivity(), "获取总成绩失败" + arg1, Toast.LENGTH_SHORT).show();
+					//Log.i(TAG, "获取总成绩失败：" + arg1);
+					tv_totalMiles.setText("0公里");
+					tv_totalTime.setText("0时");
+					tv_totalCars.setText("0卡");
+					//Toast.makeText(getActivity(), "获取总成绩失败" + arg1, Toast.LENGTH_SHORT).show();
 				}
 
 				@Override
 				public void onSuccess(ResponseInfo<String> arg0) {
-					Log.i(TAG, "获取总成绩成功：" + arg0.result);
+					//Log.i(TAG, "获取总成绩成功：" + arg0.result);
 					TotalScoreBean tsb = gson.fromJson(arg0.result, TotalScoreBean.class);
-					Log.i(TAG, tsb.getData().getSum_max_distance() + tsb.getData().getSum_max_time()
-							+ tsb.getData().getSum_max_calorie());
+					//Log.i(TAG, tsb.getData().getSum_max_distance() + tsb.getData().getSum_max_time()
+					//		+ tsb.getData().getSum_max_calorie());
 
 					if (tsb.getData().getSum_max_distance() != null) {
-						Log.i(TAG, "true");
-						tv_totalMiles.setText(tsb.getData().getSum_max_distance() + "km");
+						//Log.i(TAG, "true");
+						tv_totalMiles.setText(tsb.getData().getSum_max_distance() + "公里");
 					} else {
-						Log.i(TAG, "false");
-						tv_totalMiles.setText("0km");
+						//Log.i(TAG, "false");
+						tv_totalMiles.setText("0公里");
 					}
 
 					if (tsb.getData().getSum_max_time() != null) {
 						float time = Float.parseFloat(tsb.getData().getSum_max_time()) / (float) 3600.0;
 						if( time<1f){
-							tv_totalTime.setText("0"+Util.df.format(time) + "小时");
+							tv_totalTime.setText("0"+Util.df.format(time) + "时");
 						}else{
-							tv_totalTime.setText(Util.df.format(time) + "小时");
+							tv_totalTime.setText(Util.df.format(time) + "时");
 						}
 						
 					} else {
-						tv_totalTime.setText("0小时");
+						tv_totalTime.setText("0时");
 					}
 
 					if (tsb.getData().getSum_max_calorie() != null) {
-						tv_totalCars.setText(tsb.getData().getSum_max_calorie() + "大卡");
+						tv_totalCars.setText(tsb.getData().getSum_max_calorie() + "卡");
 					} else {
-						tv_totalCars.setText("0大卡");
+						tv_totalCars.setText("0卡");
 					}
 				}
 			});
@@ -231,7 +213,6 @@ public class FragTabPcenter extends Fragment {
 			try {
 				Thread.sleep(2000);
 				token = Util.getAccessToken(getActivity());
-				Log.i(TAG, " 2秒之后token值为：" + token);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -246,59 +227,55 @@ public class FragTabPcenter extends Fragment {
 			params2.addBodyParameter("uid", uId + "");
 
 			String urlGetBestData = Util.urlGetBestData + token;
-			Log.i(TAG, urlGetBestData);
+			//Log.i(TAG, urlGetBestData);
 
 			httpUtils.send(HttpMethod.POST, urlGetBestData, params2, new RequestCallBack<String>() {
 				@Override
 				public void onFailure(HttpException arg0, String arg1) {
 					Log.i(TAG, "获取最好成绩失败：" + arg1);
-					tv_bestMiles.setText("0km");
-					tv_bestTime.setText("0小时");
-					tv_bestCars.setText("0大卡");
+					tv_bestMiles.setText("0公里");
+					tv_bestTime.setText("0时");
+					tv_bestCars.setText("0卡");
 				}
 
 				@Override
 				public void onSuccess(ResponseInfo<String> arg0) {
 					Log.i(TAG, "获取最好成绩成功：" + arg0.result);
-					/*String temp = arg0.result.replace('[', ' ');
-					String temp1 = temp.replace(']', ' ');*/
 					String temp1 = Util.deletebracket(arg0.result);
-					Log.i(TAG, "temp is:" + temp1.trim());
+					//Log.i(TAG, "temp is:" + temp1.trim());
 					BestScoreBean bsb = gson.fromJson(temp1, BestScoreBean.class);
-					Log.i(TAG, bsb.getData().getBest_distance() + "  " + bsb.getData().getBest_cost_time() + "  "
-							+ bsb.getData().getBest_calorie());
+					//Log.i(TAG, bsb.getData().getBest_distance() + "  " + bsb.getData().getBest_cost_time() + "  "
+					//		+ bsb.getData().getBest_calorie());
 
 					if (bsb.getData().getBest_distance() != null) {
-						tv_bestMiles.setText(bsb.getData().getBest_distance() + "km");
+						tv_bestMiles.setText(bsb.getData().getBest_distance() + "公里");
 					} else {
-						tv_bestMiles.setText("0km");
+						tv_bestMiles.setText("0公里");
 					}
 
 					if (bsb.getData().getBest_cost_time() != null) {
 						float time = Float.parseFloat(bsb.getData().getBest_cost_time()) / (float) 3600.0;
 						if( time<1f){
-							tv_bestTime.setText("0"+Util.df.format(time) + "小时");
+							tv_bestTime.setText("0"+Util.df.format(time) + "时");
 						}else{
-							tv_bestTime.setText(Util.df.format(time) + "小时");
+							tv_bestTime.setText(Util.df.format(time) + "时");
 						}
 					} else {
-						tv_bestTime.setText("0小时");
+						tv_bestTime.setText("0时");
 					}
 
 					if (bsb.getData().getBest_calorie() != null) {
-						tv_bestCars.setText(bsb.getData().getBest_calorie() + "大卡");
+						tv_bestCars.setText(bsb.getData().getBest_calorie() + "卡");
 					} else {
-						tv_bestCars.setText("0大卡");
+						tv_bestCars.setText("0卡");
 					}
 				}
 
 			});
 
 		} else {
-			Log.i(TAG, "token is empty");
+			//Log.i(TAG, "token is empty");
 			Toast.makeText(getActivity(), "获取token失败", Toast.LENGTH_SHORT).show();
 		}
 	}
-
-	// end 8.28 added
 }

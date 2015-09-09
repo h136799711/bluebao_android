@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     android:orientation="vertical" >
 
     <!-- 开始：自己的actionbar -->
@@ -40,6 +41,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/widthMarStart"
+            android:layout_marginEnd="@dimen/widthMarEnd"
             android:orientation="vertical" >
 
             <!-- 图片、用户名、个性签名 -->
@@ -47,12 +50,12 @@
             <RelativeLayout
                 android:id="@+id/frag_tab_pcenter_rl_top"
                 android:layout_width="match_parent"
-                android:layout_height="140dip" >
+                android:layout_height="120dip" >
 
-                <ImageView
+                <com.itboye.bluebao.exwidget.CircleImageView
                     android:id="@+id/frag_tab_pcenter_iv_userimg"
-                    android:layout_width="@dimen/widthUserImg"
-                    android:layout_height="@dimen/heightUserImg"
+                    android:layout_width="100dip"
+                    android:layout_height="100dip"
                     android:layout_marginBottom="10dip"
                     android:layout_marginEnd="10dip"
                     android:layout_marginStart="10dip"
@@ -68,8 +71,8 @@
                     android:layout_toEndOf="@id/frag_tab_pcenter_iv_userimg"
                     android:gravity="left"
                     android:text="爱运动,享自由"
-                    android:textColor="@color/colorTabPcenterWord"
-                    android:textSize="@dimen/textsizeTab_pcenter_username" />
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/textsizeTab_pcenter" />
 
                 <TextView
                     android:id="@+id/frag_tab_pcenter_et_userSentence"
@@ -79,7 +82,7 @@
                     android:layout_toEndOf="@id/frag_tab_pcenter_iv_userimg"
                     android:gravity="left"
                     android:text="个性签名"
-                    android:textColor="@color/colorTabPcenterWord"
+                    android:textColor="@color/colorFragPcenterGXQM"
                     android:textSize="@dimen/textsizeTab_pcenter_usersentence" />
             </RelativeLayout>
 
@@ -113,8 +116,8 @@
                         android:layout_marginStart="@dimen/widthTab_pcenter_detail1_marStart"
                         android:gravity="center"
                         android:text="身高"
-                        android:textColor="@color/colorTabPcenterWord"
-                        android:textSize="@dimen/textsizeTab_pcenter_detail1Word" />
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/textsizeTab_pcenter" />
 
                     <TextView
                         android:id="@+id/frag_tab_pcenter_et_userHeight"
@@ -122,9 +125,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/widthTab_pcenter_detail1_marStart"
                         android:gravity="center"
-                        android:text="175cm"
-                        android:textColor="@color/colorTabPcenterNumber"
-                        android:textSize="@dimen/textsizeTab_pcenter_detail1Number" />
+                        android:text="0"
+                        android:textColor="@color/colorFragPcenterNumber"
+                        android:textSize="@dimen/textsizeTab_pcenter" />
                 </LinearLayout>
 
                 <!-- 体重 -->
@@ -142,8 +145,8 @@
                         android:layout_marginStart="@dimen/widthTab_pcenter_detail1_marStart"
                         android:gravity="center"
                         android:text="体重"
-                        android:textColor="@color/colorTabPcenterWord"
-                        android:textSize="@dimen/textsizeTab_pcenter_detail1Word" />
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/textsizeTab_pcenter" />
 
                     <TextView
                         android:id="@+id/frag_tab_pcenter_et_userWeight"
@@ -151,9 +154,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/widthTab_pcenter_detail1_marStart"
                         android:gravity="center"
-                        android:text="75KG"
-                        android:textColor="@color/colorTabPcenterNumber"
-                        android:textSize="@dimen/textsizeTab_pcenter_detail1Number" />
+                        android:text="0"
+                        android:textColor="@color/colorFragPcenterNumber"
+                        android:textSize="@dimen/textsizeTab_pcenter" />
                 </LinearLayout>
 
                 <!-- BMI -->
@@ -171,8 +174,8 @@
                         android:layout_marginStart="@dimen/widthTab_pcenter_detail1_marStart"
                         android:gravity="center"
                         android:text="BMI"
-                        android:textColor="@color/colorTabPcenterWord"
-                        android:textSize="@dimen/textsizeTab_pcenter_detail1Word" />
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/textsizeTab_pcenter" />
 
                     <TextView
                         android:id="@+id/frag_tab_pcenter_et_userBMI"
@@ -180,9 +183,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/widthTab_pcenter_detail1_marStart"
                         android:gravity="center"
-                        android:text="good"
-                        android:textColor="@color/colorTabPcenterNumber"
-                        android:textSize="@dimen/textsizeTab_pcenter_detail1Number" />
+                        android:text="0"
+                        android:textColor="@color/colorFragPcenterNumber"
+                        android:textSize="@dimen/textsizeTab_pcenter" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -200,7 +203,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dip"
+                android:layout_height="100dip"
                 android:layout_marginTop="10dip"
                 android:orientation="vertical" >
 
@@ -219,8 +222,8 @@
                         android:layout_weight="1"
                         android:gravity="left"
                         android:text="总里程"
-                        android:textColor="@color/colorTabPcenterWord"
-                        android:textSize="@dimen/textsizeTab_pcenter_detail2Word" />
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/textsizeTab_pcenter" />
 
                     <TextView
                         android:id="@+id/frag_tab_pcenter_tv_userTotalLength"
@@ -229,9 +232,9 @@
                         android:layout_marginEnd="@dimen/widthTab_pcenter_detail2_marEnd"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:hint="15Km"
-                        android:textColor="@color/colorTabPcenterNumber"
-                        android:textSize="@dimen/textsizeTab_pcenter_detail2Number" />
+                        android:text="0公里"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/textsizeTab_pcenter" />
                 </LinearLayout>
 
                 <!-- 总时间 -->
@@ -249,8 +252,8 @@
                         android:layout_weight="1"
                         android:gravity="left"
                         android:text="总时间"
-                        android:textColor="@color/colorTabPcenterWord"
-                        android:textSize="@dimen/textsizeTab_pcenter_detail2Word" />
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/textsizeTab_pcenter" />
 
                     <TextView
                         android:id="@+id/frag_tab_pcenter_tv_userTotalTime"
@@ -259,9 +262,9 @@
                         android:layout_marginEnd="@dimen/widthTab_pcenter_detail2_marEnd"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:hint="1小时30分钟"
-                        android:textColor="@color/colorTabPcenterNumber"
-                        android:textSize="@dimen/textsizeTab_pcenter_detail2Number" />
+                        android:text="0时"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/textsizeTab_pcenter" />
                 </LinearLayout>
 
                 <!-- 总消耗热量 -->
@@ -279,8 +282,8 @@
                         android:layout_weight="1"
                         android:gravity="left"
                         android:text="总消耗热量"
-                        android:textColor="@color/colorTabPcenterWord"
-                        android:textSize="@dimen/textsizeTab_pcenter_detail2Word" />
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/textsizeTab_pcenter" />
 
                     <TextView
                         android:id="@+id/frag_tab_pcenter_tv_userTotalCalorie"
@@ -289,9 +292,9 @@
                         android:layout_marginEnd="@dimen/widthTab_pcenter_detail2_marEnd"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:hint="3000大卡"
-                        android:textColor="@color/colorTabPcenterNumber"
-                        android:textSize="@dimen/textsizeTab_pcenter_detail2Number" />
+                        android:text="0卡"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/textsizeTab_pcenter" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -309,7 +312,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dip"
+                android:layout_height="120dip"
                 android:layout_marginTop="10dip"
                 android:orientation="vertical" >
 
@@ -318,8 +321,8 @@
                     android:layout_height="30dip"
                     android:gravity="center"
                     android:text="个人最好成绩"
-                    android:textColor="@color/colorTabPcenterWord"
-                    android:textSize="@dimen/textsizeTab_pcenter_detail3" />
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/textsizeTab_pcenter" />
 
                 <!-- 最长距离 -->
 
@@ -336,8 +339,8 @@
                         android:layout_weight="1"
                         android:gravity="left"
                         android:text="最长距离"
-                        android:textColor="@color/colorTabPcenterWord"
-                        android:textSize="@dimen/textsizeTab_pcenter_detail3Word" />
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/textsizeTab_pcenter" />
 
                     <TextView
                         android:id="@+id/frag_tab_pcenter_tv_userLongestLength"
@@ -346,9 +349,9 @@
                         android:layout_marginEnd="@dimen/widthTab_pcenter_detail3_marEnd"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:text="15Km"
-                        android:textColor="@color/colorTabPcenterNumber"
-                        android:textSize="@dimen/textsizeTab_pcenter_detail3Number" />
+                        android:text="0公里"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/textsizeTab_pcenter" />
                 </LinearLayout>
 
                 <!-- 最长时间 -->
@@ -366,8 +369,8 @@
                         android:layout_weight="1"
                         android:gravity="left"
                         android:text="最长时间"
-                        android:textColor="@color/colorTabPcenterWord"
-                        android:textSize="@dimen/textsizeTab_pcenter_detail3Word" />
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/textsizeTab_pcenter" />
 
                     <TextView
                         android:id="@+id/frag_tab_pcenter_tv_userLongestTime"
@@ -376,9 +379,9 @@
                         android:layout_marginEnd="@dimen/widthTab_pcenter_detail3_marEnd"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:text="1小时30分钟"
-                        android:textColor="@color/colorTabPcenterNumber"
-                        android:textSize="@dimen/textsizeTab_pcenter_detail3Number" />
+                        android:text="0时"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/textsizeTab_pcenter" />
                 </LinearLayout>
 
                 <!-- 最多消耗热量 -->
@@ -396,8 +399,8 @@
                         android:layout_weight="1"
                         android:gravity="left"
                         android:text="最多消耗热量"
-                        android:textColor="@color/colorTabPcenterWord"
-                        android:textSize="@dimen/textsizeTab_pcenter_detail3Word" />
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/textsizeTab_pcenter" />
 
                     <TextView
                         android:id="@+id/frag_tab_pcenter_tv_userMostCalorie"
@@ -406,9 +409,9 @@
                         android:layout_marginEnd="@dimen/widthTab_pcenter_detail3_marEnd"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:text="3000大卡"
-                        android:textColor="@color/colorTabPcenterNumber"
-                        android:textSize="@dimen/textsizeTab_pcenter_detail3Number" />
+                        android:text="0卡"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/textsizeTab_pcenter" />
                 </LinearLayout>
             </LinearLayout>
             <!-- =====divider=================================== -->

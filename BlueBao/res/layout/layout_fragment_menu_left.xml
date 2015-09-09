@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ricewhitegb"
+    android:background="@color/colorBackground"
     android:orientation="vertical" >
 
     <!-- 上边的 用户头像、用户名、个性签名 -->
@@ -14,7 +14,96 @@
         android:layout_marginStart="20dip"
         android:layout_marginTop="30dip" >
 
-        <ImageView
+        <com.itboye.bluebao.exwidget.CircleImageView
+            android:id="@+id/fragment_menu_left_top_userimg"
+            android:layout_width="@dimen/widthUserImg"
+            android:layout_height="@dimen/heightUserImg"
+            android:src="@drawable/fragment_menu_left_userimg_default" />
+
+        <TextView
+            android:id="@+id/frag_menu_left_tv_username"
+            android:layout_width="170dip"
+            android:layout_height="30dip"
+            android:layout_marginStart="5dip"
+            android:layout_toEndOf="@id/fragment_menu_left_top_userimg"
+            android:gravity="center"
+            android:text="爱运动,享自由"
+            android:textColor="@color/colorMenuLeftWord"
+            android:textSize="@dimen/textsizeFragMenuUsername" />
+        
+         <TextView
+             android:id="@+id/frag_menu_left_tv_gexingqianming"
+            android:layout_width="170dip"
+            android:layout_height="30dip"
+            android:layout_marginStart="5dip"
+            android:layout_toEndOf="@id/fragment_menu_left_top_userimg"
+            android:layout_below="@id/frag_menu_left_tv_username"
+            android:gravity="center"
+            android:text="个性签名"
+            android:textColor="@color/colorMenuLeftWord"
+            android:textSize="@dimen/textsizeFragMenuGXQM" />
+        
+        
+        
+    </RelativeLayout>
+    
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:layout_marginTop="20dip"
+            android:background="@color/colorMenuLeftLine" >
+        </View>
+
+    <!-- 下边的 List -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_marginTop="3dip"
+        android:layout_weight="1" >
+
+        <ListView
+            android:id="@+id/fragment_meun_left_lv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:choiceMode="singleChoice"
+            android:listSelector="@color/white" />
+    </LinearLayout>
+
+</LinearLayout>
+
+
+
+
+
+
+
+
+<!-- <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ricewhitegb"
+    android:orientation="vertical" >
+
+    上边的 用户头像、用户名、个性签名
+
+    <RelativeLayout
+        android:id="@+id/fragment_menu_left_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dip"
+        android:layout_marginTop="30dip" >
+
+        
+             <ImageView
+            android:id="@+id/fragment_menu_left_top_userimg"
+            android:layout_width="@dimen/widthUserImg"
+            android:layout_height="@dimen/heightUserImg"
+            android:src="@drawable/fragment_menu_left_userimg_default" />
+       
+
+        <com.itboye.bluebao.exwidget.CircleImageView
             android:id="@+id/fragment_menu_left_top_userimg"
             android:layout_width="@dimen/widthUserImg"
             android:layout_height="@dimen/heightUserImg"
@@ -31,7 +120,7 @@
             android:textSize="@dimen/textsizeFragMenu" />
     </RelativeLayout>
 
-    <!-- 下边的 List -->
+    下边的 List
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,4 +138,4 @@
             android:listSelector="@color/white" />
     </LinearLayout>
 
-</LinearLayout>
+</LinearLayout> -->

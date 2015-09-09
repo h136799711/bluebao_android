@@ -1,5 +1,8 @@
 package com.itboye.bluebao.ble;
 
+import java.util.List;
+import java.util.UUID;
+
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -15,9 +18,6 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
-
-import java.util.List;
-import java.util.UUID;
 
 import com.google.gson.Gson;
 
@@ -245,13 +245,13 @@ public class BluetoothLeService extends Service {
 		}
 
 		mBluetoothGatt = device.connectGatt(this, true, mGattCallback);
-		Log.i(TAG, "8.30 added. mBluetoothGatt.getDevice().getUuids() is: " + mBluetoothGatt.getDevice().getUuids() );
-		Log.i(TAG, "8.30 added. mBluetoothGatt.getDevice().getAddress() is: " + mBluetoothGatt.getDevice().getAddress() );
+		//Log.i(TAG, "8.30 added. mBluetoothGatt.getDevice().getUuids() is: " + mBluetoothGatt.getDevice().getUuids() );
+		//Log.i(TAG, "8.30 added. mBluetoothGatt.getDevice().getAddress() is: " + mBluetoothGatt.getDevice().getAddress() );
 		
-		Log.i(TAG, "正在连接......");
+		//Log.i(TAG, "正在连接......");
 		mBluetoothDeviceAddress = address;
 		mConnectionState = STATE_CONNECTING;
-		Log.i(TAG, "device.connectGatt(this, true, mGattCallback)----绑定状态：" + device.getBondState());
+		//Log.i(TAG, "device.connectGatt(this, true, mGattCallback)----绑定状态：" + device.getBondState());
 		
 	/*	if ( device.getBondState()==10 ) { //如果没有绑定成功就一直绑定
 			Log.i(TAG, "device.connectGatt(this, true, mGattCallback)没有连接上----绑定状态：" + device.getBondState());
@@ -418,9 +418,19 @@ public class BluetoothLeService extends Service {
 	}
 
 	public String getMiles(String str){
+		Log.i("getMiles", "str is: "+str);
 		int beforePoint = DataUtil.hexStringX2bytesToInt(str.substring(2, 4));
 		int afterPoint = DataUtil.hexStringX2bytesToInt(str.substring(4, 6));
-		String strtemp = beforePoint+"."+String.valueOf(afterPoint).substring(0, 2);
+		Log.i("getMiles", "beforePoint is: "+beforePoint);
+		Log.i("getMiles", "afterPoint is: "+afterPoint);
+		
+		Log.i("getMiles", "afterPoint is: "+afterPoint);
+		String strtemp;
+		if(afterPoint==0){
+		 strtemp = beforePoint+"";
+		}else{
+		 strtemp = beforePoint+"."+String.valueOf(afterPoint).substring(0, 2);
+		}
 		return strtemp+"km";
 	}
 	
@@ -432,7 +442,12 @@ public class BluetoothLeService extends Service {
 	public String getTotalMiles(String str){
 		int beforePoint = DataUtil.hexStringX2bytesToInt(str.substring(0, 2));
 		int afterPoint = DataUtil.hexStringX2bytesToInt(str.substring(2, 4));
-		return beforePoint+"."+afterPoint+"km";
+		if(afterPoint==0){
+			return beforePoint+"km";
+		}else{
+			return beforePoint+"."+afterPoint+"km";
+		}
+		
 	}
 	
 	public String getXinlv(String str){

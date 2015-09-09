@@ -9,13 +9,13 @@
     <dimen name="textsizeActiMainTab">12sp</dimen>
     
 	<dimen name="heightTab_home_arguments">40dip</dimen>
-    <dimen name="textsizeTab_home_arguments">18sp</dimen>
+    <dimen name="textsizeTab_home_arguments">17sp</dimen>
     
-    <dimen name="heightTab_home_arguments2">70dip</dimen>
-    <dimen name="textsizeTab_home_arguments2Word">20sp</dimen>
-    <dimen name="textsizeTab_home_arguments2Number">30sp</dimen>
+    <dimen name="heightTab_home_arguments2">50dip</dimen>
+    <dimen name="textsizeTab_home_arguments2Word">16sp</dimen>
+    <dimen name="textsizeTab_home_arguments2Number">20sp</dimen>
     
-    <dimen name="heightTab_home_arguments3">70dip</dimen>
+    <dimen name="heightTab_home_arguments3">50dip</dimen>
     <dimen name="textsizeTab_home_arguments3Word">12sp</dimen>
     <dimen name="textsizeTab_home_arguments3Number">24sp</dimen>
     <dimen name="textsizeTab_home_arguments3Percent">12sp</dimen>
@@ -23,47 +23,49 @@
     <dimen name="widthRPB_ProcessBar">10dip</dimen>
     <dimen name="textsizeRPB_Already">24sp</dimen>
     
-    <dimen name="heightUserImg">120dip</dimen>
-    <dimen name="widthUserImg">120dip</dimen>
+    <dimen name="heightUserImg">60dip</dimen>
+    <dimen name="widthUserImg">60dip</dimen>
     
+    <dimen name="widthMarStart">20dip</dimen>
+    <dimen name="widthMarEnd">20dip</dimen>
+    <dimen name="textsizeTab_pcenter">16sp</dimen>
     <dimen name="textsizeTab_pcenter_username">20sp</dimen>
     <dimen name="textsizeTab_pcenter_usersentence">14sp</dimen>
     <dimen name="heightTab_pcenter_detail1">50dip</dimen>
   <dimen name="widthTab_pcenter_detail1_marStart">5dip</dimen>
     <dimen name="widthTab_pcenter_detail1_marEnd">5dip</dimen>
     <dimen name="textsizeTab_pcenter_actionbar_btn">16sp</dimen>
-    <dimen name="textsizeTab_pcenter_detail1Word">20sp</dimen>
-    <dimen name="textsizeTab_pcenter_detail1Number">18sp</dimen>
+    <dimen name="textsizeTab_pcenter_detail1Word">16sp</dimen>
+    <dimen name="textsizeTab_pcenter_detail1Number">16sp</dimen>
     
     <dimen name="widthTab_pcenter_detail2_marTop">5dip</dimen>
     <dimen name="widthTab_pcenter_detail2_marStart">10dip</dimen>
     <dimen name="widthTab_pcenter_detail2_marEnd">5dip</dimen>
-      <dimen name="textsizeTab_pcenter_detail2Word">20sp</dimen>
-    <dimen name="textsizeTab_pcenter_detail2Number">18sp</dimen>
+      <dimen name="textsizeTab_pcenter_detail2Word">16sp</dimen>
+    <dimen name="textsizeTab_pcenter_detail2Number">16sp</dimen>
     
     <dimen name="widthTab_pcenter_detail3_marTop">5dip</dimen>
-    <dimen name="textsizeTab_pcenter_detail3">20sp</dimen>
+    <dimen name="textsizeTab_pcenter_detail3">18sp</dimen>
     <dimen name="widthTab_pcenter_detail3_marStart">10dip</dimen>
     <dimen name="widthTab_pcenter_detail3_marEnd">5dip</dimen>
-      <dimen name="textsizeTab_pcenter_detail3Word">20sp</dimen>
-    <dimen name="textsizeTab_pcenter_detail3Number">18sp</dimen>
-    
-    
+      <dimen name="textsizeTab_pcenter_detail3Word">16sp</dimen>
+    <dimen name="textsizeTab_pcenter_detail3Number">16sp</dimen>
     
     <dimen name="widthTab_share_marStart">10dip</dimen>
     <dimen name="widthTab_share_marTop">5dip</dimen>
     <dimen name="textsizeTab_share_detailWord">18sp</dimen>
-    <dimen name="textsizeTab_share_AD">18sp</dimen>
+    <dimen name="textsizeTab_share_AD">16sp</dimen>
     
-    <dimen name="textsizeFragMenu">18sp</dimen>
-    <dimen name="textsizeFragMenuItem">19sp</dimen>
-    <dimen name="heightFragMenuItem">50dip</dimen>
+    <dimen name="textsizeFragMenuUsername">14sp</dimen>
+    <dimen name="textsizeFragMenuGXQM">12sp</dimen>
+    <dimen name="textsizeFragMenuItem">16sp</dimen>
+    <dimen name="heightFragMenuItem">40dip</dimen>
     
     <dimen name="heightActiPersonalInfoArgus">50dip</dimen>
     <dimen name="widthActiPersonalInfoArgus_marStart">10dip</dimen>
     <dimen name="widthActiPersonalInfoArgus_marEnd">5dip</dimen>
-    <dimen name="textsizeActiPersonalInfoArgusWord">20sp</dimen>
-    <dimen name="textsizeActiPersonalInfoArgusNumber">20sp</dimen>
+    <dimen name="textsizeActiPersonalInfoArgusWord">16sp</dimen>
+    <dimen name="textsizeActiPersonalInfoArgusNumber">16sp</dimen>
     <dimen name="textsizeActiPersonalInfoSave">22sp</dimen>
     
     <dimen name="heightLayoutDialogForPI">100dip</dimen>
@@ -73,14 +75,20 @@
     <dimen name="widthPopupWindow">350dip</dimen>
     
     <dimen name="heightActiShareDataRL">40dip</dimen>
-    <dimen name="widthActiShareDataRL_marStart">30dip</dimen>
-    <dimen name="widthActiShareDataRL_marEnd">30dip</dimen>
+    <dimen name="heightActiShareDataWord">39dip</dimen>
+    <dimen name="widthActiShareDataWordMarginStart">10dip</dimen>
+    <dimen name="heightActiShareDataLine">1dip</dimen>
+    <dimen name="widthActiShareDataLine">100dip</dimen>
+    <dimen name="widthActiShareDataRL_marStart">50dip</dimen>
     <dimen name="widthActiShareDataRL_word1_marStart">10dip</dimen>
-    <dimen name="widthActiShareDataRL_word1_marEnd">30dip</dimen>
+    <dimen name="widthActiShareDataRL_word1_marEnd">20dip</dimen>
     <dimen name="widthActiShareDataRL_word2_marStart">5dip</dimen>
     <dimen name="widthActiShareDataRL_word2_marEnd">30dip</dimen>
-    <dimen name="textsizeActiShareDataWord">20sp</dimen>
+    <dimen name="textsizeActiShareDataWord">18sp</dimen>
+    <dimen name="widthActiShareImgMarginTop">18dip</dimen>
     
-    <dimen name="widthFrag_tab_home_drawablePadding">5dip</dimen>
+    <dimen name="widthFrag_tab_home_drawablePadding">8dip</dimen>
+    
+    
     
 </resources>

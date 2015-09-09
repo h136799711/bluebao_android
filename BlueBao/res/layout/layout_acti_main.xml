@@ -163,7 +163,7 @@
                         android:layout_gravity="center_horizontal"
                         android:text="分享"
                         android:textSize="@dimen/textsizeActiMainTab" 
-                        android:textColor="@color/colorActiMainTabWordBefore" />
+                        android:textColor="@color/colorLightGray2" />
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
@@ -176,7 +176,7 @@
     <fragment
         android:id="@+id/actimain_menu_left"
         android:name="com.itboye.bluebao.actiandfrag.FragMenuLeft"
-        android:layout_width="270dp"
+        android:layout_width="230dp"
         android:layout_height="match_parent"
         android:layout_gravity="left"
         android:tag="LEFT" />

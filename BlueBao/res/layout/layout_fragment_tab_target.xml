@@ -3,6 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/colorBackground"
     android:orientation="vertical" >
 
     <!-- 开始：自己的actionbar -->
@@ -47,8 +48,8 @@
             android:layout_width="wrap_content"
             android:layout_height="35dip"
             android:gravity="center"
-            android:hint="当前日期"
-            android:textColor="@color/colorTabTargetWord"
+            android:text="当前日期"
+            android:textColor="@color/colorBlack"
             android:textSize="22sp" />
     </LinearLayout>
 
@@ -77,8 +78,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:hint="周一"
-            android:textColor="@color/colorTabTargetWord"
+            android:text="周一"
+            android:textColor="@color/colorLightGray2"
             android:textSize="14sp" />
 
         <View
@@ -93,8 +94,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:hint="周二"
-            android:textColor="@color/colorTabTargetWord"
+            android:text="周二"
+            android:textColor="@color/colorLightGray2"
             android:textSize="14sp" />
 
         <View
@@ -109,8 +110,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:hint="周三"
-            android:textColor="@color/colorTabTargetWord"
+            android:text="周三"
+            android:textColor="@color/colorLightGray2"
             android:textSize="14sp" />
 
         <View
@@ -125,8 +126,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:hint="周四"
-            android:textColor="@color/colorTabTargetWord"
+            android:text="周四"
+            android:textColor="@color/colorLightGray2"
             android:textSize="14sp" />
 
         <View
@@ -141,8 +142,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:hint="周五"
-            android:textColor="@color/colorTabTargetWord"
+            android:text="周五"
+            android:textColor="@color/colorLightGray2"
             android:textSize="14sp" />
 
         <View
@@ -157,8 +158,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:hint="周六"
-            android:textColor="@color/colorTabTargetWord"
+            android:text="周六"
+            android:textColor="@color/colorLightGray2"
             android:textSize="14sp" />
 
         <View
@@ -173,8 +174,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:hint="周日"
-            android:textColor="@color/colorTabTargetWord"
+            android:text="周日"
+            android:textColor="@color/colorLightGray2"
             android:textSize="14sp" />
     </LinearLayout>
 
@@ -189,7 +190,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dip"
+        android:layout_height="35dip"
         android:orientation="horizontal" >
 
         <TextView
@@ -198,8 +199,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="提醒时间"
-            android:textColor="@color/colorTabTargetWord"
-            android:textSize="20sp" />
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
 
         <View
             android:layout_width="1dip"
@@ -213,8 +214,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="目标"
-            android:textColor="@color/colorTabTargetWord"
-            android:textSize="20sp" />
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
 
         <View
             android:layout_width="1dip"
@@ -228,8 +229,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="操作"
-            android:textColor="@color/colorTabTargetWord"
-            android:textSize="20sp" />
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <!-- =====divider=================================== -->

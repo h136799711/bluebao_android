@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/heightActiBar"
-        android:background="@color/colorActionBar"
+         android:background="@color/colorBackground"
         android:orientation="vertical" >
 
         <TextView
@@ -35,7 +35,7 @@
     <RelativeLayout
         android:id="@+id/acti_config_rl_vibrate"
         android:layout_width="match_parent"
-        android:layout_height="50dip" 
+        android:layout_height="40dip" 
         android:gravity="center_vertical">
 
         <TextView
@@ -47,7 +47,7 @@
             android:gravity="center"
             android:text="震动"
             android:textColor="@color/colorActionBarWord"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <ImageView
             android:id="@+id/acti_config_iv_vibrate_right"
@@ -71,14 +71,14 @@
     <RelativeLayout
          android:id="@+id/acti_config_rl_sound"
         android:layout_width="match_parent"
-        android:layout_height="50dip"
+        android:layout_height="40dip"
         android:gravity="center_vertical" >
 
         <TextView
             android:id="@+id/acti_config_tv_sound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dip"
+            android:layout_marginStart="18dip"
             android:layout_alignParentStart="true"
             android:gravity="center"
             android:text="声音"
@@ -104,7 +104,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dip" 
+        android:layout_height="40dip" 
         android:gravity="center_vertical">
 
         <TextView
@@ -114,7 +114,7 @@
             android:gravity="center"
             android:text="检查新版本"
             android:textColor="@color/colorActionBarWord"
-            android:textSize="20sp" 
+            android:textSize="18sp" 
             android:layout_marginStart="20dip"
             android:layout_alignParentStart="true"/>
 

@@ -13,9 +13,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 
 /**
- * 中枢控制Receiver，接受前台页面传来的 请求以及参数，
- * 把这些请求和参数交给service层处理，
- * service层  把处理结果  直接  发送给前台页面
+ * 中枢控制Receiver
  * @author Administrator
  *
  */

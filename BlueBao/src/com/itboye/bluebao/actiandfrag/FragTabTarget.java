@@ -8,22 +8,21 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -42,7 +41,6 @@ import com.itboye.bluebao.util.UtilStream;
  * fragment home for tab target
  * 
  * @author Administrator
- *
  */
 public class FragTabTarget extends Fragment {
 
@@ -80,7 +78,7 @@ public class FragTabTarget extends Fragment {
 	private TextView tv_7;
 
 	private ListView lv__addAims;
-	private ImageButton ib_toAddAim;// 添加目标按钮
+	private ImageButton ib_toAddAim;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -118,6 +116,7 @@ public class FragTabTarget extends Fragment {
 		date = df.format(new Date());// 当前系统日期
 		tv_date.setText(date);
 		todayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);// 初始化todayOfWeek
+		updateTheColor( todayOfWeek-1 );
 		showAimsOfTheDay(date);
 
 	}
@@ -196,27 +195,28 @@ public class FragTabTarget extends Fragment {
 									aimTemp.setTime_minute(minute + "");
 									aimTemp.setGoal(goal + "");
 
-									Log.i(TAG, "aimTemp's dayofweek: " + aimTemp.getDayOfWeek() + "\n\r" + "aimTemp's timeHour: "
+								/*	Log.i(TAG, "aimTemp's dayofweek: " + aimTemp.getDayOfWeek() + "\n\r" + "aimTemp's timeHour: "
 											+ aimTemp.getTime_hour() + "\n\r" + "aimTemp's timeMinute: " + aimTemp.getTime_minute()
-											+ "\n\r" + "aimTemp's goal: " + aimTemp.getGoal());
+											+ "\n\r" + "aimTemp's goal: " + aimTemp.getGoal());*/
 
 									// start 8.26 added
 									// 如果有重复aim则不添加
 									String temp = sp.getString(SP_FILE_NAME_KEY, "");
 									if (!temp.isEmpty()) {
 										try {
+											@SuppressWarnings("unchecked")
 											ArrayList<Frag_tab_target_Aim> aimsAlreadyHave = UtilStream.String2SurveyList(temp);
 											for (int i = 0; i < aimsAlreadyHave.size(); i++) {
 												Frag_tab_target_Aim tempAim = aimsAlreadyHave.get(i);
-												Log.i(TAG, "tempAim's dayofweek:" + tempAim.getDayOfWeek() + "tempAim's timeHour:"
+												/*Log.i(TAG, "tempAim's dayofweek:" + tempAim.getDayOfWeek() + "tempAim's timeHour:"
 														+ tempAim.getTime_hour() + "tempAim's timeMinute:" + tempAim.getTime_minute()
-														+ "tempAim's goal:" + tempAim.getGoal());
+														+ "tempAim's goal:" + tempAim.getGoal());*/
 
 												if (tempAim.getDayOfWeek().equals(aimTemp.getDayOfWeek())
 														&& tempAim.getGoal().equals(aimTemp.getGoal())
 														&& tempAim.getTime_hour().equals(aimTemp.getTime_hour())
 														&& tempAim.getTime_minute().equals(aimTemp.getTime_minute())) {
-													Log.i(TAG, "有目标重复设置了");
+													//Log.i(TAG, "有目标重复设置了");
 													return;
 												}
 											}
@@ -240,7 +240,7 @@ public class FragTabTarget extends Fragment {
 									}
 
 									// 添加闹铃提醒
-									setAlarms(aimTemp.getDayOfWeek());
+									//setAlarms(aimTemp.getDayOfWeek());
 
 								} else {// 时间或卡路里量中有空值
 									Toast.makeText(getActivity(), "目标设定有误，请重新设定！", Toast.LENGTH_SHORT).show();
@@ -261,6 +261,7 @@ public class FragTabTarget extends Fragment {
 				Date day1 = calendar.getTime();
 
 				tv_date.setText(df.format(day1));
+				updateTheColor(1);
 				showAimsOfTheDay(df.format(day1));
 				break;
 
@@ -272,6 +273,7 @@ public class FragTabTarget extends Fragment {
 				Date day2 = calendar.getTime();
 
 				tv_date.setText(df.format(day2));
+				updateTheColor(2);
 				showAimsOfTheDay(df.format(day2));
 				break;
 
@@ -283,6 +285,7 @@ public class FragTabTarget extends Fragment {
 				Date day3 = calendar.getTime();
 
 				tv_date.setText(df.format(day3));
+				updateTheColor(3);
 				showAimsOfTheDay(df.format(day3));
 				break;
 
@@ -294,6 +297,7 @@ public class FragTabTarget extends Fragment {
 				Date day4 = calendar.getTime();
 
 				tv_date.setText(df.format(day4));
+				updateTheColor(4);
 				showAimsOfTheDay(df.format(day4));
 				break;
 
@@ -305,6 +309,7 @@ public class FragTabTarget extends Fragment {
 				Date day5 = calendar.getTime();
 
 				tv_date.setText(df.format(day5));
+				updateTheColor(5);
 				showAimsOfTheDay(df.format(day5));
 				break;
 
@@ -316,6 +321,7 @@ public class FragTabTarget extends Fragment {
 				Date day6 = calendar.getTime();
 
 				tv_date.setText(df.format(day6));
+				updateTheColor(6);
 				showAimsOfTheDay(df.format(day6));
 				break;
 
@@ -325,8 +331,9 @@ public class FragTabTarget extends Fragment {
 				calendar.setTime(today);
 				calendar.add(Calendar.DAY_OF_MONTH, a7);
 				Date day7 = calendar.getTime();
-
+				Log.i(TAG, "day7 is: " + df.format(day7));
 				tv_date.setText(df.format(day7));
+				updateTheColor(7);
 				showAimsOfTheDay(df.format(day7));
 				break;
 			}
@@ -367,18 +374,20 @@ public class FragTabTarget extends Fragment {
 
 	// 添加目标时检测是否闹铃提醒
 	// 把所有未过期的aims的时间设定进闹钟里
+	@SuppressWarnings("unchecked")
+	@SuppressLint("SimpleDateFormat")
 	private void setAlarms(String date) {
 		Log.i(TAG, "闹铃提醒在：" + date);
 
 		sp = getActivity().getSharedPreferences(Util.SP_FN_ALARM, Context.MODE_PRIVATE);
-		Log.i("alarm ", sp.getString(Util.SP_KEY_ALARM, ""));
-		if ( !sp.getString(Util.SP_KEY_ALARM, "").isEmpty() ) {
-
+		//Log.i("alarm ", sp.getString(Util.SP_KEY_ALARM, ""));
+		if (!sp.getString(Util.SP_KEY_ALARM, "").isEmpty()) {
+			Log.i("alarm ", sp.getString(Util.SP_KEY_ALARM, ""));
 			AlarmManager am = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
 
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			long timeNow = new Date().getTime();
-			Log.i(TAG, "timeNow is: " + timeNow);//-----timeNow
+			Log.i(TAG, "timeNow is: " + timeNow);// -----timeNow
 
 			SharedPreferences sp = getActivity().getSharedPreferences(Util.SP_FN_TARGET, Context.MODE_PRIVATE);
 			String aimsInSP = sp.getString(Util.SP_KEY_TARGET, "");
@@ -400,28 +409,99 @@ public class FragTabTarget extends Fragment {
 					String timeThenStrHour = aims.get(i).getTime_hour();
 					String timeThenStrMinute = aims.get(i).getTime_minute();
 					String timeThenStr = timeThenStrDay + " " + timeThenStrHour + ":" + timeThenStrMinute;
-					Log.i(TAG, "timeThenStr : " + timeThenStr);
+					//Log.i(TAG, "timeThenStr : " + timeThenStr);
 					Date timeThenDate = null;
 					try {
 						timeThenDate = format.parse(timeThenStr);
 					} catch (ParseException e) {
 						e.printStackTrace();
 					}
-					long timeThen = timeThenDate.getTime();//-----timeThen
-					Log.i(TAG, "timeThen : " + timeThen);
+					long timeThen = timeThenDate.getTime();// -----timeThen
+					
 
-					Log.i(TAG, "第 "+i+" 个闹铃，timeThen-timeNow  : " + (timeThen-timeNow));
+					//Log.i(TAG, "第 " + i + " 个闹铃，timeThen-timeNow  : " + (timeThen - timeNow));
 					// 当前时间晚于目标设定的时间，就添加闹铃
 					if (timeThen > timeNow) {
+						Log.i(TAG, "timeThen : " + timeThen);
 						Intent intent = new Intent("RECEIVE_SYSTEM_ALARM_BC");
 						String howToStart = Util.sound ? "music" : "vibrate";
 						intent.putExtra("howToStart", howToStart);
 						PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), i, intent,
-								PendingIntent.FLAG_UPDATE_CURRENT);
+								PendingIntent.FLAG_CANCEL_CURRENT);
 						am.set(AlarmManager.RTC_WAKEUP, timeThen, pendingIntent);
 					}
 				}
 			}
+		}
+	}
+
+	// 改变周一周二的颜色
+	private void updateTheColor(int i) {
+
+		switch (i) {
+		case 1:
+			tv_1.setTextColor(getResources().getColorStateList(R.color.colorBlack));
+			tv_2.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_3.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_4.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_5.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_6.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_7.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			break;
+		case 2:
+			tv_1.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_2.setTextColor(getResources().getColorStateList(R.color.colorBlack));
+			tv_3.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_4.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_5.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_6.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_7.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			break;
+		case 3:
+			tv_1.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_2.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_3.setTextColor(getResources().getColorStateList(R.color.colorBlack));
+			tv_4.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_5.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_6.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_7.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			break;
+		case 4:
+			tv_1.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_2.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_3.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_4.setTextColor(getResources().getColorStateList(R.color.colorBlack));
+			tv_5.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_6.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_7.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			break;
+		case 5:
+			tv_1.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_2.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_3.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_4.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_5.setTextColor(getResources().getColorStateList(R.color.colorBlack));
+			tv_6.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_7.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			break;
+		case 6:
+			tv_1.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_2.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_3.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_4.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_5.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_6.setTextColor(getResources().getColorStateList(R.color.colorBlack));
+			tv_7.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			break;
+		case 7:
+			tv_1.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_2.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_3.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_4.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_5.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_6.setTextColor(getResources().getColorStateList(R.color.colorLightGray2));
+			tv_7.setTextColor(getResources().getColorStateList(R.color.colorBlack));
+			break;
 		}
 	}
 }

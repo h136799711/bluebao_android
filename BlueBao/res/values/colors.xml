@@ -2,8 +2,22 @@
 <resources>
     
     <!-- use -->
+    <color name="colorMenuLeft">#FFFFFF</color>
+    <color name="colorMenuLeftWord">#131313</color>
+    <color name="colorMenuLeftLine">#131313</color>
+     <color name="colorRoundProcessBar">#F1F1F1</color>
+     <color name="colorRoundProcessBarPercent">#28CAFB</color>
+    <color name="colorRoundProcessBarAimNumber">#EFC974</color>
+    <color name="colorBackground">#F8F8F8</color>
+    <color name="colorActionBarWord">#000000</color>
+    <color name="colorActiShareArgu3Word">#000000</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorFragPcenterGXQM">#544949</color>
+    <color name="colorFragPcenterNumber">#28CAFB</color>
     
     <color name="colorLightGray">#544949</color>
+    <color name="colorLightGray2">#82858b</color>
+    
     
     <color name="colorActiAlldata_dataline">#6FB98D</color>
     
@@ -12,20 +26,18 @@
     <color name="colorWordsOnButton">#FFFFFF</color>
     
     <!-- ActionBar : 白色 #FFFFFF   浅灰 #F6F6F6  浅蓝 #60C0E8  文字颜色 浅灰 #544949-->
-    <color name="colorActionBar">#60C0E8</color>
-    <color name="colorActionBarWord">#544949</color>
+    
     
     <!-- tab_home : 参数文字颜色 浅灰 #544949-->
-    <color name="colorTabHomeWeightAndBMI">#EFC974</color>
+     <color name="colorTabHomeFiveWord">#000000</color>
+    <color name="colorTabHomeFiveNumber">#000000</color>
+    <color name="colorTabHomeWeightAndBMIWord">#000000</color>
+    <color name="colorTabHomeWeightAndBMINumber">#000000</color>
+    <color name="colorTabHomeArguForEightWord">#9F9F9F</color>
     <color name="colorTabHomeArguForEightNumber">#6FDCFD</color>
-    <color name="colorTabHomeArguForEightPercent">#EFC974</color>
-    <color name="colorTabHomeOtherWord">#544949</color>
-    <color name="colorTabHomeArguWord">#544949</color>
-    
-    
-    
-    
-    
+    <color name="colorTabHomeArguForEightPercent">#000000</color>
+    <color name="colorTabHomeOtherWord">#9F9F9F</color>
+    <color name="colorTabHomeArguWord">#9F9F9F</color>
     
     <color name="colorTabBG">#E3CAAC</color>
     <color name="colorTabBG1">#E3CAAC</color>
@@ -54,9 +66,6 @@
     <!-- tab_share : 文字颜色 浅灰 #544949-->
     <color name="colorTabShareWord">#544949</color>
     
-    <!-- frag_menu : 文字颜色 浅灰 #544949-->
-    <color name="colorFragMenuWord">#544949</color>
-    <color name="colorFragMenuItemWord">#544949</color>
     
     <!-- 自定义view=RoundProcessBar -->
     <color name="colorCircle">#e8e1e1</color>

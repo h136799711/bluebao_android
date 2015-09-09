@@ -4,9 +4,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -24,7 +24,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.NumberPicker.OnValueChangeListener;
@@ -39,6 +38,7 @@ import com.google.gson.Gson;
 import com.itboye.bluebao.R;
 import com.itboye.bluebao.bean.CodeAndData;
 import com.itboye.bluebao.bean.PInfo;
+import com.itboye.bluebao.exwidget.CircleImageView;
 import com.itboye.bluebao.util.Util;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -46,6 +46,7 @@ import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * 个人资料activity，头像的上传和个人信息的修改只能在这里
@@ -62,15 +63,13 @@ public class ActiPersonalInfo extends Activity {
 	LayoutInflater inflater;
 	private View parentView;// for PopupWindow to show in it
 
-	// private ImageButton ibtn_save;
-	private int uid;
-	private ProgressDialog pdialog;
 	private PopupWindow popWindow = null;
 
 	private static final int REQUEST_CODE_SAVE = 0;
 	private static final int REQUEST_CODE_CROP = 1;
 
-	private ImageView iv_userimg;// 用户头像
+	// private ImageView iv_userimg;// 用户头像
+	private CircleImageView iv_userimg;// 用户头像
 	private EditText et_usernickname;
 	private EditText et_userSentence;
 	private RadioGroup rg_usergender;
@@ -90,7 +89,6 @@ public class ActiPersonalInfo extends Activity {
 	private int userWeightNow;
 	private int userWeightTarget;
 	private String userBMI; // 体质指数（BMI）=体重（kg）÷身高^2（m）
-							// EX：70kg÷（1.75×1.75）=22.86
 
 	private Button btn_save;
 
@@ -100,11 +98,7 @@ public class ActiPersonalInfo extends Activity {
 		setContentView(R.layout.layout_acti_personalinfo);
 		inflater = LayoutInflater.from(ActiPersonalInfo.this);
 
-		// ibtn_save = (ImageButton)
-		// findViewById(R.id.acti_personalinfo_ibtn_save);// 便于avd中保存操作
-		// ibtn_save.setOnClickListener(new MyOnClickListener());
-
-		iv_userimg = (ImageView) findViewById(R.id.acti_personalinfo_iv_userimg);
+		iv_userimg = (CircleImageView) findViewById(R.id.acti_personalinfo_iv_userimg);
 		et_usernickname = (EditText) findViewById(R.id.acti_personalinfo_et_username);
 		et_userSentence = (EditText) findViewById(R.id.acti_personalinfo_et_userSentence);
 		tv_userBMI = (TextView) findViewById(R.id.acti_personalinfo_tv_userBMI);
@@ -139,6 +133,8 @@ public class ActiPersonalInfo extends Activity {
 
 	@Override
 	protected void onResume() {
+		MobclickAgent.onResume(this);
+
 		// 如果SP中已经保存有数据，则显示保存的数据
 		sp = this.getSharedPreferences(Util.SP_FN_PINFO, Context.MODE_PRIVATE);
 		String strtemp = sp.getString(Util.SP_KEY_PINFO, "");
@@ -153,10 +149,11 @@ public class ActiPersonalInfo extends Activity {
 				gender_female.setChecked(true);
 			}
 			tv_userAge.setText(pInfo.getAge() + "岁");
-			tv_userHeight.setText(pInfo.getHeight() + "cm");
-			tv_userWeightNow.setText(pInfo.getWeight() + "kg");
-			tv_userWeightTarget.setText(pInfo.getWeightTarget() + "kg");
-			tv_userBMI.setText(pInfo.getBMI() + "");
+			tv_userHeight.setText(pInfo.getHeight() + "CM");
+			tv_userWeightNow.setText(pInfo.getWeight() + "KG");
+			tv_userWeightTarget.setText(pInfo.getWeightTarget() + "KG");
+			//tv_userBMI.setText(pInfo.getBMI() + "");
+			tv_userBMI.setText("正常");
 
 			// 防止没有改动sp的值，提交之后，下次显示全变为0
 			gender = pInfo.getGender();
@@ -166,7 +163,7 @@ public class ActiPersonalInfo extends Activity {
 			userWeightTarget = pInfo.getWeightTarget();
 			userBMI = pInfo.getBMI();
 
-		}else{
+		} else {
 			et_usernickname.setText("爱运动 享自由");
 			et_userSentence.setText("个性签名");
 			gender = 1;
@@ -174,7 +171,7 @@ public class ActiPersonalInfo extends Activity {
 			userHeight = 165;
 			userWeightNow = 65;
 			userWeightTarget = 65;
-			userBMI = 23.88+"";
+			userBMI = 23.88 + "";
 		}
 
 		// 如果用户修改过头像，则显示更改之后的头像
@@ -197,25 +194,28 @@ public class ActiPersonalInfo extends Activity {
 		} else {
 			iv_userimg.setImageDrawable(getResources().getDrawable(R.drawable.fragment_menu_left_userimg_default));
 		}
-
 		super.onResume();
 	}
 
-	// =========================================================
-	private class MyOnClickListener implements View.OnClickListener {
+	@Override
+	protected void onPause() {
+		MobclickAgent.onPause(this);
+		super.onPause();
+	}
 
+	private class MyOnClickListener implements View.OnClickListener {
+		@SuppressLint("InflateParams")
 		@Override
 		public void onClick(View v) {
-
+			
 			switch (v.getId()) {
-
+			
 			case R.id.acti_personalinfo_tv_userAge:// 点击显示身高的TextView
-
 				LinearLayout dialog_userage = (LinearLayout) inflater.inflate(R.layout.layout_dialog_userage, null);
 				NumberPicker picUserAge = (NumberPicker) dialog_userage.findViewById(R.id.dialog_userage);
 				picUserAge.setMaxValue(100);
 				picUserAge.setMinValue(10);
-				picUserAge.setValue(21); // 默认显示数值
+				picUserAge.setValue(21); 
 				picUserAge.setOnValueChangedListener(new OnValueChangeListener() {
 					@Override
 					public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
@@ -223,7 +223,6 @@ public class ActiPersonalInfo extends Activity {
 					}
 				});
 
-				// AlertDialog
 				AlertDialog.Builder builderAge = new AlertDialog.Builder(ActiPersonalInfo.this);
 				builderAge.setTitle("年龄设置").setView(dialog_userage) // 自定义弹出框样式
 						.setPositiveButton("确定", new OnClickListener() {
@@ -244,13 +243,13 @@ public class ActiPersonalInfo extends Activity {
 
 				break;
 
-			case R.id.acti_personalinfo_tv_userHeight:// 点击显示身高的TextView
+			case R.id.acti_personalinfo_tv_userHeight:
 
 				LinearLayout dialog_userheight = (LinearLayout) inflater.inflate(R.layout.layout_dialog_userheight, null);
 				NumberPicker picUserHeight = (NumberPicker) dialog_userheight.findViewById(R.id.dialog_userheight);
 				picUserHeight.setMaxValue(230);
 				picUserHeight.setMinValue(130);
-				picUserHeight.setValue(165); // 默认显示数值
+				picUserHeight.setValue(165); 
 				picUserHeight.setOnValueChangedListener(new OnValueChangeListener() {
 					@Override
 					public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
@@ -258,34 +257,33 @@ public class ActiPersonalInfo extends Activity {
 					}
 				});
 
-				// AlertDialog
 				AlertDialog.Builder builderHeight = new AlertDialog.Builder(ActiPersonalInfo.this);
-				builderHeight.setTitle("身高设置").setView(dialog_userheight) // 自定义弹出框样式
+				builderHeight.setTitle("身高设置").setView(dialog_userheight)
 						.setPositiveButton("确定", new OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 								if (userHeight != 0) {
-									tv_userHeight.setText(userHeight + "cm");
+									tv_userHeight.setText(userHeight + "CM");
 								} else {
 									userHeight = 165;
-									tv_userHeight.setText(165 + "cm");// default
+									tv_userHeight.setText(165 + "CM");
 								}
 							}
 						}).setNegativeButton("取消", new OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 							}
-						}).create().show(); // 创建并展示
+						}).create().show(); 
 
 				break;
 
-			case R.id.acti_personalinfo_tv_userWeightNow:// 点击显示身高的TextView
+			case R.id.acti_personalinfo_tv_userWeightNow:
 
 				LinearLayout dialog_userweightnow = (LinearLayout) inflater.inflate(R.layout.layout_dialog_userweightnow, null);
 				NumberPicker picUserWeightNow = (NumberPicker) dialog_userweightnow.findViewById(R.id.dialog_userweightnow);
 				picUserWeightNow.setMaxValue(150);
 				picUserWeightNow.setMinValue(40);
-				picUserWeightNow.setValue(65); // 默认显示数值
+				picUserWeightNow.setValue(65); 
 				picUserWeightNow.setOnValueChangedListener(new OnValueChangeListener() {
 					@Override
 					public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
@@ -293,34 +291,33 @@ public class ActiPersonalInfo extends Activity {
 					}
 				});
 
-				// AlertDialog
 				AlertDialog.Builder builderWeightNow = new AlertDialog.Builder(ActiPersonalInfo.this);
-				builderWeightNow.setTitle("当前体重").setView(dialog_userweightnow) // 自定义弹出框样式
+				builderWeightNow.setTitle("当前体重").setView(dialog_userweightnow) 
 						.setPositiveButton("确定", new OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 								if (userWeightNow != 0) {
-									tv_userWeightNow.setText(userWeightNow + "kg");
+									tv_userWeightNow.setText(userWeightNow + "KG");
 								} else {
 									userWeightNow = 65;
-									tv_userWeightNow.setText(65 + "kg");// default
+									tv_userWeightNow.setText(65 + "KG");
 								}
 							}
 						}).setNegativeButton("取消", new OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 							}
-						}).create().show(); // 创建并展示
+						}).create().show(); 
 
 				break;
 
-			case R.id.acti_personalinfo_tv_userWeightTarget:// 点击显示身高的TextView
+			case R.id.acti_personalinfo_tv_userWeightTarget:
 
 				LinearLayout dialog_userweighttarget = (LinearLayout) inflater.inflate(R.layout.layout_dialog_userweighttarget, null);
 				NumberPicker picUserWeightTarget = (NumberPicker) dialog_userweighttarget.findViewById(R.id.dialog_userweighttarget);
 				picUserWeightTarget.setMaxValue(150);
 				picUserWeightTarget.setMinValue(40);
-				picUserWeightTarget.setValue(65); // 默认显示数值
+				picUserWeightTarget.setValue(65); 
 				picUserWeightTarget.setOnValueChangedListener(new OnValueChangeListener() {
 					@Override
 					public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
@@ -328,40 +325,38 @@ public class ActiPersonalInfo extends Activity {
 					}
 				});
 
-				// AlertDialog
 				AlertDialog.Builder builderWeightTarget = new AlertDialog.Builder(ActiPersonalInfo.this);
-				builderWeightTarget.setTitle("目标体重").setView(dialog_userweighttarget) // 自定义弹出框样式
+				builderWeightTarget.setTitle("目标体重").setView(dialog_userweighttarget)
 						.setPositiveButton("确定", new OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 								if (userWeightTarget != 0) {
-									tv_userWeightTarget.setText(userWeightTarget + "kg");
+									tv_userWeightTarget.setText(userWeightTarget + "KG");
 								} else {
 									userWeightTarget = 65;
-									tv_userWeightTarget.setText(65 + "kg");// default
+									tv_userWeightTarget.setText(65 + "KG");
 								}
 							}
 						}).setNegativeButton("取消", new OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 							}
-						}).create().show(); // 创建并展示
+						}).create().show(); 
 
 				break;
 
-			// case R.id.acti_personalinfo_ibtn_save://
-			// actionbar中的save和最下边的save执行相同的操作
+			// case R.id.acti_personalinfo_ibtn_save:
 			case R.id.acti_personalinfo_btn_save: // ==保存到服务器===
 
 				// 0 更新BMI值
-				Log.i(TAG, "userWeightNow is :" + userWeightNow + "     userWeightTarget is :" + userWeightTarget
+				/*Log.i(TAG, "userWeightNow is :" + userWeightNow + "     userWeightTarget is :" + userWeightTarget
 						+ "     userAge is :" + age + "     userGender is :" + gender + "     userHeight is :" + userHeight
 						+ "     userHeight is :" + userHeight + "    height ping fang chu yi 10000 is:" + userHeight * userHeight
-						/ 10000.0);
+						/ 10000.0);*/
 
 				float flo = (float) (userWeightNow / (userHeight * userHeight / 10000.0)); // 默认值
 				String userBMIVlaue = Util.df.format(flo);// 保留两位小数
-				tv_userBMI.setText(userBMIVlaue+"");// 更新页面上BMI值
+				//tv_userBMI.setText(userBMIVlaue + "");// 更新页面上BMI值,都是 正常 就不更新了
 
 				// 1 取得数据
 				// userName、userSentence、gender、age、userHeight、userWeightNow、userWeightTarget
@@ -370,8 +365,6 @@ public class ActiPersonalInfo extends Activity {
 
 				// 2 把数据保存到SP中
 				PInfo pInfo = new PInfo();
-				// pInfo.setUsername(Util.username);
-				// pInfo.setPassword(Util.password);
 				pInfo.setNickname(userNickname);
 				pInfo.setSignature(userSentence);
 				pInfo.setGender(gender);
@@ -421,8 +414,9 @@ public class ActiPersonalInfo extends Activity {
 								Toast.makeText(ActiPersonalInfo.this, "更新失败：" + info.getData(), Toast.LENGTH_SHORT).show();
 							} else {
 								Toast.makeText(ActiPersonalInfo.this, "更新成功：" + info.getData(), Toast.LENGTH_SHORT).show();
-								Intent intent = new Intent(ActiPersonalInfo.this, ActiMainTest3.class);
+								Intent intent = new Intent(ActiPersonalInfo.this, ActiMain.class);
 								startActivity(intent);
+								ActiPersonalInfo.this.finish();
 							}
 						}
 					});
@@ -430,10 +424,7 @@ public class ActiPersonalInfo extends Activity {
 				}
 				break;
 
-			// ==头像图片处理==============================================================================================
 			case R.id.acti_personalinfo_iv_userimg:// 选择图片或者拍照，剪裁之后显示，保存在本地，并上传
-
-				Toast.makeText(ActiPersonalInfo.this, "用户图片被点击了", Toast.LENGTH_SHORT).show();
 
 				popWindow = new PopupWindow(ActiPersonalInfo.this);// 类似AlertDialog
 				parentView = getLayoutInflater().inflate(R.layout.layout_acti_personalinfo, null);
@@ -453,9 +444,6 @@ public class ActiPersonalInfo extends Activity {
 				break;
 
 			case R.id.dialog_uploadimg_tv_choselocalimg:
-				// Toast.makeText(ActiPersonalInfo.this, "选择本地图片",
-				// Toast.LENGTH_SHORT).show();
-
 				Intent openAlbumIntent = new Intent(Intent.ACTION_GET_CONTENT);
 				openAlbumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
 				startActivityForResult(openAlbumIntent, REQUEST_CODE_CROP);
@@ -464,9 +452,6 @@ public class ActiPersonalInfo extends Activity {
 				break;
 
 			case R.id.dialog_uploadimg_tv_takeimg:
-				// Toast.makeText(ActiPersonalInfo.this, "拍照",
-				// Toast.LENGTH_SHORT).show();
-
 				Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 				openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT,
 						Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "temp.jpg")));
@@ -478,9 +463,6 @@ public class ActiPersonalInfo extends Activity {
 		}
 	}
 
-	/**
-	 * onActivityResult
-	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -492,14 +474,9 @@ public class ActiPersonalInfo extends Activity {
 			case REQUEST_CODE_CROP: // 剪裁
 
 				if (data != null) {// 本地图片
-					// Log.i(TAG, "data is  not  null");
 					Uri uri = data.getData();
-					// Log.i(TAG, "uri is :" + uri);
 					crop(uri, REQUEST_CODE_SAVE);
 				} else {// 拍照
-						// Log.i(TAG, "data is null");
-						// Log.i(TAG, "uri is :" + Uri.fromFile(new
-						// File(Environment.getExternalStorageDirectory(),"temp.jpg")));
 					crop(Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "temp.jpg")), REQUEST_CODE_SAVE);
 				}
 
@@ -507,48 +484,32 @@ public class ActiPersonalInfo extends Activity {
 
 			case REQUEST_CODE_SAVE:// 保存 本地and服务器
 				// 通过data.getData()获取的uri为空
-
 				Bitmap photo = null;// 处理过的图片
-
 				Bundle extras = data.getExtras();
 				if (extras != null) {// 本地图片
 					photo = extras.getParcelable("data");
 				}
-
 				if (photo == null) { // 加载截图
 					photo = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + "/temp.jpg");
 				}
-
 				iv_userimg.setImageBitmap(photo);
-
 				saveImgToLocal(photo);
-
 				break;
-
 			}
 		}
 	}
 
-	/**
-	 * 剪裁图片
-	 * 
-	 * @param uri
-	 */
 	private void crop(Uri uri, int requestCode) {
-		// 裁剪图片意图
 		Intent intent = new Intent("com.android.camera.action.CROP");
 		intent.setDataAndType(uri, "image/*");
 		intent.putExtra("crop", "true");
-		// 裁剪框的比例，1：1
 		intent.putExtra("aspectX", 1);
 		intent.putExtra("aspectY", 1);
-		// 裁剪后输出图片的尺寸大小
 		intent.putExtra("outputX", 120);
 		intent.putExtra("outputY", 120);
-		intent.putExtra("outputFormat", "JPEG");// 图片格式
-		intent.putExtra("noFaceDetection", true);// 取消人脸识别
+		intent.putExtra("outputFormat", "JPEG");
+		intent.putExtra("noFaceDetection", true);
 		intent.putExtra("return-data", true);
-		// 开启一个带有返回值的Activity，请求码为requestCode
 		startActivityForResult(intent, requestCode);
 	}
 
@@ -595,9 +556,5 @@ public class ActiPersonalInfo extends Activity {
 				e.printStackTrace();
 			}
 		}
-
-		// 保存到服务器
-
 	}
-
 }

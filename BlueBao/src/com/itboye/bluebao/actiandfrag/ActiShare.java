@@ -10,29 +10,25 @@ import android.widget.TextView;
 
 import com.itboye.bluebao.R;
 import com.itboye.bluebao.util.Util;
+import com.umeng.analytics.MobclickAgent;
 import com.umeng.scrshot.UMScrShotController.OnScreenshotListener;
 import com.umeng.scrshot.adapter.UMAppAdapter;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
-import com.umeng.socialize.controller.listener.SocializeListeners.UMShareBoardListener;
 import com.umeng.socialize.sensor.controller.UMShakeService;
 import com.umeng.socialize.sensor.controller.impl.UMShakeServiceFactory;
 import com.umeng.socialize.sso.UMSsoHandler;
 import com.umeng.socialize.weixin.controller.UMWXHandler;
 
 /**
- * 分享activity 点击ActiMainTest2中的分享tab时，弹出FragTabShare
- * fragment，点击其中的分享按钮弹出此activity
+ * 分享activity
  * 
  * @author Administrator
- *
  */
 public class ActiShare extends Activity implements OnClickListener {
 
-	// 首先在您的Activity中添加如下成员变量
 	final UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.share");
-	// 声明mShakeController, 参数1为sdk 控制器描述符
 	UMShakeService mShakeController = UMShakeServiceFactory.getShakeService("write.your.content");
 
 	private TextView tv_share_yes;
@@ -62,11 +58,12 @@ public class ActiShare extends Activity implements OnClickListener {
 
 		tv_share_yes.setOnClickListener(this);
 		tv_share_no.setOnClickListener(this);
-		
+
 	}
 
 	@Override
 	protected void onResume() {
+		MobclickAgent.onResume(this);
 
 		mController.getConfig().removePlatform(SHARE_MEDIA.QQ);
 		mController.getConfig().removePlatform(SHARE_MEDIA.QZONE);
@@ -85,9 +82,14 @@ public class ActiShare extends Activity implements OnClickListener {
 	}
 
 	@Override
+	protected void onPause() {
+		MobclickAgent.onPause(this);
+		super.onPause();
+	}
+
+	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		/** 使用SSO授权必须添加如下代码 */
 		UMSsoHandler ssoHandler = mController.getConfig().getSsoHandler(requestCode);
 		if (ssoHandler != null) {
 			ssoHandler.authorizeCallBack(requestCode, resultCode, data);
@@ -100,52 +102,27 @@ public class ActiShare extends Activity implements OnClickListener {
 		switch (v.getId()) {
 
 		case R.id.acti_share_tv_share_yes:
-			// 把确定和取消隐藏掉
-			// tv_share_yes.setVisibility(View.INVISIBLE);
-			// tv_share_no.setVisibility(View.INVISIBLE);
-
-			// 设置分享内容
-			// mController.setShareContent("友盟社会化组件（SDK）让移动应用快速整合社交分享功能");
-			// 设置分享图片, 参数2为图片的url地址
-			// mController.setShareMedia(new UMImage(ActiShare.this,
-			// R.drawable.ic_launcher));
-
-			// UMAppAdapter为无SurfaceView的应应截图适配器,其他类型的截屏适配器实现请参考2.4章节
+			tv_share_yes.setVisibility(View.INVISIBLE);
+			tv_share_no.setVisibility(View.INVISIBLE);
 			mShakeController.takeScrShot(ActiShare.this, new UMAppAdapter(ActiShare.this), new OnScreenshotListener() {
-
 				@Override
 				public void onComplete(Bitmap bmp) {
-					if (bmp != null) {
-						// bmp就是屏幕截图
+					if (bmp != null) {// bmp就是屏幕截图
 					}
 				}
 			});
-			
-		/*	mController.setShareBoardListener(new UMShareBoardListener() {
-				@Override
-				public void onShow() {
-					tv_share_yes.setVisibility(View.VISIBLE);
-					tv_share_no.setVisibility(View.VISIBLE);
-				}
 
-				@Override
-				public void onDismiss() {
-					tv_share_yes.setVisibility(View.INVISIBLE);
-					tv_share_no.setVisibility(View.INVISIBLE);
-				}
-			});*/
-
-			// UMAppAdapter为无SurfaceView的应应截图适配器,其他类型的截屏适配器实现请参考2.4章节
 			mShakeController.openShare(ActiShare.this, false, new UMAppAdapter(ActiShare.this));
 
+			tv_share_yes.setVisibility(View.VISIBLE);
+			tv_share_no.setVisibility(View.VISIBLE);
 
-			
 			break;
 
 		case R.id.acti_share_tv_share_no:
 			mController.dismissShareBoard();
+			ActiShare.this.finish();
 			break;
 		}
 	}
-
 }

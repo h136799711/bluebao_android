@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ricewhitegb"
+    android:background="@color/colorBackground"
     android:orientation="vertical" >
 
     <!-- 开始：自己的actionbar -->
@@ -34,7 +34,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dip"
+        android:layout_marginTop="10dip"
         android:orientation="vertical" >
 
         <!-- 邮箱 -->
@@ -114,18 +114,31 @@
 
         <!-- 同意协议 -->
 
-        <CheckBox
-            android:id="@+id/acti_register_cb_agreewiththepolicy"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dip"
             android:layout_marginStart="20dip"
-            android:layout_marginTop="20dip"
-            android:checked="true"
-            android:text="同意并签订《用户须知》"
-            android:textColor="@color/black"
-            android:textSize="16.0sp" />
+            android:layout_marginTop="20dip" >
 
+            <CheckBox
+                android:id="@+id/acti_register_cb_agreewiththepolicy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true" />
+
+            <TextView
+                android:id="@+id/acti_register_tv_agreewiththepolicy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/acti_register_cb_agreewiththepolicy"
+                android:layout_marginStart="3dip"
+                android:layout_marginTop="5dip"
+                android:text="同意并签订《用户须知》"
+                android:textColor="@color/colorLightGray"
+                android:textSize="16.0sp" />
+        </RelativeLayout>
+       
         <!-- 快速注册 按钮 -->
 
         <Button

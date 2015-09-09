@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ricewhitegb"
+    android:background="@color/colorBackground"
     android:orientation="vertical" >
 
     <!-- 开始：自己的actionbar -->
@@ -9,7 +9,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/heightActiBar"
-        android:background="@color/colorActionBar"
         android:orientation="vertical" >
 
         <TextView

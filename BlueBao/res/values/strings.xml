@@ -10,8 +10,8 @@
     <string name="acti_login_cb_rememberpwd">记住密码</string>
     <string name="acti_login_btn_login">立即登录</string>
     <string name="acti_login_btn_register">快速注册</string>
-    <string name="actionbar_frag_tab_home">蓝堡踏步机</string>
-    <string name="frag_tab_home_tv_deviceboundstate">无连接设备</string>
+    <string name="actionbar_frag_tab_home">蓝堡动感单车</string>
+    <string name="frag_tab_home_tv_deviceboundstate">没有连接设备</string>
     <string name="frag_tab_home_tv_mileage">路程</string>
     <string name="frag_tab_home_tv_calorie">运动消耗</string>
     <string name="frag_tab_home_tv_heartrate">心率</string>

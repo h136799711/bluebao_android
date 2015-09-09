@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ricewhitegb"
+    android:background="@color/colorBackground"
     android:orientation="vertical"
      >
 
@@ -11,14 +11,13 @@
         android:id="@+id/acti_ble_scan_ab"
         android:layout_width="match_parent"
         android:layout_height="@dimen/heightActiBar"
-        android:background="@color/colorActionBar"
         android:orientation="vertical" >
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="@dimen/heightActiBarWord"
             android:gravity="center"
-            android:text="BLE 设备搜索"
+            android:text="设备管理"
             android:textColor="@color/colorActionBarWord"
             android:textSize="@dimen/textsizeActiBarWord" />
 

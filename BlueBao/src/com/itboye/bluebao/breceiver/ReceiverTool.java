@@ -24,10 +24,10 @@ public class ReceiverTool {
 	public static final String SHOW_MY_DETAIL = "ge ren zi liao"; //1 个人资料
 	public static final String SHOW_MY_DATA = "yun dong shu ju";//2 运动数据
 	public static final String OPEN_ACTIDEVICE = "she bei guan li";//3 设备管理
-	public static final String SHOW_MY_DATA2 = "mu biao guan li";//4 目标管理
-	public static final String ABOUT_LANBAO = "guan yu lan bao";//6 关于蓝堡
-	public static final String BUY_DEVICE = "gou mai qi cai";//7 购买器材
-	public static final String SETTINGS = "she zhi";//8 设置
+	public static final String SHOW_MY_AIMS = "mu biao guan li";//4 目标管理
+	//public static final String ABOUT_LANBAO = "guan yu lan bao";//6 关于蓝堡
+	//public static final String BUY_DEVICE = "gou mai qi cai";//7 购买器材
+	//public static final String SETTINGS = "she zhi";//8 设置
 	
 	
 	

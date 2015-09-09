@@ -27,26 +27,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.itboye.bluebao.R;
-import com.itboye.bluebao.actiandfrag.ActiMainTest3;
+import com.itboye.bluebao.actiandfrag.ActiMain;
+import com.umeng.analytics.MobclickAgent;
 
 public class ActiBleScan extends Activity implements OnClickListener {
 
 	private final static String TAG = "-----ActiBleNew";
 	private final Context CONTEXT = ActiBleScan.this;
 
-	// start 8.26 added
 	private BluetoothLeService mBluetoothLeService;
 	private String deviceAddress; // 要连接的ble的mac address
-	// end 8.26 added
 
 	private LeDeviceListAdapter mLeDeviceListAdapter;
 	private BluetoothManager bluetoothManager;
-	/** 搜索BLE终端 */
 	private BluetoothAdapter mBluetoothAdapter;
 	private boolean mScanning;
 	private Handler mHandler;
 
-	// Stops scanning after 10 seconds.
 	private static final long SCAN_PERIOD = 10000;
 	private static final int REQUEST_ENABLE_BT = 1;
 
@@ -101,7 +98,7 @@ public class ActiBleScan extends Activity implements OnClickListener {
 			Intent gattServiceIntent = new Intent(ActiBleScan.this, BluetoothLeService.class);
 			bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
 
-			Intent intent = new Intent(CONTEXT, ActiMainTest3.class);
+			Intent intent = new Intent(CONTEXT, ActiMain.class);
 			// intent.putExtra(ActiBleConnAndGetdata.EXTRAS_DEVICE_NAME,
 			// ble.getName());
 			// intent.putExtra(ActiBleConnAndGetdata.EXTRAS_DEVICE_ADDRESS,
@@ -110,6 +107,7 @@ public class ActiBleScan extends Activity implements OnClickListener {
 				mBluetoothAdapter.stopLeScan(mLeScanCallback);
 			}
 			startActivity(intent);
+			ActiBleScan.this.finish();
 
 			/*
 			 * Intent intent = new Intent(CONTEXT, ActiBleConnAndGetdata.class);
@@ -126,6 +124,10 @@ public class ActiBleScan extends Activity implements OnClickListener {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		
+		//友盟统计
+		MobclickAgent.onResume(this);
+		
 		// Ensures Bluetooth is enabled on the device. If Bluetooth is not
 		// currently enabled, fire an intent to display a dialog asking the user
 		// to grant permission to enable it.
@@ -158,6 +160,7 @@ public class ActiBleScan extends Activity implements OnClickListener {
 	@Override
 	protected void onPause() {
 		super.onPause();
+		MobclickAgent.onPause(this);
 		scanLeDevice(false);
 		mLeDeviceListAdapter.clear();
 	}
@@ -309,8 +312,8 @@ public class ActiBleScan extends Activity implements OnClickListener {
 				Toast.makeText(ActiBleScan.this, "服务未成功初始化", Toast.LENGTH_SHORT).show();
 				finish();
 			}
-			Toast.makeText(ActiBleScan.this, "服务已连接", Toast.LENGTH_SHORT).show();
-			Toast.makeText(ActiBleScan.this, "开始连接设备，设备地址为： " + deviceAddress, Toast.LENGTH_SHORT).show();
+			//Toast.makeText(ActiBleScan.this, "服务已连接", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(ActiBleScan.this, "开始连接设备，设备地址为： " + deviceAddress, Toast.LENGTH_SHORT).show();
 
 			// Automatically connects to the device upon successful start-up
 			// initialization.
