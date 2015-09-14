@@ -124,6 +124,39 @@
             <intent-filter>
             </intent-filter>
         </activity>
+        
+        <!-- ble new -->
+        <activity
+            android:name=".ble2.ActiBleScan"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
+            <intent-filter>
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name=".ble2.ActiDevices"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
+            <intent-filter>
+            </intent-filter>
+        </activity>
+        
+          <activity
+            android:name=".ble2.ActiDeviceDetailInfo"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
+            <intent-filter>
+            </intent-filter>
+        </activity>
+        
+        <!-- ble new -->
+        
+        
+        
         <!-- Service============================================================== -->
         <service android:name=".service.BtService" >
             <intent-filter>

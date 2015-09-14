@@ -154,6 +154,7 @@ public class ActiPersonalInfo extends Activity {
 			tv_userWeightTarget.setText(pInfo.getWeightTarget() + "KG");
 			//tv_userBMI.setText(pInfo.getBMI() + "");
 			tv_userBMI.setText("正常");
+			
 
 			// 防止没有改动sp的值，提交之后，下次显示全变为0
 			gender = pInfo.getGender();

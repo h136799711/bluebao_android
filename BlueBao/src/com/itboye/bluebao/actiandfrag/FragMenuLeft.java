@@ -30,7 +30,8 @@ import android.widget.ListView;
 
 import com.itboye.bluebao.R;
 import com.itboye.bluebao.bean.Frag_tab_target_Aim;
-import com.itboye.bluebao.ble.ActiBleScan;
+import com.itboye.bluebao.ble2.ActiBleScan;
+import com.itboye.bluebao.breceiver.ReceiverTool;
 import com.itboye.bluebao.exwidget.CircleImageView;
 import com.itboye.bluebao.util.Util;
 import com.itboye.bluebao.util.UtilStream;
@@ -115,14 +116,13 @@ public class FragMenuLeft extends Fragment implements OnItemClickListener {
 		case 3: // 目标管理
 			//FragMenuLeft.this.getActivity().getFragmentManager().beginTransaction();
 			//9.7added 先把此项关掉
-			//Intent intent4 = new Intent(ReceiverTool.SHOW_MY_AIMS);
-			//getActivity().sendBroadcast(intent4);
+			Intent intent4 = new Intent(ReceiverTool.SHOW_MY_AIMS);
+			getActivity().sendBroadcast(intent4);
 			break;
 
 		case 4: // 关于蓝堡  
 			Intent intent5 = new Intent(getActivity(), ActiAboutLB.class);
 			startActivity(intent5);
-			
 			break;
 
 		case 5: // 购买器材

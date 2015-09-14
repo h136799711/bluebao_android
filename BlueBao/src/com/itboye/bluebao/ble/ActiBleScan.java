@@ -145,8 +145,8 @@ public class ActiBleScan extends Activity implements OnClickListener {
 		}
 
 		// Initializes list view adapter.
-		mLeDeviceListAdapter = new LeDeviceListAdapter();
-		lv_bledevices.setAdapter(mLeDeviceListAdapter);
+		//mLeDeviceListAdapter = new LeDeviceListAdapter();//9.10 和 oncreate中重复
+		//lv_bledevices.setAdapter(mLeDeviceListAdapter);//9.10 和 oncreate中重复
 		scanLeDevice(true);
 
 		// start 8.26 added
@@ -172,6 +172,7 @@ public class ActiBleScan extends Activity implements OnClickListener {
 		super.onDestroy();
 	}
 
+	//111
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -185,6 +186,7 @@ public class ActiBleScan extends Activity implements OnClickListener {
 		}
 	}
 
+	//111
 	private void scanLeDevice(final boolean enable) {
 		if (enable) {
 			// Stops scanning after a pre-defined scan period.
@@ -214,6 +216,7 @@ public class ActiBleScan extends Activity implements OnClickListener {
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
+	//111
 	// Adapter for holding devices found through scanning.
 	private class LeDeviceListAdapter extends BaseAdapter {
 		private ArrayList<BluetoothDevice> mLeDevices;
@@ -280,6 +283,7 @@ public class ActiBleScan extends Activity implements OnClickListener {
 		}
 	}
 
+	//111
 	// Device scan callback.
 	private BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
 
@@ -300,6 +304,7 @@ public class ActiBleScan extends Activity implements OnClickListener {
 		TextView deviceAddress;
 	}
 
+	//111
 	// 8.26 added below
 	// bindService的时候成功或不成功的处理函数 // Code to manage Service lifecycle.
 	private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -328,4 +333,6 @@ public class ActiBleScan extends Activity implements OnClickListener {
 		}
 	};
 
+	
+	
 }

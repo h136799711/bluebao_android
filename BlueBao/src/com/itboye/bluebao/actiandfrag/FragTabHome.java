@@ -37,12 +37,11 @@ import com.itboye.bluebao.R;
 import com.itboye.bluebao.bean.DataFromServerDayBean;
 import com.itboye.bluebao.bean.Frag_tab_target_Aim;
 import com.itboye.bluebao.bean.PInfo;
-import com.itboye.bluebao.ble.ActiBleScan;
+import com.itboye.bluebao.ble2.ActiBleScan;
+import com.itboye.bluebao.ble2.ActiDevices;
 import com.itboye.bluebao.ble.BluetoothLeService;
 import com.itboye.bluebao.ble.DataToShowBean;
 import com.itboye.bluebao.ble.SampleGattAttributes;
-//import com.jys.bluetoothproj.ble.ActiBle;
-//import com.jys.bluetoothproj.ble.ActiBle2;
 import com.itboye.bluebao.breceiver.ReceiverTool;
 import com.itboye.bluebao.exwidget.RoundProcessBar;
 import com.itboye.bluebao.util.Util;
@@ -227,7 +226,7 @@ public class FragTabHome extends Fragment {
 				}				
 				String data = intent.getStringExtra(BluetoothLeService.EXTRA_DATA);
 				displayData(data);
-			} else if (BluetoothLeService.ACTION_GATT_SERVICE_NOT_FOUND.equals(action)) {
+			}	else if (BluetoothLeService.ACTION_GATT_SERVICE_NOT_FOUND.equals(action)) {
 				tv_deviceConnState.setText("未连接");
 				// Toast.makeText(getActivity(), "没有发现服务",
 				// Toast.LENGTH_SHORT).show();
@@ -747,6 +746,9 @@ public class FragTabHome extends Fragment {
 				break;
 
 			case R.id.frag_tab_home_ibtn_connectdevice:
+				//Intent gattServiceIntent = new Intent(getActivity(), BluetoothLeService.class);
+				//getActivity().startService(gattServiceIntent);//因为在ActiDevices中点击item连接ble设备时bind了服务，但是当ActiDevices被finish时，服务被停止，所有首先在这里startService试试。9.11add
+				
 				Intent intent1 = new Intent(getActivity(), ActiBleScan.class);
 				startActivity(intent1);
 				break;

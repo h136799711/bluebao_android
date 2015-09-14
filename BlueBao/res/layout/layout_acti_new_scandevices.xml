@@ -1,0 +1,82 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical" >
+
+    <!-- 开始：自己的actionbar -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/heightActiBar"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/heightActiBarWord"
+            android:gravity="center"
+            android:text="设备管理"
+            android:textColor="@color/colorActionBarWord"
+            android:textSize="@dimen/textsizeActiBarWord" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="#DCDCDC" >
+        </View>
+    </LinearLayout>
+
+    <!-- 结束：自己的actionbar -->
+
+
+    <!-- 搜索动画 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/acti_new_simg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/scan_image_four"
+            />android:src="@anim/scandevice_animation"
+
+        <TextView
+            android:id="@+id/acti_new_tv_searchword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:gravity="center"
+            android:text="正在搜索设备..."
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:gravity="center"
+            android:text="请确保设备已经开启，并且在手机附近"
+            android:textColor="@color/colorLightGray2"
+            android:textSize="16sp" />
+
+        <!-- 重新搜索按钮 -->
+
+        <Button
+            android:id="@+id/acti_new_scandevices_btn_scanagain"
+            android:layout_width="250dip"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:background="#dc514c"
+            android:gravity="center"
+            android:text="重新搜索"
+            android:textColor="@color/colorWhite"
+            
+            android:textSize="20sp" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -34,6 +34,7 @@ public class BluetoothLeService extends Service {
 	private String mBluetoothDeviceAddress;
 	private BluetoothGatt mBluetoothGatt;
 	private int mConnectionState = STATE_DISCONNECTED;
+	private boolean thefirsttime = true;
 
 	private static final int STATE_DISCONNECTED = 0;
 	private static final int STATE_CONNECTING = 1;
@@ -79,6 +80,7 @@ public class BluetoothLeService extends Service {
 			} else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
 				Log.i(TAG, "onConnectionStateChange----绑定状态：" + newState);
 				connect(mBluetoothDeviceAddress);//8.29 added 断开时重新连接
+				//connect(mBluetoothDeviceAddress,0,5);//8.29 added 断开时重新连接-----9.11add
 				intentAction = ACTION_GATT_DISCONNECTED;
 				mConnectionState = STATE_DISCONNECTED;
 				Log.i(TAG, "Disconnected from GATT server.");
@@ -129,8 +131,9 @@ public class BluetoothLeService extends Service {
 			//Log.i(TAG, "onCharacteristicChanged----characteristic值改变了。新值为：" + characteristic.getValue().toString());
 			broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
 		}
+		
 	};
-
+	
 	private void broadcastUpdate(final String action) {
 		final Intent intent = new Intent(action);
 		sendBroadcast(intent);
@@ -149,18 +152,48 @@ public class BluetoothLeService extends Service {
 			DataToShowBean dataToShowBean = parseData(data);
 			String dataToShowBeanStr = gson.toJson(dataToShowBean);
 			// end 8.26 added
-			
-			intent.putExtra(EXTRA_DATA, dataToShowBeanStr);
-			sendBroadcast(intent);
-			Log.i(TAG, "数据已通过广播发送到前台");
 
+			if (thefirsttime) {
+				Log.i(TAG, "thefirsttime is：" + thefirsttime);
+				thefirsttime = false;
+				// 获取到需要的数据了，发送广播停止ActiDevices的progressDialog，并转到tab_home
+				Intent bIntent = new Intent("CANCELPD_AND_TOHOME");
+				sendBroadcast(bIntent);
+			}else {
+				Log.i(TAG, "thefirsttime is：" + thefirsttime);
+				intent.putExtra(EXTRA_DATA, dataToShowBeanStr);
+				sendBroadcast(intent);
+				Log.i(TAG, "数据已通过广播发送到前台");
+			}
+
+		/*	try {
+				Thread.sleep(2000);
+				Log.i(TAG, "thefirsttime is：" + thefirsttime);
+				intent.putExtra(EXTRA_DATA, dataToShowBeanStr);
+				sendBroadcast(intent);
+				Log.i(TAG, "数据已通过广播发送到前台");
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}*/
+			
+			
+			
+		
+				//获取到需要的数据了，发送广播停止ActiDevices的progressDialog，并转到tab_home
+				//Intent bIntent = new Intent("CANCELPD_AND_TOHOME");
+				//sendBroadcast(bIntent);
+	
+				/*Log.i(TAG, "thefirsttime is：" + thefirsttime);
+				intent.putExtra(EXTRA_DATA, dataToShowBeanStr);
+				sendBroadcast(intent);*/
+			
 		}
 	}
 
 	private final IBinder mBinder = new LocalBinder();
 	
 	public class LocalBinder extends Binder {
-		BluetoothLeService getService() {
+		public BluetoothLeService getService() {
 			return BluetoothLeService.this;
 		}
 	}
@@ -172,6 +205,7 @@ public class BluetoothLeService extends Service {
 
 	@Override
 	public boolean onUnbind(Intent intent) {
+		Log.i(TAG, "onUnbind被执行了");
 		// After using a given device, you should make sure that
 		// BluetoothGatt.close() is called
 		// such that resources are cleaned up properly. In this particular
@@ -206,6 +240,15 @@ public class BluetoothLeService extends Service {
 
 		return true;
 	}
+	
+	//9.12 added 和武健商量后添加的代码
+	@Override
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		Log.i(TAG, "onStartCommand被执行了");
+		//String deviceAddress = intent.getStringExtra("deviceAddress");//9.12和武健商量之后添加的代码
+		//connect(deviceAddress);//9.12和武健商量之后添加的代码
+		return super.onStartCommand(intent, flags, startId);
+	}
 
 	/**
 	 * Connects to the GATT server hosted on the Bluetooth LE device.
@@ -219,12 +262,14 @@ public class BluetoothLeService extends Service {
 	 *         callback.
 	 */
 	public boolean connect(final String address) {
+		Log.i(TAG, "connect被执行了");
 		
 		if (mBluetoothAdapter == null || address == null) {
 			Log.i(TAG, "BluetoothAdapter not initialized or unspecified address.");
 			return false;
 		}
-
+		disconnect();//9.11 根据MTBeaconMBLE加入此句
+		
 		// Previously connected device. Try to reconnect.
 		if (mBluetoothDeviceAddress != null && address.equals(mBluetoothDeviceAddress) && mBluetoothGatt != null) {
 			Log.i(TAG, "Trying to use an existing mBluetoothGatt for connection.");
@@ -237,36 +282,76 @@ public class BluetoothLeService extends Service {
 		}
 
 		final BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
-		
+		Log.i(TAG, "9.11 getRemoteDevice(address)--"+device.getAddress()+ "  boundState--"+device.getBondState() );
 		
 		if (device == null) {
 			Log.i(TAG, "Device not found.  Unable to connect.");
 			return false;
 		}
 
-		mBluetoothGatt = device.connectGatt(this, true, mGattCallback);
-		//Log.i(TAG, "8.30 added. mBluetoothGatt.getDevice().getUuids() is: " + mBluetoothGatt.getDevice().getUuids() );
-		//Log.i(TAG, "8.30 added. mBluetoothGatt.getDevice().getAddress() is: " + mBluetoothGatt.getDevice().getAddress() );
+		mBluetoothGatt = device.connectGatt(this, true, mGattCallback);//初始化gatt
+		Log.i(TAG, "8.30 added. mBluetoothGatt.getDevice().getAddress() is: " + mBluetoothGatt.getDevice().getAddress() );
 		
-		//Log.i(TAG, "正在连接......");
+		Log.i(TAG, "正在连接......");
 		mBluetoothDeviceAddress = address;
 		mConnectionState = STATE_CONNECTING;
-		//Log.i(TAG, "device.connectGatt(this, true, mGattCallback)----绑定状态：" + device.getBondState());
+		Log.i(TAG, "device.connectGatt(this, true, mGattCallback)----绑定状态：" + device.getBondState());
 		
-	/*	if ( device.getBondState()==10 ) { //如果没有绑定成功就一直绑定
-			Log.i(TAG, "device.connectGatt(this, true, mGattCallback)没有连接上----绑定状态：" + device.getBondState());
-			mBluetoothGatt = device.connectGatt(this, true, mGattCallback);
-			Log.i(TAG, "device.connectGatt(this, true, mGattCallback)重新连接----绑定状态：" + device.getBondState());
-		}*/
-		
-/*		if( device.getBondState()==10 ){
-			Log.i(TAG, "device.connectGatt(this, true, mGattCallback)没有连接上----绑定状态：" + device.getBondState());
-			mBluetoothGatt = device.connectGatt(this, true, mGattCallback);
-			Log.i(TAG, "device.connectGatt(this, true, mGattCallback)重新连接----绑定状态：" + device.getBondState());
-		}*/
 		return true;
 	}
 
+	//9.11 MTBeaconMBLE中的连接
+	private String last_mac;
+	private boolean connect_flag = false;
+	public boolean connect(String mac, int sectime, int reset_times) {
+
+		if (!mBluetoothAdapter.isEnabled()) { // 没有打开蓝牙
+			return false;
+		}
+		disconnect();
+		for (int i = 0; i < reset_times; i++) {
+			//initTimeFlag(WORK_onServicesDiscovered);
+			System.out.println("开始连接");
+			if ((mBluetoothGatt != null) && mac.equals(last_mac)) {
+				if (connect_flag == true) { // 当前已经连接好了
+					return true;
+				}
+				System.out.println("重连");
+				mBluetoothGatt.connect();
+			} else {
+				System.out.println("新连接");
+				disconnect(); // 新设备进行连接
+				BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(mac);
+				if (device == null) {
+					System.out.println("device == null");
+					return false;
+				}
+				mBluetoothGatt = device.connectGatt(this, false,mGattCallback);
+			}
+
+			/*if (startTimeOut(sectime)) { // 连接超时
+				System.out.println("连接超时");
+				disconnect();
+				continue;
+			}*/
+
+			connect_flag = true;
+
+			last_mac = mac;
+			
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			return true;
+		}
+
+		return false;
+	}
+	
+	
 	/**
 	 * Disconnects an existing connection or cancel a pending connection. 
 	 * The disconnection result is reported asynchronously through the
@@ -274,11 +359,13 @@ public class BluetoothLeService extends Service {
 	 * callback.
 	 */
 	public void disconnect() {
+		Log.i(TAG, "disconnect被执行了");
 		if (mBluetoothAdapter == null || mBluetoothGatt == null) {
 			Log.w(TAG, "BluetoothAdapter not initialized");
+			initialize();//9.11 add
 			return;
 		}
-		mBluetoothGatt.disconnect();
+		//mBluetoothGatt.disconnect();//9.12 晚上注释掉
 	}
 
 	/**
@@ -286,11 +373,12 @@ public class BluetoothLeService extends Service {
 	 * resources are released properly.
 	 */
 	public void close() {
+		Log.i(TAG, "close被执行了");
 		if (mBluetoothGatt == null) {
 			return;
 		}
-		mBluetoothGatt.close();
-		mBluetoothGatt = null;
+		//mBluetoothGatt.close();//9.12 晚上注释掉
+		//mBluetoothGatt = null;//9.12 晚上注释掉
 	}
 
 	/**
@@ -318,6 +406,7 @@ public class BluetoothLeService extends Service {
 	
 		//start 8.26 added  这一段代码非常重要
 		if (UUID_I_CARE.equals(characteristic.getUuid())) {
+			Log.i(TAG, "重要代码已经执行");
 			BluetoothGattDescriptor descriptor = characteristic.getDescriptor(UUID
 					.fromString(SampleGattAttributes.CLIENT_CHARACTERISTIC_CONFIG));
 			descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);

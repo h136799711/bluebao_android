@@ -39,7 +39,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="160dip"
+        android:layout_height="170dip"
         android:layout_marginEnd="30dip"
         android:layout_marginStart="30dip"
         android:gravity="center_horizontal"
@@ -57,7 +57,8 @@
             android:id="@+id/acti_personalinfo_et_username"
             android:layout_width="match_parent"
             android:layout_height="40dip"
-            android:cursorVisible="false"
+            android:cursorVisible="true"
+            android:textCursorDrawable="@null"
             android:gravity="center_horizontal"
             android:maxLength="20"
             android:singleLine="true"
@@ -70,8 +71,11 @@
         <EditText
             android:id="@+id/acti_personalinfo_et_userSentence"
             android:layout_width="match_parent"
-            android:layout_height="30dip"
+            android:layout_height="40dip"
             android:gravity="center_horizontal"
+            android:cursorVisible="true"
+            android:textCursorDrawable="@null"
+            android:singleLine="true"
             android:text="个性签名"
             android:textColor="@color/colorBlack"
             android:textSize="14sp" />
@@ -119,6 +123,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:text="男"
+                    android:checked="true"
                     android:textColor="@color/colorBlack"
                     android:textSize="@dimen/textsizeActiPersonalInfoArgusWord" />
 

@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.itboye.bluebao.R;
 import com.itboye.bluebao.util.Util;
+import com.itboye.bluebao.util.UtilBitmap;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.scrshot.UMScrShotController.OnScreenshotListener;
 import com.umeng.scrshot.adapter.UMAppAdapter;
@@ -29,8 +31,9 @@ import com.umeng.socialize.weixin.controller.UMWXHandler;
 public class ActiShare extends Activity implements OnClickListener {
 
 	final UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.share");
-	UMShakeService mShakeController = UMShakeServiceFactory.getShakeService("write.your.content");
-
+	//final UMShakeService mShakeController = UMShakeServiceFactory.getShakeService("write.your.content");
+	final UMShakeService mShakeController = UMShakeServiceFactory.getShakeService("com.umeng.share");
+	
 	private TextView tv_share_yes;
 	private TextView tv_share_no;
 	private TextView tv_dataMiles;
@@ -73,10 +76,12 @@ public class ActiShare extends Activity implements OnClickListener {
 		// 添加微信平台
 		UMWXHandler wxHandler = new UMWXHandler(ActiShare.this, appId, appSecret);
 		wxHandler.addToSocialSDK();
+		//wxHandler.showCompressToast(true);//9.9 added
 		// 添加微信朋友圈
 		UMWXHandler wxCircleHandler = new UMWXHandler(ActiShare.this, appId, appSecret);
 		wxCircleHandler.setToCircle(true);
 		wxCircleHandler.addToSocialSDK();
+		//wxCircleHandler.showCompressToast(true);//9.9 added
 
 		super.onResume();
 	}
@@ -108,11 +113,18 @@ public class ActiShare extends Activity implements OnClickListener {
 				@Override
 				public void onComplete(Bitmap bmp) {
 					if (bmp != null) {// bmp就是屏幕截图
+						Log.i("actishare", "bmp's size: " + bmp.getAllocationByteCount());
+						if( bmp.getAllocationByteCount()>32768){//大于32k，压缩 9.9added
+							bmp = UtilBitmap.createScaledBitmap(bmp, bmp.getWidth()/10, bmp.getHeight()/10);
+							Log.i("actishare", "new bmp's size: " + bmp.getAllocationByteCount());
+						}
 					}
 				}
 			});
 
 			mShakeController.openShare(ActiShare.this, false, new UMAppAdapter(ActiShare.this));
+			
+			
 
 			tv_share_yes.setVisibility(View.VISIBLE);
 			tv_share_no.setVisibility(View.VISIBLE);

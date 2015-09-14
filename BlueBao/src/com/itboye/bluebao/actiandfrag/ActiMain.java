@@ -52,6 +52,8 @@ public class ActiMain extends Activity implements OnClickListener {
 	private TextView tv_actimain_tab_target_textview;
 	private TextView tv_actimain_tab_pcenter_textview;
 
+	private long firstTimeClickHomeFrag=0;//9.14 added
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -147,11 +149,15 @@ public class ActiMain extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-
 		switch (v.getId()) {
-
 		case R.id.actimain_tab_home_layout: 
-			setTabSelection(0);
+			//setTabSelection(0);//此处可改进---------------
+			//9.14改进,点击home的时间间隔不能小于1.2秒，防止点击过于频繁造成崩溃
+			if( System.currentTimeMillis() - firstTimeClickHomeFrag > 1200 ){
+				setTabSelection(0);
+				firstTimeClickHomeFrag = System.currentTimeMillis();
+			}
+			
 			break;
 		case R.id.actimain_tab_target_layout: 
 			setTabSelection(1);
@@ -179,7 +185,7 @@ public class ActiMain extends Activity implements OnClickListener {
 		super.onPause();
 	}
 
-	private void setTabSelection(int index) {
+	public void setTabSelection(int index) {
 
 		clearSelection();
 		// 开启一个Fragment事务
@@ -265,6 +271,7 @@ public class ActiMain extends Activity implements OnClickListener {
 		iFilter.addAction(ReceiverTool.OPEN_SLIDEMENU);
 		iFilter.addAction(ReceiverTool.SHOW_MY_DETAIL);
 		iFilter.addAction(ReceiverTool.SHOW_MY_AIMS);
+		//iFilter.addAction("SelectHomeTab");
 		registerReceiver(myReceiver, iFilter);
 	}
 
@@ -277,9 +284,13 @@ public class ActiMain extends Activity implements OnClickListener {
 			if (ReceiverTool.OPEN_SLIDEMENU.equals(action)) {
 				mDrawerLayout.openDrawer(Gravity.START);
 			} else if (ReceiverTool.SHOW_MY_AIMS.equals(action)) {
-				mDrawerLayout.closeDrawer(Gravity.START);
+				//mDrawerLayout.closeDrawer(Gravity.START);//9.14 测试侧滑栏点击目标管理
 				setTabSelection(1);
-			} else {
+				mDrawerLayout.closeDrawer(Gravity.START);//9.14 测试侧滑栏点击目标管理
+			} /*else if("SelectHomeTab".equals(action)){
+				setTabSelection(0);//9.11 add
+			}*/
+			else {
 				Log.i(TAG, "没有接收到广播 ");
 			}
 		};

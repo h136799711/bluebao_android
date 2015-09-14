@@ -8,10 +8,11 @@
      <color name="colorRoundProcessBar">#F1F1F1</color>
      <color name="colorRoundProcessBarPercent">#28CAFB</color>
     <color name="colorRoundProcessBarAimNumber">#EFC974</color>
-    <color name="colorBackground">#F8F8F8</color>
+    <color name="colorBackground">#f0eff5</color>
     <color name="colorActionBarWord">#000000</color>
     <color name="colorActiShareArgu3Word">#000000</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#FFFFFF</color>
     <color name="colorFragPcenterGXQM">#544949</color>
     <color name="colorFragPcenterNumber">#28CAFB</color>
     
@@ -116,7 +117,7 @@
     <color name="cornsilk">#FFF8DC</color>
 	<!-- 柠檬绸色 -->    
     <color name="lemonchiffon">#FFFACD</color>
-
+
     <color name="lightyellow">#FFFFE0</color>
 <!-- 亮黄色  -->
     <color name="yellow">#FFFF00</color>
