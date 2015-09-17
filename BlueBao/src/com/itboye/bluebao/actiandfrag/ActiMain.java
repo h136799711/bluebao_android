@@ -1,14 +1,23 @@
 package com.itboye.bluebao.actiandfrag;
 
+import java.io.IOException;
+
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.DrawerLayout.DrawerListener;
 import android.util.Log;
@@ -18,6 +27,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.itboye.bluebao.R;
 import com.itboye.bluebao.breceiver.ReceiverTool;
 import com.itboye.bluebao.util.DoubleClickExitHelper;
@@ -271,7 +281,7 @@ public class ActiMain extends Activity implements OnClickListener {
 		iFilter.addAction(ReceiverTool.OPEN_SLIDEMENU);
 		iFilter.addAction(ReceiverTool.SHOW_MY_DETAIL);
 		iFilter.addAction(ReceiverTool.SHOW_MY_AIMS);
-		//iFilter.addAction("SelectHomeTab");
+		iFilter.addAction("RECEIVE_SYSTEM_ALARM_BC");
 		registerReceiver(myReceiver, iFilter);
 	}
 
@@ -284,12 +294,66 @@ public class ActiMain extends Activity implements OnClickListener {
 			if (ReceiverTool.OPEN_SLIDEMENU.equals(action)) {
 				mDrawerLayout.openDrawer(Gravity.START);
 			} else if (ReceiverTool.SHOW_MY_AIMS.equals(action)) {
-				//mDrawerLayout.closeDrawer(Gravity.START);//9.14 测试侧滑栏点击目标管理
 				setTabSelection(1);
-				mDrawerLayout.closeDrawer(Gravity.START);//9.14 测试侧滑栏点击目标管理
-			} /*else if("SelectHomeTab".equals(action)){
-				setTabSelection(0);//9.11 add
-			}*/
+				try {
+					Thread.sleep(700);
+					mDrawerLayout.closeDrawer(Gravity.START);//9.14 测试侧滑栏点击目标管理
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				
+			} else if("RECEIVE_SYSTEM_ALARM_BC".equals(action)){//9.14 闹铃提醒放到这里
+				// 闹铃广播
+				Log.i(TAG, "tab_home : 开始运动了！");
+				String howToStart = intent.getStringExtra("howToStart");
+				Log.i(TAG, "howToStart: " + howToStart);
+
+				if ("music".equals(howToStart)) {
+					final MediaPlayer mMediaPlayer = new MediaPlayer();
+					Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+					Log.i(TAG, "music's uri is : " + uri);
+					try {
+						mMediaPlayer.setDataSource(context, uri);
+						AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+						if (audioManager.getStreamVolume(AudioManager.STREAM_ALARM) != 0) {
+							mMediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+							mMediaPlayer.setLooping(false);
+							mMediaPlayer.prepare();
+						}
+					} catch (IllegalArgumentException e) {
+						e.printStackTrace();
+					} catch (SecurityException e) {
+						e.printStackTrace();
+					} catch (IllegalStateException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+
+					mMediaPlayer.start();
+
+					new AlertDialog.Builder(ActiMain.this).setTitle("蓝堡提醒您").setMessage("运动时间到了！").setCancelable(false)
+							.setNegativeButton("知道了", new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									mMediaPlayer.stop();
+									mMediaPlayer.release();
+								}
+							}).create().show();
+
+				} else {
+					final Vibrator vibrator = (Vibrator) ActiMain.this.getSystemService(Context.VIBRATOR_SERVICE);
+					vibrator.vibrate(15000);// 15秒
+					new AlertDialog.Builder(ActiMain.this).setTitle("蓝堡提醒您").setMessage("运动时间到了！").setCancelable(false)
+							.setNegativeButton("知道了", new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									vibrator.cancel();
+								}
+							}).create().show();
+				}
+			
+			}
 			else {
 				Log.i(TAG, "没有接收到广播 ");
 			}

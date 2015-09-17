@@ -232,7 +232,7 @@ public class FragTabHome extends Fragment {
 				// Toast.LENGTH_SHORT).show();
 			} else if (BluetoothLeService.ACTION_GATT_CHARA_NOT_FOUND.equals(action)) {
 				Toast.makeText(getActivity(), "没有发现特征值", Toast.LENGTH_SHORT).show();
-			} else if ("RECEIVE_SYSTEM_ALARM_BC".equals(action)) {// 闹铃广播
+			} else if ("RECEIVE_SYSTEM_ALARM_BC".equals(action)) {/*// 闹铃广播
 				Log.i(TAG, "tab_home : 开始运动了！");
 				String howToStart = intent.getStringExtra("howToStart");
 				Log.i(TAG, "howToStart: " + howToStart);
@@ -280,7 +280,7 @@ public class FragTabHome extends Fragment {
 								}
 							}).create().show();
 				}
-			}
+			*/}
 		};
 	};
 
@@ -447,10 +447,10 @@ public class FragTabHome extends Fragment {
 				tv_heartrate.setText(dataToShowBean.getXinlv());
 				tv_speed.setText(dataToShowBean.getSpeed());
 				tv_time.setText(dataToShowBean.getTime());
-				// Util中保存一份，供分享时用
-				Util.miles = dataToShowBean.getMiles();
+				// Util中保存一份，供分享时用 //9.14add
+				Util.miles = dataToShowBean.getMiles().substring(0, dataToShowBean.getMiles().length()-2);
 				Util.time = dataToShowBean.getTime();
-				Util.cals = dataToShowBean.getCars();
+				Util.cals = dataToShowBean.getCars().substring(0, dataToShowBean.getCars().length()-1);
 
 			} else {
 				// Toast.makeText(getActivity(), "读取到的数据为空",

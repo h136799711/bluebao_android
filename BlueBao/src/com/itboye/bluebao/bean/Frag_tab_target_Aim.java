@@ -19,6 +19,7 @@ public class Frag_tab_target_Aim implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
+	private int uid;//9.14 add 每个aim都要有一个uid，用来分辨不同的用户
 	private String dayOfWeek;
 	private String time_hour;
 	private String time_minute;
@@ -46,5 +47,11 @@ public class Frag_tab_target_Aim implements Serializable{
 	}
 	public void setGoal(String goal) {
 		this.goal = goal;
+	}
+	public int getUid() {
+		return uid;
+	}
+	public void setUid(int uid) {
+		this.uid = uid;
 	}
 }

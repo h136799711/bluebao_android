@@ -82,6 +82,7 @@ public class ActiLogin extends Activity implements View.OnClickListener {
 			btn_toRegister.setEnabled(false);
 		}
 		if (!Util.isBleAvailable(ActiLogin.this)) {
+			Log.i(TAG, "toast shoujiversion ");
 			Toast.makeText(ActiLogin.this, "手机系统版本太低，请更新", Toast.LENGTH_LONG).show();
 			btn_login.setEnabled(false);
 			btn_toRegister.setEnabled(false);
@@ -95,6 +96,7 @@ public class ActiLogin extends Activity implements View.OnClickListener {
 		if (!sp.getString("username", "").isEmpty() && !sp.getString("password", "").isEmpty()) {
 			et_username.setText(sp.getString("username", ""));
 			et_password.setText(sp.getString("password", ""));
+			cb_rememberPwd.setChecked(true);//9.14 add
 		}
 
 		super.onResume();

@@ -123,8 +123,6 @@ public class ActiShare extends Activity implements OnClickListener {
 			});
 
 			mShakeController.openShare(ActiShare.this, false, new UMAppAdapter(ActiShare.this));
-			
-			
 
 			tv_share_yes.setVisibility(View.VISIBLE);
 			tv_share_no.setVisibility(View.VISIBLE);

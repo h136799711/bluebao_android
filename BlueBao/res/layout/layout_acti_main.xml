@@ -175,10 +175,10 @@
 
     <fragment
         android:id="@+id/actimain_menu_left"
-        android:name="com.itboye.bluebao.actiandfrag.FragMenuLeft"
+        android:name="com.itboye.bluebao.actiandfrag.FragMenuLeft2"
         android:layout_width="230dp"
         android:layout_height="match_parent"
-        android:layout_gravity="left"
+        android:layout_gravity="start"
         android:tag="LEFT" />
     <!-- 结束： left drawer -->
 

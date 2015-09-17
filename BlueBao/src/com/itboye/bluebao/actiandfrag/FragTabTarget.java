@@ -1,22 +1,17 @@
 package com.itboye.bluebao.actiandfrag;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import android.annotation.SuppressLint;
-import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -116,8 +111,8 @@ public class FragTabTarget extends Fragment {
 		date = df.format(new Date());// 当前系统日期
 		tv_date.setText(date);
 		todayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);// 初始化todayOfWeek
-		updateTheColor( todayOfWeek-1 );
-		showAimsOfTheDay(date);
+		updateTheColor(todayOfWeek - 1);
+		showAimsOfTheDay(date);// adapter 初始化
 
 	}
 
@@ -132,7 +127,8 @@ public class FragTabTarget extends Fragment {
 
 				// ==设定目标的弹出框中的时间和卡路里量的设置==========
 				// 测试 弹出框让用户选择，弹出框是自定义的
-				LinearLayout dialog_aim = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.layout_dialog_aim, null);
+				LinearLayout dialog_aim = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.layout_dialog_aim,
+						null);
 
 				// picTime and picGoal
 				NumberPicker picTimeHour = (NumberPicker) dialog_aim.findViewById(R.id.dialog_aim_np_time_hour);
@@ -188,37 +184,47 @@ public class FragTabTarget extends Fragment {
 								int duration = 60 * hour + minute;// 计算目标的时间，转换为分钟
 
 								if (duration != 0 && goal != 0) {
-
+									Log.i(TAG, "要设置的闹铃的uid是：" + Util.uId);
 									Frag_tab_target_Aim aimTemp = new Frag_tab_target_Aim();
+									aimTemp.setUid(Util.uId);// 9.14 add
 									aimTemp.setDayOfWeek(tv_date.getText() + ""); // 当前日期
 									aimTemp.setTime_hour(hour + "");
 									aimTemp.setTime_minute(minute + "");
 									aimTemp.setGoal(goal + "");
 
-								/*	Log.i(TAG, "aimTemp's dayofweek: " + aimTemp.getDayOfWeek() + "\n\r" + "aimTemp's timeHour: "
-											+ aimTemp.getTime_hour() + "\n\r" + "aimTemp's timeMinute: " + aimTemp.getTime_minute()
-											+ "\n\r" + "aimTemp's goal: " + aimTemp.getGoal());*/
+									Log.i(TAG,
+											"aimTemp's uid: " + aimTemp.getUid() + "aimTemp's dayofweek: "
+													+ aimTemp.getDayOfWeek() + "aimTemp's timeHour: " + aimTemp.getTime_hour()
+													+ "aimTemp's timeMinute: " + aimTemp.getTime_minute() + "aimTemp's goal: "
+													+ aimTemp.getGoal());
 
 									// start 8.26 added
 									// 如果有重复aim则不添加
 									String temp = sp.getString(SP_FILE_NAME_KEY, "");
 									if (!temp.isEmpty()) {
+										
 										try {
 											@SuppressWarnings("unchecked")
 											ArrayList<Frag_tab_target_Aim> aimsAlreadyHave = UtilStream.String2SurveyList(temp);
+											
 											for (int i = 0; i < aimsAlreadyHave.size(); i++) {
 												Frag_tab_target_Aim tempAim = aimsAlreadyHave.get(i);
-												/*Log.i(TAG, "tempAim's dayofweek:" + tempAim.getDayOfWeek() + "tempAim's timeHour:"
-														+ tempAim.getTime_hour() + "tempAim's timeMinute:" + tempAim.getTime_minute()
-														+ "tempAim's goal:" + tempAim.getGoal());*/
+												Log.i(TAG,
+														"tempAim uid: " + tempAim.getUid() + "tempAim dayofweek: "
+																+ tempAim.getDayOfWeek()  + "tempAim timeHour: "
+																+ tempAim.getTime_hour()  + "tempAim timeMinute: "
+																+ tempAim.getTime_minute()  + "tempAim goal: "
+																+ tempAim.getGoal());
 
-												if (tempAim.getDayOfWeek().equals(aimTemp.getDayOfWeek())
+												if (tempAim.getUid() == aimTemp.getUid()
+														&& tempAim.getDayOfWeek().equals(aimTemp.getDayOfWeek())
 														&& tempAim.getGoal().equals(aimTemp.getGoal())
 														&& tempAim.getTime_hour().equals(aimTemp.getTime_hour())
 														&& tempAim.getTime_minute().equals(aimTemp.getTime_minute())) {
-													//Log.i(TAG, "有目标重复设置了");
+													Log.i(TAG, "有目标重复设置了");
 													return;
 												}
+
 											}
 										} catch (Exception e) {
 											e.printStackTrace();
@@ -226,21 +232,33 @@ public class FragTabTarget extends Fragment {
 									}
 									// end 8.26 added
 
+									Log.i(TAG, "保存之前，最后一次显示新添加的aim的uid：" + aimTemp.getUid());
 									aims.add(aimTemp);// aims中包含所有日期的目标，将新添加的目标保存到aims中
 									aimsForAdapter.add(aimTemp); // 将新添加的目标也保存到listview的adapter中
 									adapter.notifyDataSetChanged();// 更新数据
+									
+									//Log.i(TAG, "9.16added-添加新aim之后重新初始化adapter，防止第一次安装添加第一个aim之后直接修改或删除时崩溃-测试阶段");
+									//adapter = new AdapterForAim(getActivity(), aimsForAdapter, aims); // 9.16added 
 
-									try {// 把包换所有aim的aims写进SP
+									try {// 把包含所有aim的aims写进SP
 										aimsStr = UtilStream.SurveyList2String(aims);
-										editor = sp.edit();
+										//9.16 added
+										if( !aimsStr.isEmpty() ){
+											Log.i(TAG, "第一次添加新aim之前UtilStream.SurveyList2String(aims)不空");
+											editor = sp.edit();
+											editor.putString(SP_FILE_NAME_KEY, aimsStr);
+											editor.commit(); // 把新建的aim添加到包含所有日期的aims中去
+										}
+										//9.16 added
+										/*editor = sp.edit();
 										editor.putString(SP_FILE_NAME_KEY, aimsStr);
 										editor.commit(); // 把新建的aim添加到包含所有日期的aims中去
-									} catch (IOException e) {
+*/									} catch (IOException e) {
 										e.printStackTrace();
 									}
 
 									// 添加闹铃提醒
-									//setAlarms(aimTemp.getDayOfWeek());
+									Util.setAlarms(getActivity());
 
 								} else {// 时间或卡路里量中有空值
 									Toast.makeText(getActivity(), "目标设定有误，请重新设定！", Toast.LENGTH_SHORT).show();
@@ -343,20 +361,25 @@ public class FragTabTarget extends Fragment {
 	@SuppressWarnings("unchecked")
 	private void showAimsOfTheDay(String date) {
 		aimsForAdapter.clear();
+		Log.i(TAG, "aimsForAdapter.clear()执行完了");
 		sp = getActivity().getSharedPreferences(SP_FILE_NAME, Context.MODE_PRIVATE);
 		try {
 			String spContent = sp.getString(SP_FILE_NAME_KEY, "");
+			Log.i(TAG, "sp.getString(SP_FILE_NAME_KEY--执行完了，spContent is："+ spContent);
 			aimsStr = spContent;// 初始化aimsStr
 
-			ArrayList<Frag_tab_target_Aim> allAims = null;
+			//第一次安装，第一次设定aim之后直接删除或者修改崩溃的原因是这里的allAims没有初始化 9.16修改此bug
+			ArrayList<Frag_tab_target_Aim> allAims = new ArrayList<Frag_tab_target_Aim>();
 
 			if (!spContent.isEmpty()) {
 				allAims = UtilStream.String2SurveyList(spContent);
 				aims = allAims;// 初始化aims
 				// 从allAims中解析出 当前日期 的aims
+				Log.i(TAG, "showAimsOfTheDay--Util.uId:" + Util.uId);
 				for (int i = 0; i < allAims.size(); i++) {
 					Frag_tab_target_Aim aimtemp = allAims.get(i);
-					if (date.equals(aimtemp.getDayOfWeek())) {
+					Log.i(TAG, "showAimsOfTheDay--aimtemp.getUid():" + aimtemp.getUid());
+					if (aimtemp.getUid() == Util.uId && date.equals(aimtemp.getDayOfWeek())) {
 						aimsForAdapter.add(aimtemp);// 把所有当天的aim放入ArrayList中
 					}
 				}
@@ -369,69 +392,6 @@ public class FragTabTarget extends Fragment {
 		} catch (Exception e) {
 			Toast.makeText(getActivity(), "请设定目标!", Toast.LENGTH_SHORT).show();
 			e.printStackTrace();
-		}
-	}
-
-	// 添加目标时检测是否闹铃提醒
-	// 把所有未过期的aims的时间设定进闹钟里
-	@SuppressWarnings("unchecked")
-	@SuppressLint("SimpleDateFormat")
-	private void setAlarms(String date) {
-		Log.i(TAG, "闹铃提醒在：" + date);
-
-		sp = getActivity().getSharedPreferences(Util.SP_FN_ALARM, Context.MODE_PRIVATE);
-		//Log.i("alarm ", sp.getString(Util.SP_KEY_ALARM, ""));
-		if (!sp.getString(Util.SP_KEY_ALARM, "").isEmpty()) {
-			Log.i("alarm ", sp.getString(Util.SP_KEY_ALARM, ""));
-			AlarmManager am = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-			long timeNow = new Date().getTime();
-			Log.i(TAG, "timeNow is: " + timeNow);// -----timeNow
-
-			SharedPreferences sp = getActivity().getSharedPreferences(Util.SP_FN_TARGET, Context.MODE_PRIVATE);
-			String aimsInSP = sp.getString(Util.SP_KEY_TARGET, "");
-			if (!aimsInSP.isEmpty()) {
-				Log.i(TAG, "aimsInSP are: " + aimsInSP);
-
-				ArrayList<Frag_tab_target_Aim> aims = null;
-
-				try {
-					aims = UtilStream.String2SurveyList(aimsInSP);
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-
-				for (int i = 0; i < aims.size(); i++) {
-					String timeThenStrDay = aims.get(i).getDayOfWeek();
-					String timeThenStrHour = aims.get(i).getTime_hour();
-					String timeThenStrMinute = aims.get(i).getTime_minute();
-					String timeThenStr = timeThenStrDay + " " + timeThenStrHour + ":" + timeThenStrMinute;
-					//Log.i(TAG, "timeThenStr : " + timeThenStr);
-					Date timeThenDate = null;
-					try {
-						timeThenDate = format.parse(timeThenStr);
-					} catch (ParseException e) {
-						e.printStackTrace();
-					}
-					long timeThen = timeThenDate.getTime();// -----timeThen
-					
-
-					//Log.i(TAG, "第 " + i + " 个闹铃，timeThen-timeNow  : " + (timeThen - timeNow));
-					// 当前时间晚于目标设定的时间，就添加闹铃
-					if (timeThen > timeNow) {
-						Log.i(TAG, "timeThen : " + timeThen);
-						Intent intent = new Intent("RECEIVE_SYSTEM_ALARM_BC");
-						String howToStart = Util.sound ? "music" : "vibrate";
-						intent.putExtra("howToStart", howToStart);
-						PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), i, intent,
-								PendingIntent.FLAG_CANCEL_CURRENT);
-						am.set(AlarmManager.RTC_WAKEUP, timeThen, pendingIntent);
-					}
-				}
-			}
 		}
 	}
 

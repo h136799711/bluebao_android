@@ -145,6 +145,8 @@ public class FragMenuLeft extends Fragment implements OnItemClickListener {
 			}).setNegativeButton("否", new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
+					editor.putString(Util.SP_KEY_ALARM, "");
+					editor.commit();
 				}
 			}).create().show();
 			break;
@@ -203,7 +205,7 @@ public class FragMenuLeft extends Fragment implements OnItemClickListener {
 				String timeThenStrHour = aims.get(i).getTime_hour();
 				String timeThenStrMinute = aims.get(i).getTime_minute();
 				String timeThenStr = timeThenStrDay + " " + timeThenStrHour + ":" + timeThenStrMinute;
-				// Log.i(TAG, "timeThenStr : " + timeThenStr);
+
 				Date timeThenDate = null;
 				try {
 					timeThenDate = format.parse(timeThenStr);
@@ -213,8 +215,8 @@ public class FragMenuLeft extends Fragment implements OnItemClickListener {
 				long timeThen = timeThenDate.getTime();// -----timeThen
 
 				//Log.i(TAG, "第 " + i + " 个闹铃，timeThen-timeNow  : " + (timeThen - timeNow));
-				// 当前时间晚于目标设定的时间，就添加闹铃
-				if (timeThen > timeNow) {
+				// 当前时间晚于目标设定的时间，就添加闹铃 + 9.14add 只添加当前用户的
+				if  ( (timeThen > timeNow) && aims.get(i).getUid()==Util.uId ){
 					Log.i(TAG, "timeThen : " + timeThen);
 					Intent intent = new Intent("RECEIVE_SYSTEM_ALARM_BC");
 					String howToStart = Util.sound ? "music" : "vibrate";

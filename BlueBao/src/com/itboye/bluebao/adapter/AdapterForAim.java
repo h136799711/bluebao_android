@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 
 import com.itboye.bluebao.R;
 import com.itboye.bluebao.bean.Frag_tab_target_Aim;
+import com.itboye.bluebao.util.Util;
 import com.itboye.bluebao.util.UtilStream;
 
 /**
@@ -28,9 +30,10 @@ import com.itboye.bluebao.util.UtilStream;
  */
 public class AdapterForAim extends BaseAdapter {
 
+	private static final String TAG = "AdapterForAim";
 	private Context context;
-	private ArrayList<Frag_tab_target_Aim> aims;// aimsForAdaptre
-	private ArrayList<Frag_tab_target_Aim> allAims;// 包含各个日期的aims
+	private ArrayList<Frag_tab_target_Aim> aims ;// aimsForAdaptre    			//9.15晚 第一次安装时没有aims和allAims，只新建一个aim然后对其修改删除会出崩溃，注意此种情况
+	private ArrayList<Frag_tab_target_Aim> allAims ;// 包含各个日期的aims
 
 	@Override
 	public int getCount() {
@@ -77,6 +80,8 @@ public class AdapterForAim extends BaseAdapter {
 		this.context = context;
 		this.aims = aims;
 		this.allAims = allAims;
+		//Log.i(TAG, "allAims.size():" + allAims.size());
+		//Log.i(TAG, "aims.size():" + aims.size());
 	}
 
 	/**
@@ -84,9 +89,10 @@ public class AdapterForAim extends BaseAdapter {
 	 */
 	private class MyClickListenerInItem implements View.OnClickListener {
 		
-		private static final String SP_FILE_NAME = "frag_tab_target_aims";
-		private static final String SP_FILE_NAME_KEY = "aims";
-		//protected static final String TAG = "-----MyClickListenerInItem";
+		//private static final String SP_FILE_NAME = "frag_tab_target_aims";
+		//private static final String SP_FILE_NAME_KEY = "aims";
+		private static final String SP_FILE_NAME = Util.SP_FN_TARGET;
+		private static final String SP_FILE_NAME_KEY = Util.SP_KEY_TARGET;
 		private SharedPreferences spItem;
 		private SharedPreferences.Editor editorItem;
 		
@@ -98,9 +104,9 @@ public class AdapterForAim extends BaseAdapter {
 
 		//修改之后aim的新数据初始化，设置为类的成员变量
 		//String afterDayOfWeek = "";
-		int afterHour = 0;
-		int afterMinute = 0;
-		int afterGoal = 0;
+		private int afterHour = 0;
+		private int afterMinute = 0;
+		private int afterGoal = 0;
 		
 		//构造函数
 		public MyClickListenerInItem(int pos){
@@ -115,11 +121,13 @@ public class AdapterForAim extends BaseAdapter {
 			switch ( v.getId() ) {
 			
 			case R.id.frag_tab_target_ibtn_delete : //删除
-				//Toast.makeText(context, "要删除第" + position +"个item。", Toast.LENGTH_SHORT).show();
+				Log.i(TAG, "要删除第" + position +"个item。");
+				//Log.i(TAG, "allAims.size():" + allAims.size());
+				//Log.i(TAG, "aims.size():" + aims.size());
 				Frag_tab_target_Aim aimToDelete = aims.get(position);
 				allAims.remove(aimToDelete);
 				
-				//Log.i("-----AdapterForAim", "after delete aims(position) allAims are :" + allAims.toString() );
+				Log.i("-----AdapterForAim", "after delete aims("+position+") allAims are :" + allAims.toString() );
 				
 				//把SP中相应的数据也擦除掉
 				String afterDeleteTheItem = "";
@@ -128,12 +136,25 @@ public class AdapterForAim extends BaseAdapter {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+				Log.i("UtilStream.SurveyList2String(allAims)--", afterDeleteTheItem );
 				editorItem.putString(SP_FILE_NAME_KEY, afterDeleteTheItem);
 				editorItem.commit();
 				
 				//更新Adapter
 				aims.remove(position);
 				notifyDataSetChanged();
+				
+				Log.i("AdapterForAim-删除aim之后，保存之前--", afterDeleteTheItem );
+				
+				Log.i("----", "删除aim-闹铃");
+				Util.cancelAlarms(context);
+				try {
+					Thread.sleep(500);
+					Util.setAlarms(context);//更改闹铃
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
 				
 				break;
 				
@@ -142,11 +163,11 @@ public class AdapterForAim extends BaseAdapter {
 				
 				//获取修改前aim数据
 				final Frag_tab_target_Aim aimToEdit = aims.get(position);
-				final String beforeDayOfWeek = aimToEdit.getDayOfWeek();// 目标设定日期
+				//final String beforeDayOfWeek = aimToEdit.getDayOfWeek();// 目标设定日期
 				final String beforeHour = aimToEdit.getTime_hour();
 				final String beforeMinute = aimToEdit.getTime_minute();
 				final String beforeGoal = aimToEdit.getGoal();
-	
+				Log.i("AdapterForAim--要修改的aim：", aimToEdit.getUid() +"  " + aimToEdit.getDayOfWeek() +"  " + aimToEdit.getTime_hour() + "  "+aimToEdit.getTime_minute() +"  "+aimToEdit.getGoal());
 				//Toast.makeText(context, "要修改第" + position +"个item。", Toast.LENGTH_SHORT).show();
 				//弹出选择框供用户修改,如果没有选择，则值
 				LinearLayout dialog_aim = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.layout_dialog_aim, null);
@@ -208,12 +229,15 @@ public class AdapterForAim extends BaseAdapter {
 						//总之，是0就去原数据，否则就去新数据，即afterHour
 						if ( afterHour==0 ){ 
 							afterHour = Integer.parseInt( beforeHour );
+							Log.i("AdapterForAim--afterHour-", afterHour+"");
 						}
 						if ( afterMinute==0 ){
 							afterMinute = Integer.parseInt( beforeMinute );
+							Log.i("AdapterForAim--afterMinute-", afterMinute+"");
 						}
 						if ( afterGoal==0 ){
 							afterGoal = Integer.parseInt( beforeGoal );
+							Log.i("AdapterForAim--afterGoal-", afterGoal+"");
 						}
 						
 						//点击编辑之后，不管用户是否重新选择了数值，都新建一个aim，并对addAims和aims进行更新
@@ -222,23 +246,26 @@ public class AdapterForAim extends BaseAdapter {
 						
 							//1 更新allAim，写进SP中
 							Frag_tab_target_Aim aimAfterEdited = new Frag_tab_target_Aim();
-							aimAfterEdited.setDayOfWeek(beforeDayOfWeek);//设定目标的日期不变
+							aimAfterEdited.setUid(aimToEdit.getUid());//9.15
+							aimAfterEdited.setDayOfWeek(aimToEdit.getDayOfWeek());//设定目标的日期不变
 							aimAfterEdited.setGoal(afterGoal+"");
-							aimAfterEdited.setTime_hour(afterHour+"");
+							aimAfterEdited.setTime_hour(afterHour+""); 
 							aimAfterEdited.setTime_minute(afterMinute+"");
+							Log.i("AdapterForAim--修改后的aim：", aimAfterEdited.getUid() +"  " + aimAfterEdited.getDayOfWeek() +"  " + aimAfterEdited.getTime_hour() + "  "+aimAfterEdited.getTime_minute() +"  "+aimAfterEdited.getGoal());
 							
-							/*Log.i(TAG, "新aim中数据：" +aimAfterEdited.getDayOfWeek() +"  " + aimAfterEdited.getTime_hour() + "  " + aimAfterEdited.getTime_minute()
-																					+"  " +aimAfterEdited.getGoal());
-							
-							Log.i(TAG, "修改allAims中数据");*/
 							//更新allAims中的aim,不能根据position，因为position是aims中的，而不是allAims中的
-							allAims.remove(aimToEdit);
+							//allAims.remove(aimToEdit);
+							allAims.remove(aimToEdit); // 9.16 00 add
+							Log.i("AdapterForAim-","allAims.remove(aimToEdit)");
 							allAims.add(aimAfterEdited);
+							Log.i("AdapterForAim-","allAims.add(aimAfterEdited)");
+							
 							
 							//Log.i(TAG, "修改SP中数据");
 							String strtemp = "";
 							try {
 								strtemp = UtilStream.SurveyList2String(allAims);
+								Log.i("AdapterForAim-","UtilStream.SurveyList2String(allAims)");
 							} catch (IOException e) {
 								e.printStackTrace();
 							}
@@ -251,6 +278,19 @@ public class AdapterForAim extends BaseAdapter {
 							//aims.remove(position);
 							//aims.add(position, aimAfterEdited);
 							notifyDataSetChanged();
+							
+							Log.i("AdapterForAim-更改aim之后，保存之前--", aimAfterEdited.getGoal() + "  "+aimAfterEdited.getUid() 
+									+ "  "+aimAfterEdited.getDayOfWeek() + "  "+aimAfterEdited.getTime_hour()+ "  "+aimAfterEdited.getTime_minute() );
+							Log.i("----", "更改aim-闹铃");
+							Util.cancelAlarms(context);
+							
+							try {
+								Thread.sleep(500);
+								Util.setAlarms(context);//更改闹铃
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+							
 					}
 				})
 				.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -259,6 +299,9 @@ public class AdapterForAim extends BaseAdapter {
 					}
 				})
 				.create().show();
+				
+				
+				
 				break;
 			}
 		}
