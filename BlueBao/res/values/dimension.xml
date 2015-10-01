@@ -58,7 +58,7 @@
     
     <dimen name="textsizeFragMenuUsername">14sp</dimen>
     <dimen name="textsizeFragMenuGXQM">12sp</dimen>
-    <dimen name="textsizeFragMenuItem">16sp</dimen>
+    <dimen name="textsizeFragMenuItem">12sp</dimen>
     <dimen name="heightFragMenuItem">40dip</dimen>
     
     <dimen name="heightActiPersonalInfoArgus">50dip</dimen>

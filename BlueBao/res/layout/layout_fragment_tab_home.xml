@@ -61,7 +61,6 @@
 
             <!-- =====divider=================================== -->
 
-
             <!-- 日期 -->
 
             <LinearLayout
@@ -131,20 +130,25 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dip"
+                android:layout_height="170dip"
                 android:gravity="center"
                 android:orientation="horizontal" >
 
                 <!-- 8.13测试自定义view-processbar============================================================== -->
 
-                <com.itboye.bluebao.exwidget.RoundProcessBar
+            <!-- 改进前    <com.itboye.bluebao.exwidget.RoundProcessBar
                     android:id="@+id/roundProgressBar1"
                     android:layout_width="180dip"
                     android:layout_height="180dip"
                     android:layout_marginBottom="5dip"
                     android:layout_marginTop="5dp" 
+                    /> -->
+                    
+                 <com.itboye.bluebao.exwidget.RoundProcessBar
+                    android:id="@+id/roundProgressBar1"
+                    android:layout_width="170dip"
+                    android:layout_height="170dip"
                     />
-              
             </LinearLayout>
 
             <!-- =====divider=================================== -->

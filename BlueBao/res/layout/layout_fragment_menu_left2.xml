@@ -29,7 +29,8 @@
             android:gravity="center"
             android:text="爱运动,享自由"
             android:singleLine="true"
-            android:textColor="@color/colorMenuLeftWord"
+            android:textStyle="bold"
+            android:textColor="#000000"
             android:textSize="@dimen/textsizeFragMenuUsername" />
 
         <TextView
@@ -50,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dip"
         android:layout_marginTop="20dip"
-        android:background="@color/colorMenuLeftLine" >
+        android:background="#DCDCDC" >
     </View>
 
     <!-- 下边的 Items -->
@@ -66,7 +67,7 @@
         android:gravity="center_vertical"
         android:paddingEnd="10dip"
         android:paddingStart="20dip"
-        android:text="个人资料"
+        android:text="我的个人资料"
         android:textColor="@color/colorMenuLeftWord"
         android:textSize="@dimen/textsizeFragMenuItem" />
 
@@ -94,7 +95,7 @@
         android:gravity="center_vertical"
         android:paddingEnd="10dip"
         android:paddingStart="20dip"
-        android:text="运动数据"
+        android:text="我的运动数据"
         android:textColor="@color/colorMenuLeftWord"
         android:textSize="@dimen/textsizeFragMenuItem" />
 
@@ -108,7 +109,7 @@
         android:gravity="center_vertical"
         android:paddingEnd="10dip"
         android:paddingStart="20dip"
-        android:text="目标管理"
+        android:text="我的目标管理"
         android:textColor="@color/colorMenuLeftWord"
         android:textSize="@dimen/textsizeFragMenuItem" />
 
@@ -136,7 +137,7 @@
         android:gravity="center_vertical"
         android:paddingEnd="10dip"
         android:paddingStart="20dip"
-        android:text="购买器材"
+        android:text="购买更多健身器材"
         android:textColor="@color/colorMenuLeftWord"
         android:textSize="@dimen/textsizeFragMenuItem" />
 

@@ -9,20 +9,13 @@ import java.util.Calendar;
 import java.util.Date;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Vibrator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,11 +30,10 @@ import com.itboye.bluebao.R;
 import com.itboye.bluebao.bean.DataFromServerDayBean;
 import com.itboye.bluebao.bean.Frag_tab_target_Aim;
 import com.itboye.bluebao.bean.PInfo;
-import com.itboye.bluebao.ble2.ActiBleScan;
-import com.itboye.bluebao.ble2.ActiDevices;
 import com.itboye.bluebao.ble.BluetoothLeService;
 import com.itboye.bluebao.ble.DataToShowBean;
 import com.itboye.bluebao.ble.SampleGattAttributes;
+import com.itboye.bluebao.ble2.ActiBleScan;
 import com.itboye.bluebao.breceiver.ReceiverTool;
 import com.itboye.bluebao.exwidget.RoundProcessBar;
 import com.itboye.bluebao.util.Util;
@@ -605,7 +597,7 @@ public class FragTabHome extends Fragment {
 			//Log.i(TAG, "today.toString() is : " + format.format(today));
 			//Log.i(TAG, "minutesNow"+ minutesNow);
 			
-			Frag_tab_target_Aim aimToUse = null;//选择和是的aim用
+			Frag_tab_target_Aim aimToUse = null;//选择合适的aim用
 			int minuteTemp = 0;
 			
 			for (int i = 0; i < aims.size(); i++) {
@@ -619,7 +611,8 @@ public class FragTabHome extends Fragment {
 					int minutesInAim = Integer.parseInt(aimTemp.getTime_hour()) * 60 + Integer.parseInt(aimTemp.getTime_minute());
 					//Log.i(TAG, "minutesInAim"+ minutesInAim);
 					
-					if (minutesNow < minutesInAim) {//找出距离当前时间最近的aim，把它赋给aimToUse
+				/*	9.30修改前
+				 * if (minutesNow < minutesInAim) {//找出距离当前时间最近的aim，把它赋给aimToUse
 						if( minuteTemp ==0  ){
 							minuteTemp = minutesInAim;
 							aimToUse = aimTemp;
@@ -627,7 +620,20 @@ public class FragTabHome extends Fragment {
 							minuteTemp = minutesInAim;
 							aimToUse = aimTemp;
 						}
+					}*/
+					
+					//9.30修改的
+					//使用的aim：当前系统时间 》 aim中的时间，且差值最小的aim
+					if (minutesNow > minutesInAim) {
+						if( minuteTemp ==0  ){
+							minuteTemp = minutesInAim;
+							aimToUse = aimTemp;
+						}else if( minuteTemp < minutesInAim ){
+							minuteTemp = minutesInAim;
+							aimToUse = aimTemp;
+						}
 					}
+					
 				} else {// 没有今天的数据
 					Log.i(TAG, "没有今天的数据");
 					clearUI();

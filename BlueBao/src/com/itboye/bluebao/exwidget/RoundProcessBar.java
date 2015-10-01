@@ -12,14 +12,11 @@ import android.view.View;
 
 import com.itboye.bluebao.R;
 
-
-
 public class RoundProcessBar extends View {
 	/**
 	 * 画笔对象的引用
 	 */
 	private Paint paint;
-	
 	
 	private int colorCircle;// 外圆颜色
 	
@@ -70,7 +67,7 @@ public class RoundProcessBar extends View {
 		colorCircle = mTypedArray.getColor(R.styleable.RoundProcessBar_colorCircle, getResources().getColor(R.color.colorRoundProcessBar));
 		
 		colorProcessBar = mTypedArray.getColor(R.styleable.RoundProcessBar_colorProcessBar, getResources().getColor(R.color.colorRoundProcessBarPercent));
-		widthProcessBar = mTypedArray.getDimension(R.styleable.RoundProcessBar_widthProcessBar, 50);
+		widthProcessBar = mTypedArray.getDimension(R.styleable.RoundProcessBar_widthProcessBar, 43);
 		
 		colorAlready = mTypedArray.getColor(R.styleable.RoundProcessBar_colorAlready, R.color.colorAlready);
 		textSizeAlready = mTypedArray.getDimension(R.styleable.RoundProcessBar_textSizeAlready, 25);
@@ -85,7 +82,7 @@ public class RoundProcessBar extends View {
 		textSizeAim = mTypedArray.getDimension(R.styleable.RoundProcessBar_textSizeAim, 25);
 		
 		colorAimNumber = mTypedArray.getColor(R.styleable.RoundProcessBar_colorAimNumber, getResources().getColor(R.color.colorRoundProcessBarAimNumber));
-		textSizeAimNumber = mTypedArray.getDimension(R.styleable.RoundProcessBar_textSizeAimNumber, 25);
+		textSizeAimNumber = mTypedArray.getDimension(R.styleable.RoundProcessBar_textSizeAimNumber, 10);
 		
 		max = mTypedArray.getInteger(R.styleable.RoundProcessBar_max, 100);
 		textIsDisplayable = mTypedArray.getBoolean(R.styleable.RoundProcessBar_textIsDisplayable, true);
@@ -114,21 +111,21 @@ public class RoundProcessBar extends View {
 		paint.setStrokeWidth(0); //设置画笔宽度
 		paint.setColor(colorAlready);
 		paint.setTextSize(textSizeAlready);// 字体大小
-		paint.setTypeface(Typeface.DEFAULT_BOLD); //设置字体
+		//paint.setTypeface(Typeface.DEFAULT_BOLD); //设置字体
 		float textWidthAlready = paint.measureText( "已完成");   //测量字体宽度，我们需要根据字体的宽度设置在圆环中间
-		canvas.drawText( "已完成", center - textWidthAlready / 2, (float)(0.8*center - textWidthAlready/2), paint); //画出进度百分比
+		canvas.drawText( "已完成", (float)(center - textWidthAlready / 2), (float)(0.7*center - textWidthAlready/2), paint); //画出进度百分比
 		
 		 //显示进度百分比，不断变化
 		paint.setStrokeWidth(0); //设置画笔宽度
 		paint.setColor(colorPercent);
 		paint.setTextSize(textSizePercent);// 字体大小
-		paint.setTypeface(Typeface.DEFAULT_BOLD); //设置字体
+		//paint.setTypeface(Typeface.DEFAULT_BOLD); //设置字体
 		int percent = (int)(((float)progress / (float)max) * 100);  //中间的进度百分比，先转换成float在进行除法运算，不然都为0
 		float textWidth = paint.measureText(percent + "%");   //测量字体宽度，我们需要根据字体的宽度设置在圆环中间
 		if(textIsDisplayable && percent != 0 && style == STROKE){
-			canvas.drawText(percent + "%", center - textWidth / 2, center + textSizePercent/2, paint); //画出进度百分比
+			canvas.drawText(percent + "%", center - textWidth / 2, (float)(0.95*center + textSizePercent/2), paint); //画出进度百分比
 		}else{//percent is 0 9.7added
-			canvas.drawText(0 + "%", center - textWidth / 2, center + textSizePercent/2, paint); //画出进度百分比
+			canvas.drawText(0 + "%", center - textWidth / 2, (float)(0.95*center + textSizePercent/2), paint); //画出进度百分比 center + textSizePercent/2
 		}
 		
 		 //画出 百分比下边的横线
@@ -141,19 +138,20 @@ public class RoundProcessBar extends View {
 		paint.setStrokeWidth(0); //设置画笔宽度
 		paint.setColor(colorAim);
 		paint.setTextSize(textSizeAim);// 字体大小
-		paint.setTypeface(Typeface.DEFAULT_BOLD); //设置字体
+		//paint.setTypeface(Typeface.DEFAULT_BOLD); //设置字体
 		float textWidthAim = paint.measureText("目标");   //测量字体宽度，我们需要根据字体的宽度设置在圆环中间
-		canvas.drawText("目标", (float)(1-0.7)*center + (float)(1.3*widthProcessBar), (float)(1+0.4)*center + textWidthAim/2, paint); //画出进度百分比
+		canvas.drawText("目标", (float)(1-0.7)*center + (float)(1.3*widthProcessBar), (float)(1+0.33)*center + textWidthAim/2, paint); //画出进度百分比
 		
 		//显示 目标数字
 		paint.setStrokeWidth(0); //设置画笔宽度
 		paint.setColor(colorAimNumber);
-		paint.setTextSize(textSizeAimNumber);// 字体大小
-		paint.setTypeface(Typeface.DEFAULT_BOLD); //设置字体
+		paint.setTextSize(42);// 字体大小
+		//paint.setTextSize(textSizeAimNumber);// 字体大小
+		//paint.setTypeface(Typeface.DEFAULT_BOLD); //设置字体
 		//float textWidthAimNumber = paint.measureText(aimNumber+"大卡");   //测量字体宽度，我们需要根据字体的宽度设置在圆环中间
 		//canvas.drawText(aimNumber+"大卡", center , (float)(1+0.5)*center + textWidthAimNumber/3, paint); //画出进度百分比
 		float textWidthAimNumber = paint.measureText(aimNumber+"");   //测量字体宽度，我们需要根据字体的宽度设置在圆环中间
-		canvas.drawText(aimNumber+"", center+12 , (float)(1+0.4)*center + textWidthAimNumber/3+10, paint); //画出进度百分比
+		canvas.drawText(aimNumber+"", center , (float)(1+0.5)*center, paint); //画出进度百分比
 		
 		 //画processbar的进度
 		//设置进度是实心还是空心

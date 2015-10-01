@@ -18,8 +18,8 @@
         <attr name="colorAim" format="color" />  
         <attr name="textSizeAim" format="dimension" /> 
         
-        <attr name="colorAimNumber" format="color" />  
-        <attr name="textSizeAimNumber" format="dimension" /> 
+        <attr name="colorAimNumber" format="color" /> 
+        <attr name="textSizeAimNumber" format="dimension" />  
         
         <attr name="aimNumber" format="integer"></attr> <!-- 目标数值 -->
         <attr name="max" format="integer"></attr> <!-- 进度条最大值 -->

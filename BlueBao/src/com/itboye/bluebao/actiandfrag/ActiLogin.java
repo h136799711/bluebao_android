@@ -81,12 +81,12 @@ public class ActiLogin extends Activity implements View.OnClickListener {
 			btn_login.setEnabled(false);// 不可用
 			btn_toRegister.setEnabled(false);
 		}
-		if (!Util.isBleAvailable(ActiLogin.this)) {
+	/*	if (!Util.isBleAvailable(ActiLogin.this)) {
 			Log.i(TAG, "toast shoujiversion ");
 			Toast.makeText(ActiLogin.this, "手机系统版本太低，请更新", Toast.LENGTH_LONG).show();
 			btn_login.setEnabled(false);
 			btn_toRegister.setEnabled(false);
-		}
+		}*/
 
 		if (pdialog != null) {
 			pdialog.cancel();
